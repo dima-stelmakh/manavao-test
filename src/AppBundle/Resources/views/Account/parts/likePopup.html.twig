@@ -1,0 +1,23 @@
+<div class="details-popup-likes white-popup mfp-with-anim" id="details-popup-likes">
+	<div class="heading-likes">
+            <h2>{{post.likedUsers | length}} {{'user_wall.Like'|trans}}</h2>
+            <span class="icon icon-close custom-close-btn" onclick="closePopup();"></span>
+	</div>
+	<div class="box-info-block">
+            {% for item in post.likedUsers %}
+		<div class="info-block">
+			<div class="wrap-holder">
+                            <div class="img-holder">
+                                <img src="{{item.user.image.src}}" alt="">
+                            </div>
+			</div>
+			<div class="user-info-box">
+                            <h3>{{item.user.firstName}} {{item.user.lastName}}</h3>
+                            <h4>{% if item.user.urbanArea %}{{item.user.urbanArea.translate(app.request.locale).name}}, {% endif %}
+                                {% if item.user.country %}{{item.user.country.translate(app.request.locale).name}} {% endif %}</h4>
+                            <span>{{item.user.job}}</span>
+			</div>
+		</div>
+            {% endfor %}
+	</div>
+</div>

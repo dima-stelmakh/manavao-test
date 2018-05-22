@@ -1,0 +1,450 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block content %}
+<div id="content" class="wall-page">
+    <div class="container">
+
+        {% include 'AppBundle:Account:parts/profileLeftAside.html.twig' with {'user': app.user } %}
+
+        <div class="col-md-7">
+            <div class="row">
+                <div class="wall-wrap">
+                        <div class="submit-post-wrap" data-tutorial-popup="#details-popup-5">
+                            <div class="submit-post-block">
+                                <textarea name="user-post" id="user-post-text"  rows="10" placeholder="{{'user_wall.placeholder-event'|trans}}"></textarea>
+                            </div>
+                            <div class="submit-post-type">
+                                <button onclick="shareText();" name="submit-content-update" class="submit-update" href="javascript:;">
+                                <span class="icon-share_icon icon"></span>
+                                    {{'user_wall.Share_an_update'|trans}}</button>
+                                <button onclick="shareText();" name="wall-content-opportunity" class="submit-opportunity" href="javascript:;">
+                                <span class="icon-post_icon icon"></span>
+                                    {{'user_wall.Post_an_opportunity'|trans}}</button>
+                                <button onclick="shareText();" name="submit-content-event" class="submit-event" href="javascript:;">
+                                    <span class="icon-publish_icon icon"></span>
+                                    {{'user_wall.Publish_an_event'|trans}}
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="submit-post-wrap-active">
+                                <div class="submit-post-type">
+                                        <button name="submit-content-update" class="submit-update" href="javascript:;">
+                                        <span class="icon-share_icon icon"></span>
+                                                {{'user_wall.Share_an_update'|trans}}</button>
+                                        <button name="wall-content-opportunity" class="submit-opportunity" href="javascript:;">
+                                        <span class="icon-post_icon icon"></span>
+                                                {{'user_wall.Post_an_opportunity'|trans}}</button>
+                                        <button name="submit-content-event" class="submit-event" href="javascript:;">
+                                        <span class="icon-publish_icon icon"></span>
+                                                {{'user_wall.Publish_an_event'|trans}}</button>
+                                </div>
+                                <div class="post-tab-content-wrap">
+                                        <div id="submit-content-update">
+                                            <form method="POST" action="{{path('add-post-form')}}">
+                                                <input type="hidden" value="1" name = "type">
+                                                <div class="description-wrap">
+                                                        <textarea name="content" id="user-post-textShare"  rows="10" placeholder="{{'user_wall.placeholder-event'|trans}}"></textarea>
+                                                        <div class="add-file-wrap">
+                                                                <!-- <input type="file" id="add-file-publish">
+                                                                <label for="add-file-publish">
+                                                                        <span class="icon icon-add"></span>
+                                                                </label> -->
+                                                                <button class="mnv-disabled" data-toggle="dropdown"><span class="icon icon-add"></span> {{'user_wall.Add_the_file'|trans}}</button>
+                                                                <p>{{'registration_pr.files'|trans}}: pdf, doc, png, jpeg, ptt ...</p>
+
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                </div>
+
+                                                <div class="post-tab-content"><select name="category" id="" required>
+                                                        {#{% if user.category %}
+                                                            <option value="{{user.category.id}}">{{'user_wall.update_type'|trans}} {{user.category.translate(app.request.locale).name}}</option>
+                                                        {% else %}#}
+                                                            <option selected disabled>{{'user_wall.update_type'|trans}}</option>
+{#                                                                    {% endif %}#}
+                                                        {% for item in cat %}
+                                                            <option value="{{item.id}}">{{item.translate(app.request.locale).name}}</option>
+                                                        {% endfor %}
+                                                </select></div>
+                                                <div class="post-tab-content"><select  name="industry" id="" required>
+                                                    {#{% if user.industry %}
+                                                        <option value="{{user.industry.id}}">{{'user_wall.industry_post'|trans}} {{user.industry.translate(app.request.locale).name}}</option>
+                                                    {% else %}#}
+                                                        <option selected disabled>{{'user_wall.industry_post'|trans}}</option>
+{#                                                                    {% endif %}#}
+                                                    {% for item in ind %}
+                                                        <option value="{{item.id}}">{{item.translate(app.request.locale).name}}</option>
+                                                    {% endfor %}
+                                                </select></div>
+                                                <div class="post-tab-content"><select name="community[]" multiple required>
+                                                    <option value="all">{{'user_wall.all_my_communities'|trans}}</option>
+                                                    {% for item in comm %}
+                                                        <option value="{{item.id}}">{{item.name}}</option>
+                                                    {% endfor %}
+                                                </select></div>
+                                                <div class="post-tab-content">
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <div class="hr"></div>
+                                                <div class="clearfix">
+
+                                                <div class="post-tab-content">
+                                                  {#
+                                                    <input  class="mnv-disabled" data-toggle="dropdown" type="checkbox" id="share-linkedin">
+                                                    <label for="share-linkedin"><img src="/assets/img/inkedin.png" alt=""></label>
+                                                  #}
+                                                </div>
+                                                <div class="post-tab-content">
+                                                        <div class="button-wrap"><button class="submit-update">
+                                                        <span class="icon-share_icon icon"></span>
+
+                                                        {{'user_wall.Share'|trans}}</button></div>
+                                                </div>
+                                                </div>
+
+                                            </form>
+                                        </div>
+                                        <div id="wall-content-opportunity">
+                                            <form method="POST" action="{{path('add-post-form')}}">
+                                                <input name="type" type="hidden" value="2">
+                                        <div class="step2-content-opportunity">
+                                                <div class="description-wrap">
+                                                        <textarea name="content" id="user-post-textOpp"  rows="10" placeholder="{{'user_wall.describe'|trans}}"></textarea>
+                                                        <div class="add-file-wrap">
+                                                                <!-- <input type="file" id="add-file-publish">
+                                                                <label for="add-file-publish">
+                                                                        <span class="icon icon-add"></span>
+
+                                                                </label> -->
+                                                                <button class="mnv-disabled"> <span class="icon icon-add"></span>{{'user_wall.Add_the_file'|trans}}</button>
+                                                                <p>{{'registration_pr.files'|trans}}: pdf, doc, png, jpeg, ptt ...</p>
+
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                </div>
+                                                <div class="post-tab-content">
+                                                        <input  name="few-words" type="text" placeholder="{{'business_community.in_few_words'|trans}}" required>
+                                                        </div>
+                                                <div class="post-tab-content"><select name="industry" id="" required>
+                                                        {#{% if user.industry %}
+                                                            <option value="{{user.industry.id}}">{{'user_wall.industry'|trans}} {{user.industry.translate(app.request.locale).name}}</option>
+                                                        {% else %}#}
+                                                            <option selected disabled>{{'user_wall.industry'|trans}}</option>
+                                                        {#{% endif %}#}
+                                                        {% for item in ind %}
+                                                            <option value="{{item.id}}">{{item.translate(app.request.locale).name}}</option>
+                                                        {% endfor %}
+                                                </select></div>
+                                                <div class="post-tab-content"><select name="project-type" id="" required>
+                                                        <option selected disabled value="">{{'business_community.project_type'|trans}}</option>
+                                                        {% for item in projectType %}
+                                                            <option value="{{item.id}}">{{item.translate(app.request.locale).name}}</option>
+                                                        {% endfor %}
+                                                </select></div>
+                                                <div class="post-tab-content"><select name="author-type" id="" required>
+                                                        {#{% if user.type %}
+                                                            <option value="{{user.type.id}}">{{'user_wall.you_are'|trans}}{{user.type.translate(app.request.locale).name}}</option>
+                                                        {% else %}#}
+                                                            <option selected disabled>
+                                                                {{'user_wall.you_are'|trans}}
+                                                                </option>
+                                                        {#{% endif %}#}
+                                                        {% for item in authorType %}
+                                                            <option value="{{item.id}}">{{item.translate(app.request.locale).name}}</option>
+                                                        {% endfor %}
+                                                </select></div>
+                                {#		<div class="post-tab-content">
+                                                        <select name="skill" id="">
+                     <option value="0">Skill</option>
+                                                        {% for item in skill %}
+                                                            <option value="{{item.id}}">{{item.translate(app.request.locale).name}}</option>
+                                                        {% endfor %}
+                                                </select></div>#}
+                                                {#<div class="post-tab-content">
+                                                    <input type="text" placeholder="Skills" name="skill" required>
+                                                </div>#}
+                                                <div class="post-tab-content">
+                                                    <input id="opp_date" placeholder="{{'user_wall.date'|trans}}" name="deadline" required>
+                                                </div>
+                                                <div class="post-tab-content"><select name="community[]" multiple required>
+                                                        <option value="all">{{'user_wall.all_my_communities'|trans}}</option>
+                                                        {% for item in comm %}
+                                                            <option value="{{item.id}}">{{item.name}}</option>
+                                                        {% endfor %}
+                                                </select></div>
+                                                <div class="clearfix"></div>
+
+                                                <div class="button-wrap"><button id="submit-content-opportunity" name="submit-content-opportunity" class="submit-opportunity" href="javascript:;"><span class="icon-post_icon icon"></span>
+                                                {{'user_wall.Post'|trans}}</button></div>
+
+                                                <div class="clearfix"></div>
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div id="submit-content-event">
+                                            <form method="POST" action="{{path('add-post-form')}}">
+                                                <div class="description-wrap">
+                                                    <input name="type" type="hidden" value="3">
+                                                    <textarea name="content" id="user-post-textEvent"  rows="10" placeholder="Tell about it"></textarea>
+                                                    <div class="add-file-wrap">
+                                                        <!-- <input type="file" id="add-file-publish">
+                                                        <label for="add-file-publish">
+                                                                <span class="icon icon-add"></span>
+
+                                                        </label> -->
+                                                        <button class="mnv-disabled"> <span class="icon icon-add"></span> {{'user_wall.Add_the_file'|trans}}</button>
+                                                        <p>{{'registration_pr.files'|trans}}: pdf, doc, png, jpeg, ptt ...</p>
+
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                                <div class="post-tab-content">
+                                                        <input type="text" name="name" placeholder="Name">
+                                                </div>
+                                                <div class="post-tab-content"><select name="typeOfEvent" required="required">
+                                                        <option selected disabled value="">Event Type*</option>
+                                                        {% for item in eventType %}
+                                                            <option value="{{item.id}}">{{item.translate(app.request.locale).name}}</option>
+                                                        {% endfor %}
+                                                </select></div>
+
+                                                <div class="post-tab-content">
+                                                    <input placeholder="Date de début" id="start_day" name="start_date" required="required">
+                                                </div>
+                                                <div class="post-tab-content">
+                                                    <input placeholder="Date de fin" id="end_date" name="end_date" required="required">
+                                                </div>
+                                                <div class="post-tab-content">
+                                                    <select name="industry" id="" required="required">
+                                                        {#{% if user.industry %}
+                                                            <option value="{{user.industry.id}}">{{'user_wall.industry_post_event'|trans}} {{user.industry.translate(app.request.locale).name}}</option>
+                                                        {% else %}#}
+                                                            <option selected disabled>{{'user_wall.industry_post_event'|trans}}</option>
+{#                                                                    {% endif %}#}
+                                                        {% for item in ind %}
+                                                            <option value="{{item.id}}">{{item.translate(app.request.locale).name}}</option>
+                                                        {% endfor %}
+                                                </select>
+                                                </div>
+
+                                                <div class="post-tab-content">
+                                                    <input type="text" name="link" placeholder="Link">
+                                                </div>
+
+                                                <div class="post-tab-content">
+                                                    <input type="text" name="location" placeholder="{{'user_wall.location'|trans}}">
+                                                    <input type="hidden" name="lat" value="0.00" id="event-lat-input">
+                                                    <input type="hidden" name="lng" value="0.00" id="event-lng-input">
+                                                </div>
+                                                <div class="post-tab-content"><select name="community[]" multiple required>
+                                                    <option value="all">{{'user_wall.all_my_communities'|trans}}</option>
+                                                    {% for item in comm %}
+                                                        <option value="{{item.id}}">{{item.name}}</option>
+                                                    {% endfor %}
+                                                </select></div>
+
+                                                <div class="clearfix"></div>
+                                                {#<div class="location-img-wrap">
+                                                        <div id="map-event" class="event-location-map" style="height: 250px; width: 280px;"></div>
+                                                </div>#}
+
+                                                <div class="button-wrap">
+                                                    <button class="submit-event" type="submit">
+                                                            <span class="icon-publish_icon icon"></span>
+                                                    {{'user_wall.Publish'|trans}}</button>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                        {% include 'AppBundle:Account:post.html.twig' with {'from' : 'user', 'user': 'x'} %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+
+            {% include 'AppBundle:Account:parts/profileRightAside.html.twig' with {'showMembers' : true } %}
+
+        </div>
+    </div>
+    {% if not is_granted('ROLE_MEMBER') %}
+
+        {% include "AppBundle:Register:finalModal.html.twig" with {'confirmed': false } %}
+
+    {% endif %}
+
+    {% if is_granted('ROLE_MEMBER') and app.session.flashBag.get('registration_success') %}
+        {% for flash_message in app.session.flashBag.get('notice') %}
+            <div style="display: none;" class="flash-notice">
+                {{ flash_message }}
+            </div>
+        {% endfor %}
+        {% include "AppBundle:Register:finalModal.html.twig" with {'confirmed': true } %}
+
+    {% endif %}
+
+{% endblock %}
+
+{% block javascript %}
+<script src="https://maps.googleapis.com/maps/api/js?key={{googleApiKey}}"
+    async defer></script>
+    {{parent()}}
+<script src="/js/map.js"></script>
+<script>
+    function shareText()
+    {
+        var message = $('#user-post-text').val();
+        $('#user-post-textShare').html(message);
+        $('#user-post-textOpp').html(message);
+        $('#user-post-textEvent').html(message);
+
+    }
+</script>
+<div class="details-popup white-popup mfp-with-anim mfp-hide" id="details-popup-1">
+	<span class="triangle"></span>
+	<div class="heading"></div>
+	<p>{{'tuto.tuto_1'|trans}}</p>
+	<div class="line-step"></div>
+	<div class="bottom-block">
+		<a href="javascript:;" class="skip">skip
+			<span class="bg-skip"></span>
+		</a>
+		<a href="javascript:;" class="next-popup-link">next</a>
+	</div>
+</div>
+<div class="details-popup white-popup mfp-with-anim mfp-hide" id="details-popup-2">
+	<span class="triangle"></span>
+	<div class="heading"></div>
+	<p>{{'tuto.tuto_2'|trans}}</p>
+	<div class="line-step"></div>
+	<div class="bottom-block">
+		<a href="javascript:;" class="skip">skip
+			<span class="bg-skip"></span>
+		</a>
+		<a href="javascript:;" class="next-popup-link">next</a>
+	</div>
+</div>
+<div class="details-popup white-popup mfp-with-anim mfp-hide" id="details-popup-3">
+	<span class="triangle"></span>
+	<div class="heading"></div>
+	<p>{{'tuto.tuto_3'|trans}}</p>
+	<div class="line-step"></div>
+	<div class="bottom-block">
+		<a href="javascript:;" class="skip">skip
+			<span class="bg-skip"></span>
+		</a>
+		<a href="javascript:;" class="next-popup-link">next</a>
+	</div>
+</div>
+<div class="details-popup white-popup mfp-with-anim mfp-hide" id="details-popup-4">
+	<span class="triangle"></span>
+	<div class="heading"></div>
+	<p>{{'tuto.tuto_4'|trans}}</p>
+	<div class="line-step"></div>
+	<div class="bottom-block">
+		<a href="javascript:;" class="skip">skip
+			<span class="bg-skip"></span>
+		</a>
+		<a href="javascript:;" class="next-popup-link">next</a>
+	</div>
+</div>
+<div class="details-popup white-popup mfp-with-anim mfp-hide" id="details-popup-5">
+	<span class="triangle"></span>
+	<div class="heading"></div>
+	<p>{{'tuto.tuto_5'|trans}}</p>
+	<div class="line-step"></div>
+	<div class="bottom-block">
+		<a href="javascript:;" class="skip">skip
+			<span class="bg-skip"></span>
+		</a>
+		<a href="javascript:;" class="next-popup-link">next</a>
+	</div>
+</div>
+<div class="details-popup white-popup mfp-with-anim mfp-hide" id="details-popup-6">
+	<span class="triangle"></span>
+	<div class="heading"></div>
+	<p>{{'tuto.tuto_6'|trans}}</p>
+	<div class="line-step"></div>
+	<div class="bottom-block">
+		<a href="javascript:;" class="skip">skip
+			<span class="bg-skip"></span>
+		</a>
+		<a href="javascript:;" class="next-popup-link">next</a>
+	</div>
+</div>
+
+
+{#<div class="details-popup-likes white-popup mfp-with-anim mfp-hide" id="details-popup-likes">
+	<div class="heading-likes">
+		<h2>2 {{'user_wall.Like'|trans}}</h2>
+		<span class="icon icon-close custom-close-btn"></span>
+	</div>
+	<div class="box-info-block">
+		<div class="info-block">
+			<div class="wrap-holder">
+				<div class="img-holder">
+					<img src="/assets/img/noname.png" alt="">
+				</div>
+			</div>
+			<div class="user-info-box">
+				<h3>Georges Fischer</h3>
+				<h4>Paris Area, France</h4>
+				<span>, developer</span>
+			</div>
+		</div>
+		<div class="info-block">
+			<div class="wrap-holder">
+				<div class="img-holder">
+					<img src="/assets/img/noname.png" alt="">
+				</div>
+			</div>
+			<div class="user-info-box">
+				<h3>Li U</h3>
+				<h4>Beijing, PRC</h4>
+				<span>, journalist</span>
+			</div>
+		</div>
+		<div class="info-block">
+			<div class="wrap-holder">
+				<div class="img-holder">
+					<img src="/assets/img/noname.png" alt="">
+				</div>
+			</div>
+			<div class="user-info-box">
+				<h3>Thomas Edward Lawrence</h3>
+				<h4>Kut El Amara, Mesopotamia</h4>
+				<span>, diplomat</span>
+			</div>
+		</div>
+		<div class="info-block">
+			<div class="wrap-holder">
+				<div class="img-holder">
+					<img src="/assets/img/noname.png" alt="">
+				</div>
+			</div>
+			<div class="user-info-box user-info-box-last">
+				<h3>Benedict Timothy Carlton Cumberbatch</h3>
+				<h4>London Area, England</h4>
+				<span>, actor</span>
+			</div>
+		</div>
+	</div>
+</div>#}
+
+
+{% endblock %}
+
+{% block js %}
+    <script src="/js/welcome.js"></script>
+    <script src="/js/post.js"></script>
+    <script>
+    {% if is_granted('ROLE_MEMBER') %}
+        showNewUserCloseableModal();
+    {% else %}
+        showNewUserModal();
+    {% endif %}
+    </script>
+{% endblock %}

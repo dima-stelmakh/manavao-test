@@ -1,0 +1,539 @@
+{% extends "AppBundle::layout.html.twig"%}
+{% block header_comm %}
+    <div class="community-header{% if comm %} mnv-community-image mnv-homeBlock-community{% endif %}" {% if comm %} data-community-id="{{comm.id}}"{% else %} style="background-image: url('/img/manavao_main_image.png')"{% endif %}>
+        <div class="container">
+            <div class="col-md-6">
+                <div class="info">
+                  <h1>{{comm.name}}</h1>
+                  <h2>Voisinage d'affaires</h2>
+
+                    <div class="community-location">
+                            <img src="/assets/img/flag.png" alt="" class="flag">
+                            <span>{{comm.area.region}} - {{comm.area.country.name}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="community-buttons col-md-4 col-md-offset-1">
+                <!-- <a class="mnv-disabled" href="">{{'business_community.Join_us'|trans}}</a> -->
+                <a class="mnv-disabled" href="javascript:;">{{'business_community.invite_contacts'|trans}}</a>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block content %}
+<div id="content" class="community-content">
+  <div class="row">
+    <div class="container">
+
+        <aside class="col-md-2 left-side">
+          <div class="community-info left-item-wrap">
+            <div id="mnv-communityDataBlock"
+                 data-community-id="{{comm.id}}">
+              <h3 class="title">{{'business_community.At_a_glance'|trans}}</h3>
+              <p v-if="community.total_population">{{'business_community.Total_population'|trans}} <br> <span id="total-com">${community.total_population}</span></p>
+              <p v-if="community.percent_population">{{'business_community.As_percent'|trans}} <br> <span id="percent-total-com">${community.percent_population}</span></p>
+              <p v-if="community.gdp_estimated">{{'business_community.GDP_estlmated'|trans}}<br> <span id="estimated-com">${community.gdp_estimated}</span></p>
+              <p v-if="community.percent_national">{{'business_community.as_percent_of_national_value'|trans}}<br> <span id="percent-estimated-com">${community.percent_national}</span></p>
+            </div>
+            <div id="map-mini" class="user-location-map" style="height: 160px; width: 160px;"></div>
+            <div>
+              <div id="mnv-mapBlock" class="hide">
+                <div id="mnv-mapBlock-map"></div>
+              </div>
+            </div>
+            <input id="address" type="hidden" value="{{comm.area.name}}, {{comm.area.country.name}}">
+          </div>
+          <div class="left-item-wrap">
+            <h3 class="title">{{'business_community.Home'|trans}}</h3>
+            <div class="left-list-item">
+              <a href="javascript:;" class="active">{{'aside.overview'|trans}}</a>
+            </div>
+            <div class="left-list-item">
+              <a href="{{path('community-update', {'comm' : comm.id})}}">{{'business_community.News_feed'|trans}}</a>
+            </div>
+            <div class="left-list-item">
+              <a href="{{path('community-opportunity', {'comm' : comm.id})}}">{{'user_wall.Opportunities'|trans}}</a>
+            </div>
+            <div class="left-list-item">
+              <a href="{{path('community-event', {'comm' : comm.id})}}">{{'user_wall.Events'|trans}}</a>
+            </div>
+          </div>
+          <div class="left-item-wrap">
+            <h3 class="title">{{'business_community.explore'|trans}}</h3>
+            <div class="left-list-item">
+              <a class="mnv-disabled" href="javascript:;">{{'business_community.Members'|trans}}</a>
+            </div>
+            <div class="left-list-item">
+              <a class="mnv-disabled" href="javascript:;">{{'business_community.Companies'|trans}}</a>
+            </div>
+            <div class="left-list-item">
+              <a class="mnv-disabled" href="javascript:;">{{'business_community.Public_organisations'|trans}}</a>
+            </div>
+            <div class="left-list-item">
+              <a class="mnv-disabled" href="javascript:;">Clubs d'entreprise</a>
+            </div>
+            <div class="left-list-item">
+              <a class="mnv-disabled" href="javascript:;">Coworking</a>
+            </div>
+            <div class="left-list-item">
+              <a class="mnv-disabled" href="javascript:;">ESS</a>
+            </div>
+            <div class="left-list-item">
+              <a class="mnv-disabled" href="javascript:;">Financement</a>
+            </div>
+            <div class="left-list-item">
+              <a class="mnv-disabled" href="javascript:;">Formation</a>
+            </div>
+            <div class="left-list-item">
+              <a class="mnv-disabled" href="javascript:;">Franchise</a>
+            </div>
+            <div class="left-list-item">
+              <a class="mnv-disabled" href="javascript:;">Immobilier</a>
+            </div>
+            <div class="left-list-item">
+              <a class="mnv-disabled" href="javascript:;">Innovation</a>
+            </div>
+            <div class="left-list-item">
+              <a class="mnv-disabled" href="javascript:;">Zones d'activité</a>
+            </div>
+            <button class="btn btn-default" id="mnv-map">Mode cartographique</button>
+          </div>
+          {#
+            <div class="left-item-wrap">
+              <h3 class="title">{{'user_wall.Recent_activity'|trans}}</h3>
+              <div class="left-list-item">
+                  <a{% if type is defined and type == 4 %} class="active"{% endif %} href="{{path('profile-members')}}">{{'business_community.Members'|trans}}</a>
+              </div>
+              <div class="left-list-item">
+                <a  class="mnv-disabled" href="javascript:;"> {{'business_community.organisations'|trans}}</a>
+              </div>
+              <div class="left-list-item">
+                <a{% if type is defined and type == 1 %} class="active"{% endif %} href="{{path('profile-update')}}">{{'user_wall.Updates_feed'|trans}}</a>
+              </div>
+              <div class="left-list-item">
+                <a{% if type is defined and type == 2 %} class="active"{% endif %} href="{{path('profile-opportunity')}}">{{'user_wall.Opportunities'|trans}}</a>
+              </div>
+              <div class="left-list-item">
+                <a{% if type is defined and type == 3 %} class="active"{% endif %} href="{{path('profile-event')}}">{{'user_wall.Events'|trans}}</a>
+              </div>
+            </div>
+          #}
+          <div class="left-item-wrap">
+              <h3 class="title">Groupes</h3>
+              <div class="left-list-item left-list-item-fas">
+                  <a href="javascript:;" class="mnv-disabled"><i class="fas fa-lock"></i>Coventis</a>
+                  <a href="javascript:;" class="mnv-disabled"><i class="fas fa-lock"></i>Interfaces</a>
+                  <a href="javascript:;" class="mnv-disabled"><i class="fas fa-lock"></i>Achat public innovant</a>
+              </div>
+          </div>
+      </aside>
+
+      <div class="col-md-7">
+        <div id="mnv-directory" class="row hide">
+          <div class="mnv-directory-title"></div>
+          <form id="mnv-directory-search">
+            <input id="mnv-directory-search-input" type="search" placeholder="toulouse,site internet">
+          </form>
+          <div id="mnv-directory-nbresults"></div>
+          <div id="mnv-directory-results"></div>
+        </div>
+        <div id="mnv-community" class="row">
+          <div class="overview-wrap">
+            <h2 class="title">{{'aside.overview'|trans}}</h2>
+            <div class="overview">
+                {{comm.overview}}
+            </div>
+          </div>
+          <div class="wall-wrap">
+          <div class="submit-post-wrap">
+            <div class="submit-post-block">
+              <textarea name="user-post" id="user-post-text"  rows="10" placeholder="{{'business_community.placeholder-event'|trans}}"></textarea>
+            </div>
+            <div class="submit-post-type">
+              <button onclick="shareText();" name="submit-content-update" class="submit-update">
+              <span class="icon-share_icon icon"></span>
+                {{'user_wall.Share_an_update'|trans}}</button>
+              <button onclick="shareText();" name="wall-content-opportunity" class="submit-opportunity">
+              <span class="icon-post_icon icon"></span>
+                {{'user_wall.Post_an_opportunity'|trans}}</button>
+              <button onclick="shareText();" name="submit-content-event" class="submit-event">
+              <span class="icon-publish_icon icon"></span>
+                {{'user_wall.Publish_an_event'|trans}}</button>
+            </div>
+          </div>
+
+          <div class="submit-post-wrap-active">
+            <div class="submit-post-type">
+              <button name="submit-content-update" class="submit-update">
+              <span class="icon-share_icon icon"></span>
+                {{'user_wall.Share_an_update'|trans}}</button>
+              <button name="wall-content-opportunity" class="submit-opportunity">
+              <span class="icon-post_icon icon"></span>
+                {{'user_wall.Post_an_opportunity'|trans}}</button>
+              <button name="submit-content-event" class="submit-event">
+              <span class="icon-publish_icon icon"></span>
+                {{'user_wall.Publish_an_event'|trans}}</button>
+            </div>
+            <div class="post-tab-content-wrap">
+              <div id="submit-content-update">
+                <form method="POST" action="{{path('add-post-form')}}">
+                  <input type="hidden" value="1" name = "type">
+                  <input type="hidden" value="{{comm.id}}" name = "check">
+                  <div class="description-wrap">
+                    <textarea name="content" id="user-post-textShare"  rows="10" placeholder="{{'business_community.placeholder-event'|trans}}"></textarea>
+                    <div class="add-file-wrap">
+                      <input type="file" id="add-file-publish">
+                      <label for="add-file-publish">
+                        <span class="icon icon-add"></span>
+                        {{'user_wall.Add_the_file'|trans}}
+                      </label>
+                      <p>{{'registration_pr.files'|trans}}: pdf, doc, png, jpeg, ptt ...</p>
+
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+
+                  <div class="post-tab-content"><select name="category" id="category" required>
+                                                                          {#{% if user.category %}
+                                                                          <option value="{{user.category.id}}">{{'user_wall.update_type'|trans}} {{user.category.translate(app.request.locale).name}}</option>
+                                                                      {% else %}#}
+                                                                          <option selected disabled>{{'user_wall.update_type'|trans}}</option>
+  {#                                                                    {% endif %}#}
+                                                                      {% for item in cat %}
+                                                                          <option value="{{item.id}}">{{item.translate(app.request.locale).name}}</option>
+                                                                      {% endfor %}
+                  </select></div>
+                  <div class="post-tab-content"><select name="industry" id="industry" required>
+                                                                          {#{% if user.industry %}
+                                                                          <option value="{{user.industry.id}}">{{'user_wall.industry_post'|trans}} {{user.industry.translate(app.request.locale).name}}</option>
+                                                                      {% else %}#}
+                                                                          <option selected disabled>{{'user_wall.industry_post'|trans}}</option>
+  {#                                                                    {% endif %}#}
+                                                                      {% for item in ind %}
+                                                                          <option value="{{item.id}}">{{item.translate(app.request.locale).name}}</option>
+                                                                      {% endfor %}
+                  </select></div>
+                  {#<div class="post-tab-content"><select name="community" id="community">
+                    {% for item in comm %}
+                                                                              <option value="{{item.id}}">{{item.name}}</option>
+                    {% endfor %}
+                  </select></div>#}
+                                                                  <input type="hidden" name="community[]" value="{{comm.id}}">
+                  <div class="post-tab-content">
+                  </div>
+                    <div class="clearfix"></div>
+                  <div class="hr"></div>
+                  <div class="clearfix">
+
+                  <div class="post-tab-content">
+                    {#
+                      <input type="checkbox" id="share-linkedin">
+                      <label for="share-linkedin"><img src="/assets/img/inkedin.png" alt=""></label>
+                    #}
+                  </div>
+                  <div class="post-tab-content">
+                    <div class="button-wrap"><button class="submit-update">
+                    <span class="icon-share_icon icon"></span>
+
+                    {{'user_wall.Share'|trans}}</button></div>
+                  </div>
+                  </div>
+
+                </form>
+              </div>
+              <div id="wall-content-opportunity">
+                <form method="POST" action="{{path('add-post-form')}}">
+                  <input name="type" type="hidden" value="2">
+                  <input type="hidden" value="{{comm.id}}" name = "check">
+                  <input type="hidden" name="community[]" value="{{comm.id}}">
+                  <div class="step2-content-opportunity">
+                    <div class="description-wrap">
+                      <textarea name="content" id="user-post-textOpp"  rows="10" placeholder="{{'user_wall.describe'|trans}}"></textarea>
+                      <div class="add-file-wrap">
+                        <input type="file" id="add-file-publish">
+                        <label for="add-file-publish">
+                          <span class="icon icon-add"></span>
+                          {{'user_wall.Add_the_file'|trans}}
+                        </label>
+                        <p>{{'registration_pr.files'|trans}}: pdf, doc, png, jpeg, ptt ...</p>
+
+                      </div>
+                      <div class="clearfix"></div>
+                    </div>
+                    <div class="post-tab-content">
+                      <input  name="few-words" type="text" placeholder="{{'business_community.in_few_words'|trans}}" required>
+                      </div>
+                    <div class="post-tab-content"><select name="industry" id="" required>
+    {#                                                                        <option value="{{user.industry.id}}">{{'user_wall.industry'|trans}} {{user.industry.translate(app.request.locale).name}}</option>#}
+                                                                            <option selected disabled>{{'user_wall.industry'|trans}}</option>
+                      {% for item in ind %}
+                                                                                <option value="{{item.id}}">{{item.translate(app.request.locale).name}}</option>
+                      {% endfor %}
+                    </select></div>
+                    <div class="post-tab-content"><select name="project-type" id="" required>
+                                                                            <option value="">{{'business_community.project_type'|trans}}</option>
+                      {% for item in projectType %}
+                                                                                <option value="{{item.id}}">{{item.translate(app.request.locale).name}}</option>
+                      {% endfor %}
+                    </select></div>
+
+                    <div class="post-tab-content"><select name="author-type" id="" required>
+                                                                            <option selected disabled>{{'user_wall.you_are'|trans}}</option>
+    {#                                                                        <option value="{{user.type.id}}">
+    {{'user_wall.you_are'|trans}}
+    {{user.type.translate(app.request.locale).name}}</option>#}
+                      {% for item in authorType %}
+                                                                                <option value="{{item.id}}">{{item.translate(app.request.locale).name}}</option>
+                      {% endfor %}
+                    </select></div>
+                {#    <div class="post-tab-content">
+                      <select name="skill" id="">
+                                        <option value="0">Skill</option>
+                      {% for item in skill %}
+                                                                                <option value="{{item.id}}">{{item.translate(app.request.locale).name}}</option>
+                      {% endfor %}
+                    </select></div>#}
+                                                                  {# <div class="post-tab-content">
+                                                                        <input type="text" placeholder="Skills" name="skill" required>
+                    </div>#}
+                    <div class="post-tab-content">
+                                                                        <input id="opp_date" placeholder="{{'business_community.date_business_community'|trans}}" name="deadline" required>
+                    </div>
+    {#                                                                <div class="post-tab-content"><select name="community" id="">
+                      {% for item in comm %}
+                                                                                <option value="{{item.id}}">{{item.name}}</option>
+                      {% endfor %}
+                    </select></div>#}
+                    <div class="clearfix"></div>
+
+
+                    <div class="button-wrap"><button id="submit-content-opportunity" name="submit-content-opportunity" class="submit-opportunity" href="javascript:;"><span class="icon-post_icon icon"></span>
+                    {{'user_wall.Post'|trans}}</button></div>
+
+                    <div class="clearfix"></div>
+
+                  </div>
+                </form>
+              </div>
+              <div id="submit-content-event">
+                                                            <form method="POST" action="{{path('add-post-form')}}">
+                <div class="description-wrap">
+                                                                        <input type="hidden" value="{{comm.id}}" name = "check">
+                                                                        <input name="type" type="hidden" value="3">
+                  <textarea name="content" id="user-post-textEvent"  rows="10" placeholder="{{'business_community.tell_about_it'|trans}}"></textarea>
+                  <div class="add-file-wrap">
+                    <input type="file" id="add-file-publish">
+                    <label for="add-file-publish">
+                      <span class="icon icon-add"></span>
+                      {{'user_wall.Add_the_file'|trans}}
+                    </label>
+                    <p>{{'registration_pr.files'|trans}}: pdf, doc, png, jpeg, ptt ...</p>
+
+                  </div>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="post-tab-content">
+                  <input type="text" name="name" placeholder="{{'business_community.name'|trans}}">
+                </div>
+                <div class="post-tab-content"><select name="typeOfEvent" required="required">
+                                                                        <option selected disabled value="">{{'business_community.event_type'|trans}}*</option>
+                                                                        {% for item in eventType %}
+                                                                            <option value="{{item.id}}">{{item.translate(app.request.locale).name}}</option>
+                  {% endfor %}
+                </select></div>
+
+                <div class="post-tab-content">
+                  <input placeholder="{{'business_community.end'|trans}}"   id="end_date" name="end_date" required="required">
+                </div>
+                                                                <div class="post-tab-content">
+                  <input placeholder="{{'business_community.start_business_community'|trans}}"  id="start_day"  name="start_date" required="required">
+                </div>
+
+                <div class="post-tab-content">
+                                                                    <select name="industry" id="" required="required">
+{#                                                                        <option value="{{user.industry.id}}">{{'user_wall.industry_post_event'|trans}} {{user.industry.translate(app.request.locale).name}}</option>#}
+                                                                        <option selected disabled>{{'user_wall.industry_post_event'|trans}}</option>
+                  {% for item in ind %}
+                                                                            <option value="{{item.id}}">{{item.translate(app.request.locale).name}}</option>
+                  {% endfor %}
+
+                </select>
+                                                                </div>
+
+                <div class="post-tab-content">
+                  <input type="text" name="link" placeholder="{{'business_community.link'|trans}}">
+
+                </div>
+
+                <div class="post-tab-content">
+                  <input type="text" name="location" placeholder="{{'user_wall.location'|trans}}">
+                  <input type="hidden" name="lat" id="event-lat-input">
+                                                                        <input type="hidden" name="lng" id="event-lng-input">
+                                                                        <input type="hidden" name="community[]" value="{{comm.id}}">
+                </div>
+                <div class="post-tab-content">
+                <select name="onlyToMeShow" required="required">
+                  <option selected disabled value="">{{'business_community.who_can_see_this'|trans}}*</option>
+                  <option value="0">{{'business_community.all_network'|trans}}</option>
+                  <option value="1">{{'business_community.just_me'|trans}}</option>
+                </select>
+                </div>
+
+                <div class="clearfix"></div>
+                                                                {#<div class="location-img-wrap">
+                                                                        <div id="map-event" class="event-location-map" style="height: 250px; width: 280px;"></div>
+                </div>#}
+                <div class="button-wrap">
+                  <button class="submit-event" type="submit">
+                    <span class="icon-publish_icon icon"></span>
+                  {{'user_wall.Publish'|trans}}</button>
+      {#            #}
+                </div>
+                <div class="clearfix"></div>
+                                                            </form>
+              </div>
+            </div>
+
+
+          </div>
+          {% include 'AppBundle:Account:post.html.twig' with {'from' : 'comm', 'user' : 'x'} %}
+        </div>
+        </div>
+      </div>
+      <aside class="col-md-3 right-side">
+        <div class="partners-wrap mnv-community-iconBlock">
+          <h3>{{'business_community.Supported_by'|trans}}</h3>
+          <div class="partner">
+            <img src="" class="mnv-community-icon" alt="">
+            <!-- <a class="become-partner" href="javascript:;">{{'business_community.contact_us'|trans}}</a> -->
+          </div>
+          {% if comm.id == 2702 %}
+          <div>
+            <div>
+              <a href="http://www.coventis.org/2018/02/05/appel-a-projets-2018-transition-ecologique-ensemble/" target="_blank">
+                <p>
+                    Appel à projets 2018 : La transition écologique, ici et ensemble
+                    <br>
+                    <span style="font-style: italic;color: #aaa;font-size: 11px;">5 février 2018 Catégories : Economie Circulaire.</span>
+                </p>
+              </a>
+            </div>
+            <div>
+              <a href="http://www.coventis.org/2018/01/31/concours-2018-de-fondation-france-ess-innovation-sociale/" target="_blank">
+                <p>
+                    Concours 2018 de la Fondation la France s’engage : ESS & innovation sociale
+                    <br>
+                    <span style="font-style: italic;color: #aaa;font-size: 11px;">31 janvier 2018 Catégories : Economie Circulaire.</span>
+                </p>
+              </a>
+            </div>
+            <div>
+              <a href="http://www.coventis.org/2018/01/31/reparcafe-de-maison-de-lavenir-comminges-pyrenees-programme-ateliers-premier-trimestre-2018/" target="_blank">
+                <p>
+                    Répar’Café de la Maison de l’Avenir Comminges Pyrénées : programme des ateliers à venir !
+                    <br>
+                    <span style="font-style: italic;color: #aaa;font-size: 11px;">Catégories : Economie Circulaire.</span>
+                </p>
+              </a>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+
+        <div class="last-members">
+                                    <h2 class="aside-title">{{'business_community.Last_members'|trans}}</h2>
+                                    {% for item in lastUsers %}
+                                    <div class="aside-item">
+                                            <img src="{{item.image.src}}" alt="">
+                                            <a href="{{path('some-user-page', {'someUser': item.id})}}">
+                                            {{item.firstName}} <br> {{item.lastName}}</a>
+                                    </div>
+                                    {% endfor %}
+                                    <div class="link-all-wrap clearfix">
+                                        <a href="{{path('community_members', {'community': comm.id})}}" class="link-all">{{'user_wall.See_all'|trans}} <span>...</span></a>
+                                    </div>
+        </div>
+
+        <div class="calendar-wrap">
+          <div class="datepicker-holder" data-lang="{{'header.lang'|trans}}">
+            <div class="datepicker-inline cusmom-datepicker-inline"></div>
+          </div>
+          <div class="link-all-wrap clearfix">
+              <a href="javascript:;" class="link-all">{{'user_wall.See_all'|trans}} <span>...</span></a>
+            </div>
+        </div>
+
+                            <div class="near-community-wrap">
+                                <h2 class="aside-title">{{'user_wall.Nearby_business_communities'|trans}}</h2>
+                                {% for item in nearly %}
+                                <div class="aside-item">
+                                    <a href="{{path('community', {'comm' : item.id})}}" class="mnv-photo-community community-round-image" data-community-id="{{item.id}}">
+                                    <span>{{item.name}}</span>{#<br>
+                                            {{'user_wall.Add'|trans}}#}
+                                    </a>
+                                </div>
+                                {% endfor %}
+                                <div class="link-all-wrap clearfix">
+                                    <a href="javascript:;" class="link-all mnv-disabled">{{'user_wall.See_all'|trans}}<span>...</span></a>
+                                </div>
+                            </div>
+      </aside>
+
+    </div>
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block javascript %}
+<script src="https://maps.googleapis.com/maps/api/js?key={{googleApiKey}}"
+    async defer></script>
+    {{parent()}}
+<script src="/js/map.js"></script>
+
+<div class="details-contact-us-popup white-popup mfp-with-anim mfp-hide" id="contact-us-popup">
+  <div class="heading">
+    <h3>{{'business_community.contact_us'|trans}}</h3>
+  </div>
+  <div class="clearfix"></div>
+  <form>
+    <div class="wrapper-block">
+      <input name="first-name" type="text" placeholder="{{'registration_pr.First_name'|trans}}">
+      <input name="last-name" type="text" placeholder="{{'registration_pr.Last_name'|trans}}">
+    </div>
+    <div class="wrapper-block">
+      <input name="current-position" type="text" placeholder="{{'registration_pr.Current_position'|trans}}">
+      <input name="organisations" type="text" placeholder="{{'user_wall.organisation_s_name'|trans}}">
+    </div>
+    <div class="wrapper-block">
+      <select name="orgType">
+                            <option selected disabled>{{'business_community.type_of_organisation'|trans}}</option>
+                            {% for item in cats %}
+                            <option value="{{item.id}}">{{item.translate(app.request.locale).name}}</option>
+                            {% endfor %}
+      </select>
+      <input name="website" type="text" placeholder="{{'business_community.website'|trans}}">
+    </div>
+    <textarea rows="4" placeholder="{{'business_community.describe_your_activities'|trans}}"></textarea>
+    <div class="wrapper-block">
+      <input name="email" type="email" placeholder="{{'homepage.eMail'|trans}}">
+      <input name="phone" type="text" placeholder="{{'business_community.phone_number'|trans}}">
+    </div>
+    <div class="wrapper-block wrapper-block-confirm">
+      <div class="holder-custom-checkbox">
+        <input type="checkbox" name="confirm-send" id="confirm-send">
+        <label for="confirm-send">{{'business_community.by_clicking_send'|trans}}</label>
+      </div>
+      <button class="submit submit-send" type="submit"><span>{{'business_community.send'|trans}}</span></button>
+    </div>
+  </form>
+</div>
+
+
+{% endblock %}
+
+{% block js %}
+    <script src="/js/post.js"></script>
+{% endblock %}

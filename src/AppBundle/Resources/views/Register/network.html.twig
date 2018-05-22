@@ -1,0 +1,114 @@
+{% extends "AppBundle::layout.html.twig"%}
+
+{% block content %}
+    <div class="container progress-registration-warp">
+        <div class="registration-box">
+
+
+            <ul id="registration-tabs" class="nav nav-tabs">
+                <li class="active"><!-- <a data-toggle="tab" href="#step1"> -->
+                    <div class="step"></div>
+                    <p>{{'registration.network'|trans}}</p>
+                </li>
+                <li>
+                    <div class="step"></div>
+                    <p>{{'registration.profile'|trans}}</p>
+                </li>
+                <li>
+                    <div class="step last-step"></div>
+                    <p>{{'registration.Lets'|trans}}<br> {{'registration.Start'|trans}}</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="container content-registration-wrap">
+        <div class="registration-box">
+            <div id="step1">
+                <h3 class="reg-title">{{'registration_bc.Set_your_network'|trans}}</h3>
+                <input id="address" type="hidden" value="{{city}}">
+                <div class="map-wrap" id="map" style="height: 425px; width: 500px;">
+
+                </div>
+                 <div class="selected-community-wrap">
+                    <p id="selected-title">{{'registration_bc.No_selected_communities'|trans}}</p>
+
+                    <ul id="selected-community-list"></ul>
+                </div>
+                <div class="community-wrap">
+
+                    <form method="post" id="add-community-form" action="{{path('register_save_communities')}}">
+{#                        <p id="near-title">Select your nearby business communities</p>
+                        <ul id="community-list">
+
+                        </ul>#}
+
+                        <p>{{'registration_bc.Do_you_want_to_add_another_city'|trans}}</p>
+                        <select name="community-country" id="community-country">
+                            <option value="">{{'registration_bc.Select_your_country'|trans}}</option>
+                            {% for item in countries%}
+                            <option value="{{item.id}}">{{item.name}}</option>
+                            {% endfor %}
+                        </select>
+
+                        <select name="community-area" id="community-area" disabled>
+                            <option value="">{{'registration_bc.Select_an_urban_area'|trans}}</option>
+                        </select>
+
+{#                        <select required name="community-city" id="community-city" disabled>
+                            <option value="">Select the city</option>
+                            {% for item in countries%}
+                            <option value="{{item.id}}">{{item.name}}</option>
+                            {% endfor %}
+                        </select>#}
+
+                        <button id="registration-communities-submit" class="continue" disabled><span class="icon-continue_icon"></span> {{'registration_bc.Continue'|trans}}</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+<script src="https://maps.googleapis.com/maps/api/js?key={{googleApiKey}}"
+    {#async defer#}></script>
+    {{parent()}}
+<script src="/js/registration.js"></script>
+<script>
+    jQuery(document).ready(function($) {
+        var youAlreadySelected = "{{'registration_bc.You_already_selected'|trans}}";
+        initMap();
+    });
+</script>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+
+{% block header %}
+<header id="header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 col-md-offset-1 logo">
+            <a href="{{path('homepage')}}">
+                <span class="mnv-logo-small">{% include 'AppBundle:Main:logo.html.twig'%}</span>
+            </a>
+            </div>
+
+            <div class="col-md-2 user-avatar">
+                 <div class="lang">
+                    <button class="dropdown-toggle" type="button" data-toggle="dropdown" name="lang" >{{ app.request.locale }} <span class="caret"></span></button>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'fr'})) }}">{{ 'fr'|trans }}</a></li>
+                        <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'})) }}">{{ 'en'|trans }}</a></li>
+                        <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'es'})) }}">{{ 'es'|trans }}</a></li>
+                        <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'ca'})) }}">{{ 'ca'|trans }}</a></li>
+                    </ul>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock header %}

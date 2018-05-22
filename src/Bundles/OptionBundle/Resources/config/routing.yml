@@ -1,0 +1,3 @@
+bundles_option_homepage:
+    path:     /
+    defaults: { _controller: BundlesOptionBundle:Default:index }

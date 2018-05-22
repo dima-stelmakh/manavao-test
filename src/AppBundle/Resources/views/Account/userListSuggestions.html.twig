@@ -1,0 +1,11 @@
+{% extends "AppBundle:Account:memberList.html.twig" %}
+
+{% block userList %}
+<div class="user-list-wrap">
+    {% include 'AppBundle:Account:parts/userListHead.html.twig' with {'user': app.user, 'currentTab': 3 } %}
+    
+    {% for item in pagination %}
+        {% include 'AppBundle:Account:parts/userListItem.html.twig' with {'user': item }%}
+    {% endfor %}
+</div>
+{% endblock userList %}

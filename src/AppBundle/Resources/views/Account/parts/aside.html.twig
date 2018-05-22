@@ -1,0 +1,127 @@
+<aside class="col-md-3 right-side">
+
+    {% if app.request.attributes.get('_route') == 'profile_info' %}
+    <div class="edit-profiling-side-wrap">
+
+        <a class="invite" href="javascript:;"><span class="icon icon-invite"></span>{{'business_community.invite_contacts'|trans}}</a>
+        <div class="edit-profiling-side">
+            <p class="settings-plus">+ {{'user_dropdown.settings'|trans}}</p>
+            <h3>{{'edit_profiling_side.notify_your_network'|trans}}</h3>
+            <p>{{'edit_profiling_side.do_not_publish'|trans}}</p>
+            <input class="switch-input"  type="checkbox" id="confidential">
+            <label for="confidential">
+                <div class="switch">
+                    <span class="switch-no">{{'edit_profiling_side.no_answer'|trans}}</span>
+                    <span class="switch-yes">{{'edit_profiling_side.yes_answer'|trans}}</span>
+                </div>
+            </label>
+        </div>
+        <div class="link-all-wrap clearfix"></div>
+    </div>
+    {% endif %}
+
+    {% if not (app.request.attributes.get('_route') == 'profile_info') %}
+    <div class="calendar-wrap">
+        <div class="datepicker-holder" data-lang="{{'header.lang'|trans}}">
+          <div class="datepicker-inline cusmom-datepicker-inline"></div>
+        </div>
+        <div class="link-all-wrap clearfix">
+            <a href="javascript:;" class="link-all">{{'user_wall.See_all'|trans}} <span>...</span></a>
+        </div>
+    </div>
+
+
+
+
+    {% if app.request.attributes.get('_route') != 'profile_organisation' %}
+    <div class="last-connections">
+{#            <h2 class="aside-title">{{'business_community.Last_members'|trans}}</h2>#}
+        {% if mymy %}
+        <h2 class="aside-title">{{'user_wall.my_connections'|trans}}</h2>
+        {% else%}
+        <h2 class="aside-title">{{'user_wall.Connections'|trans}}</h2>
+        {% endif%}
+        {% for item in friends.getFriends(someUser, 6) %}
+        <div class="aside-item">
+            <a href="{{path('some-user-page', {'someUser': item.id})}}">
+            <img src="{{item.image.src}}" alt="">
+            {{item.firstName}} <br> {{item.lastName}}</a>
+        </div>
+        {% endfor %}
+        <div class="link-all-wrap clearfix">
+            <a href="{{path('profile_last_someuser_friends', {'user': someUser.id })}}" class="link-all">{{'user_wall.See_all'|trans}} <span>...</span></a>
+            {#{% if mymy %}
+            <a href="{{path('profile_followers')}}" class="link-all">{{'user_wall.See_all'|trans}} <span>...</span></a>
+            {% else%}
+            <a href="{{path('profile_someuser_friends', {'user': someUser.id })}}" class="link-all">{{'user_wall.See_all'|trans}} <span>...</span></a>
+            {% endif%}#}
+        </div>
+    </div>
+    {% endif%}
+
+    <div class="suggestions-wrap">
+            <h2 class="aside-title">{{'user_wall.Suggestions'|trans}}</h2>
+            {% for item in lastConnections.getLastConnections(app.user, 6) %}
+            <div class="aside-item">
+
+                <a href="{{path('some-user-page', {'someUser': item.id})}}">
+                <img src="{{item.image.src}}" alt="">
+                {{item.firstName}} <br> {{item.lastName}}</a>
+            </div>
+            {% endfor %}
+            <div class="link-all-wrap clearfix">
+                <a href="{{path('profile_suggestions')}}" class="link-all">{{'user_wall.See_all'|trans}} <span>...</span></a>
+            </div>
+    </div>
+
+{#    <div class="near-community-wrap">
+            <h2 class="aside-title">{{'user_wall.Nearby_business_communities'|trans}}</h2>
+            <div class="aside-item">
+
+                    <a class="mnv-disabled" href="javascript:;">
+                    <img src="/assets/img/user-avatar.jpg" alt="">
+                    <span>London</span><br>
+                            + Add
+                    </a>
+            </div>
+            <div class="aside-item">
+                    <a class="mnv-disabled" href="javascript:;">
+                    <img src="/assets/img/user-avatar.jpg" alt="">
+                    <span>London</span><br>
+                            + Add
+                    </a>
+            </div>
+            <div class="aside-item">
+                    <a class="mnv-disabled" href="javascript:;">
+                    <img src="/assets/img/user-avatar.jpg" alt="">
+                    <span>London</span><br>
+                            + Add
+                    </a>
+            </div>
+            <div class="aside-item">
+                    <a class="mnv-disabled" href="javascript:;">
+                    <img src="/assets/img/user-avatar.jpg" alt="">
+                    <span>London</span><br>
+                            + Add
+                    </a>
+            </div>
+            <div class="aside-item">
+                    <a class="mnv-disabled" href="javascript:;">
+                    <img src="/assets/img/user-avatar.jpg" alt="">
+                    <span>London</span><br>
+                            + Add
+                    </a>
+            </div>
+            <div class="aside-item">
+                    <a class="mnv-disabled" href="javascript:;">
+                    <img src="/assets/img/user-avatar.jpg" alt="">
+                    <span>London</span><br>
+                            + Add
+                    </a>
+            </div>
+            <div class="link-all-wrap clearfix">
+                            <a href="javascript:;" class="link-all">{{'user_wall.See_all'|trans}} <span>...</span></a>
+                    </div>
+    </div>#}
+    {% endif %}
+</aside>

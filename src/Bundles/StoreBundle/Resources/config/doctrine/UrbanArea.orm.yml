@@ -1,0 +1,40 @@
+Bundles\StoreBundle\Entity\UrbanArea:
+    type: entity
+    table: null
+    repositoryClass: Bundles\StoreBundle\Repository\UrbanAreaRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+        code:
+            type: string
+            length: 255
+            unique: true
+        region:
+            type: string
+            length: 255
+        code_sno:
+            type: string
+            length: 255
+    oneToMany:
+        cities:
+            targetEntity: City
+            mappedBy: urbanArea
+    oneToOne:
+        community:
+            targetEntity: Community
+            mappedBy: area    
+    manyToOne:
+        country:
+            targetEntity: Country
+            inversedBy: urbanAreas
+            joinColumn:
+                name: country_id
+                referencedColumnName: id
+    lifecycleCallbacks: {  }

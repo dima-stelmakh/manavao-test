@@ -1,0 +1,76 @@
+<div class="post-action-wrap clearfix">
+        {#{% if app.user != item.author %}#}
+        <div class="post-action">
+                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" {#onclick="repost({{item.id}}, {{app.user.id}});" #}>
+                        <span class="icon-save icon"></span>
+                {{'post.save'|trans}}</a>
+        </div>
+        {#{% endif %}#}
+        <div class="post-action like-box"> 
+            <a href="javascript:;" class="dropdown-toggle" onclick="like({{item.id}});return false;">
+                    <span id="likes1-{{item.id}}" class="icon icon-like">{{item.likedUsers | length}}</span>
+            {{'post.like'|trans}}</a>
+            <div class="popup-window">
+                <a href="{{path('getLikePopup', {'post' : item.id})}}" class="heading-info link-popup-likes">
+                    <strong><span id="likes2-{{item.id}}">{{item.likedUsers | length}}</span> {{'post.like'|trans}}</strong>
+                </a>
+                <div class="wrap-holder" id="like-list-{{item.id}}">
+                    {% for elem in item.likedUsers | slice(0, 4) %}
+                    <a {% if app.user == elem.user %} id="like-{{item.id}}-{{elem.user.id}}" 
+                                    href="{{path('profile')}}" 
+                                {% else %} 
+                                    href="{{path('some-user-page', {'someUser': elem.user.id})}}" 
+                                {% endif %}>
+                    <div class="img-holder">
+                        <img src="{{elem.user.image.src}}" alt="">
+                    </div>
+                    </a>
+                    {% endfor %}
+                    {#<a href="javascript:;"><div class="img-holder">
+                        <img src="/assets/img/noname.png" alt="">
+                    </div></a>#}
+                </div>
+            </div>
+        </div>
+        <div class="post-action">
+                <a class="dropdown-toggle toggle-add-comment" href="javascript:;">
+                        <span class="icon icon-comment">{{item.comment | length}}</span>
+                {{'post.comment'|trans}}</a></div>
+        <div class="post-action">
+            {% if item.type == 2 %}
+                <a class="dropdown-toggle link-popup-share"  href="{{path('getOppPopup', {'post' : item.id})}}">
+                        <span class="icon icon-share_little">{{item.sharedUsers | length}}</span> 
+                        {{'post.share'|trans}}
+                </a>
+            {% elseif item.type == 1 %}
+                <a class="dropdown-toggle link-popup-share"  href="{{path('getUpdatePopup', {'post' : item.id})}}">
+                        <span class="icon icon-share_little">{{item.sharedUsers | length}}</span> 
+                        {{'post.share'|trans}}
+                </a>
+            {% else %}
+                <a class="dropdown-toggle link-popup-share"  href="{{path('getEventPopup', {'post' : item.id})}}">
+                        <span class="icon icon-share_little">{{item.sharedUsers | length}}</span> 
+                        {{'post.share'|trans}}
+                </a>
+            {% endif %}
+        </div>
+
+        <div class="post-action filter">
+                <button>
+                    {% if from == 'user' and item.author == app.user %}
+                        <a href="javascript:;" onclick="deletePostFromUserWall({{item.id}}); return false;">
+                            <span class="icon icon-close"></span>
+                        </a>
+                    {% elseif from == 'comm' and item.author == app.user %}
+                        <a href="javascript:;" onclick="deletePostFromCommWall({{item.id}}, {{comm.id}}); return false;">
+                            <span class="icon icon-close"></span>
+                        </a>
+                    {% elseif from == 'someUser' and item.author == app.user %}
+                        <a href="javascript:;" onclick="deletePostFromUserWall({{item.id}}); return false;">
+                            <span class="icon icon-close"></span>
+                        </a>
+                    {% endif %}
+                </button>
+
+        </div>
+</div>

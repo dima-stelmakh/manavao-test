@@ -1,0 +1,109 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block content %}
+
+<div class="bg-wrapp">
+	<div class="container">
+		<div class="messenger-block">
+			<div class="user-col">
+				<div class="heading-message-block">
+					<h2 class="heading">{{'messenger_block.messenger'|trans}}</h2>
+					<span class="icon icon-edit"></span>
+				</div>
+				<div class="input-holder">
+					<span class="custom-icon-search mnv-disabled"  name="icon-picture"></span>
+					<input type="search" class="search" placeholder="{{'messenger_block.search_messages'|trans}}">
+				</div>
+				<ul class="user-list">
+                                        {% for item in dialogs %}
+					<li{% if item.user.id == conv.id %} class="active"{% endif %}>
+
+						<div class="info-block">
+                                                    {% if item.user.id == app.user.id %}
+                                                    <a href="{{ path('some-user-page', {'someUser': item.message.sender.id })}}">
+                                                    {% else %}
+                                                    <a href="{{ path('some-user-page', {'someUser': item.user.id })}}">
+                                                    {% endif %}
+                                                    	<div class="wrap-holder">
+                                                            <div class="img-holder">
+                                                                <img src="{{item.user.image.src}}" alt="">
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                    {% if item.user.id == app.user.id %}
+                                                    <a href="{{ path('profile_message_user', {'userId': item.message.sender.id })}}">
+                                                    {% else %}
+                                                    <a href="{{ path('profile_message_user', {'userId': item.user.id })}}">
+                                                    {% endif %}
+                                                        <div class="user-info-box">
+                                                            <div class="info-box">
+                                                                <h3>{{item.user.firstName}} {{item.user.lastName}}</h3>
+                                                                <span class="date">{{item.message.createdAt |date('Y-m-d')}}</span>
+                                                            </div>
+                                                            <span class="sponsored">{{'user_wall.Sponsored'|trans}}</span>
+                                                            {% if item.myLastMessage %}
+                                                            <span class="name-user">{{app.user.firstName}}:</span>
+                                                            {% else %}
+                                                            <span class="name-user">{{item.message.sender.firstName}}:</span>
+                                                            {% endif %}
+                                                            <span class="content-message">{{item.message.text}}</span>
+                                                        </div>
+                                                    </a>
+						</div>
+
+					</li>
+                                        {% endfor %}
+				</ul>
+			</div>
+			<div class="message-block">
+				<div class="heading-message-block">
+					<a href="javascript:;" class="heading-link"><h2>{{conv.firstName}} {{conv.lastName}}</h2></a>
+					<!-- <span class="last-actions">last actions 13 min. ago</span> -->
+				</div>
+				<div class="chat-box">
+                                    {% for item in messages %}
+                                        {% if item.sender == app.user %}
+
+					<div class="info-block info-block-your-message">
+						<p>{{item.text}}</p>
+						<a href="{{ path('some-user-page', {'someUser': item.sender.id })}}">
+							<div class="wrap-holder">
+								<div class="img-holder">
+									<img src="{{item.sender.image.src}}" alt="">
+								</div>
+							</div>
+						</a>
+					</div>
+                                        {% else %}
+                                        {#read messages   #}
+                                        {{messageManager.readMessage(item)}}
+                                        <div class="info-block info-block-interlocutor">
+						<a href="{{ path('some-user-page', {'someUser': item.sender.id })}}">
+							<div class="wrap-holder">
+								<div class="img-holder">
+									<img src="{{item.sender.image.src}}" alt="">
+								</div>
+							</div>
+						</a>
+						<p>{{item.text}}</p>
+					</div>
+                                        {% endif %}
+                                    {% endfor %}
+				</div>
+                                {% if conv %}
+				<div class="send-block">
+                                    <form action="{{path('send_message', {'user': conv.id})}}" method="post">
+					<textarea name="message" placeholder="{{'user_wall.enter_your_message'|trans}}"></textarea>
+					<div class="add-box">
+                                            <span class="icon-picture mnv-disabled"  name="icon-picture">
+                                            </span>
+                                            <span class="icon-add-file mnv-disabled"  name="add icon-file"></span>
+					</div><div class="wrapp-input"><input type="submit" /></div>
+                                    </form>
+				</div>
+                                {% endif %}
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

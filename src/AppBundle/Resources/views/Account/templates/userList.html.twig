@@ -1,0 +1,44 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block content %}
+<div id="content" class="wall-page">
+    <div class="container">
+        {% block leftAside %}
+            {% include 'AppBundle:Account:parts/profileLeftAside.html.twig' with {'user': app.user } %}
+        {% endblock %}
+        <div class="col-md-7">
+            <div class="row">
+                {% block userList %}
+                <div class="user-list-wrap">
+                    {% include 'AppBundle:Account:parts/userListItem.html.twig' with {'user': app.user, 'currentTab': 1 } %}
+                    {% for friend in friends.getFriends(app.user) %}
+                        {% include 'AppBundle:Account:parts/userListItem.html.twig' with {'user': friend }%}
+                    {% endfor %}
+                </div>
+                {% endblock userList %}
+            </div>
+        </div>
+        <div class="col-md-3">
+            {% include 'AppBundle:Account:parts/profileRightAside.html.twig' with {'showMembers' : false } %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+<script src="https://maps.googleapis.com/maps/api/js?key={{googleApiKey}}"
+    async defer></script>
+    {{parent()}}
+<script src="/js/map.js"></script>
+<script>
+    function shareText()
+    {
+        var message = $('#user-post-text').val();
+        $('#user-post-textShare').html(message);
+        $('#user-post-textOpp').html(message);
+        $('#user-post-textEvent').html(message);       
+
+    }
+</script>
+{% endblock %}

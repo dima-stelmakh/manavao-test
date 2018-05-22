@@ -1,0 +1,24 @@
+{% extends "AppBundle::layout.html.twig"%}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block content %}
+<div class="container">
+    <div class="login-form-holder login-form-holder-reset">
+	<form name="fos_user_resetting_form" method="post" action="{{path('fos_user_resetting_reset', {'token': token}) }}" class="fos_user_resetting_reset">
+		{{ form_row(form._token) }}
+		<div class="edit-profiling-wrap">
+			<p class="title-name">New password</p>
+			<input class="password-box" type="password" id="fos_user_resetting_form_plainPassword_first" name="fos_user_resetting_form[plainPassword][first]" required="required">
+		</div>
+		<div class="edit-profiling-wrap">
+			<p class="title-name">Repeat new password</p>
+			<input class="password-box" type="password" id="fos_user_resetting_form_plainPassword_second" name="fos_user_resetting_form[plainPassword][second]" required="required">
+		</div>
+		<div>
+			<button class="orange-btn" type="submit">{{ 'resetting.reset.submit'|trans }}</button>
+		</div>
+	</form>
+	</div>
+</div>
+{% endblock  %}

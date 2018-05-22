@@ -1,0 +1,26 @@
+Bundles\StoreBundle\Entity\Comment:
+    type: entity
+    table: null
+    repositoryClass: Bundles\StoreBundle\Repository\CommentRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        content:
+            type: text
+    manyToOne:
+        post:
+            targetEntity: Post
+            inversedBy: comment
+            joinColumn:
+                name: post_id
+                referencedColumnName: id
+        user:
+            targetEntity: Bundles\UserBundle\Entity\User
+            joinColumn:
+                name: user_id
+                referencedColumnName: id
+    lifecycleCallbacks: {  }

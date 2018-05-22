@@ -1,0 +1,4 @@
+services:
+    bundles.image_manager:
+        class: Bundles\ImageBundle\Service\ImageManager
+        arguments: ["@doctrine.orm.entity_manager"]

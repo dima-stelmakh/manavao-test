@@ -1,0 +1,21 @@
+<ul class="user-list-organization">
+    {% if currentTab == 1 %}
+    <li class="active"><span>{{'business_community.Last_members'|trans}}</span><strong class="number">({{ pagination.getTotalItemCount }})</strong></li>
+    {% else %}
+    <li><a href="{{path('profile_last_members')}}">{{'business_community.Last_members'|trans}}<strong class="number">({{lastConnections.getUsersInMyCommunitiesQueryCount(user)}})</strong></a></li>
+    {% endif %}
+    
+    {% if currentTab == 2 %}
+    <li class="active"><span>{{'business_community.Members'|trans}} </span><strong class="number">({{ pagination.getTotalItemCount }})</strong></li>
+    {% else %}
+    <li><a href="{{path('profile_members')}}">{{'business_community.Members'|trans}} <strong class="number">({{lastConnections.getUsersInMyCommunitiesQueryCount(user)}})</strong></a></li>
+    {% endif %}
+        
+    {% if currentTab == 3 %}
+    <li class="active"><span>{{'user_wall.Suggestions'|trans}} </span><strong class="number">({{ pagination.getTotalItemCount }})</strong></li>
+    {% else %}
+    <li><a href="{{path('profile_suggestions')}}" >{{'user_wall.Suggestions'|trans}} <strong class="number">({{lastConnections.getLastConnectionCount(user)}})</strong></a></li>
+    {% endif %}
+        
+    <li><a href=""class="tab-search">Search</a></li>
+</ul>

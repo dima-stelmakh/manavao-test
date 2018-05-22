@@ -1,0 +1,100 @@
+{
+    "name": "root/my-proj",
+    "license": "proprietary",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        },
+        "classmap": [
+            "app/AppKernel.php",
+            "app/AppCache.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": ">=5.5.9",
+        "symfony/symfony": "3.4.*",
+        "doctrine/orm": "^2.5",
+        "doctrine/doctrine-bundle": "^1.6",
+        "doctrine/doctrine-cache-bundle": "^1.2",
+        "symfony/swiftmailer-bundle": "^2.3",
+        "symfony/monolog-bundle": "^2.8",
+        "symfony/polyfill-apcu": "^1.0",
+        "sensio/distribution-bundle": "^5.0",
+        "sensio/framework-extra-bundle": "^3.0.2",
+        "incenteev/composer-parameter-handler": "^2.0",
+        "friendsofsymfony/user-bundle": "2.0.0",
+        "jms/i18n-routing-bundle": "^2.0",
+        "knplabs/doctrine-behaviors": "^1.4",
+        "beberlei/DoctrineExtensions": "^1.0",
+        "doctrine/doctrine-fixtures-bundle": "^2.3",
+        "linkedinapi/linkedin": "^1.1",
+        "rollbar/rollbar": "~0.18.2",
+        "knplabs/knp-paginator-bundle": "^2.5",
+        "gos/web-socket-bundle": "^1.8",
+        "a2lix/translation-form-bundle": "^2.1",
+        "twig/twig": "1.*",
+        "symfony/var-dumper": "^4.0"
+    },
+    "require-dev": {
+        "sensio/generator-bundle": "^3.0",
+        "symfony/phpunit-bridge": "^3.0",
+        "symfony/web-server-bundle": "^3.4"
+    },
+    "scripts": {
+        "symfony-scripts": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+        ],
+        "post-install-cmd": [
+            "@symfony-scripts"
+        ],
+        "post-update-cmd": [
+            "@symfony-scripts"
+        ]
+    },
+    "extra": {
+        "paas": {
+            "nginx-includes": ["config/nginx-https-redirection.conf"]
+        },
+        "symfony-app-dir": "app",
+        "symfony-bin-dir": "bin",
+        "symfony-var-dir": "var",
+        "symfony-web-dir": "web",
+        "symfony-tests-dir": "tests",
+        "symfony-assets-install": "relative",
+        "incenteev-parameters": {
+            "file": "app/config/parameters.yml",
+            "env-map": {
+                "database_host": "DATABASE_HOST",
+                "database_port": "DATABASE_PORT",
+                "database_name": "DATABASE_NAME",
+                "database_user": "DATABASE_USER",
+                "database_password": "DATABASE_PASSWORD",
+                "mailer_transport": "MAILER_TRANSPORT",
+                "mailer_host": "MAILER_HOST",
+                "mailer_username": "MAILER_USERNAME",
+                "mailer_password": "MAILER_PASSWORD",
+                "mailer_port": "MAILER_PORT",
+                "mailer_auth_mode": "MAILER_AUTH_MODE",
+                "mailer_from": "MAILER_FROM",
+                "mailer_encryption": "MAILER_ENCRYPTION",
+                "secret": "SECRET",
+                "google_api": "GOOGLE_API",
+                "google_analytics": "GOOGLE_ANALYTICS",
+                "google_tag_manager": "GOOGLE_TAG_MANAGER",
+                "api_url": "API_URL",
+                "api_token": "API_TOKEN"
+            }
+        }
+    }
+}

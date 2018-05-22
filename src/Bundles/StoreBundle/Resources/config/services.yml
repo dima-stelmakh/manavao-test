@@ -1,0 +1,20 @@
+services:
+    friend_manager:
+        class: Bundles\StoreBundle\Service\FriendManager
+        arguments: ["@service_container"]
+
+    last_connection_manager:
+        class: Bundles\StoreBundle\Service\LastConnectionManager
+        arguments: ["@service_container"]    
+        
+    guest_manager:
+        class: Bundles\StoreBundle\Service\GuestManager
+        arguments: ["@service_container"]  
+    
+    message_manager:
+        class: Bundles\StoreBundle\Service\MessageManager
+        arguments: ["@service_container"]  
+  
+    notification_manager:
+        class: Bundles\StoreBundle\Service\NotificationManager
+        arguments: ["@service_container"]  

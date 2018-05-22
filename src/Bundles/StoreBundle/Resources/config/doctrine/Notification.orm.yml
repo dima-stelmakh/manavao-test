@@ -1,0 +1,45 @@
+Bundles\StoreBundle\Entity\Notification:
+    type: entity
+    table: null
+    repositoryClass: Bundles\StoreBundle\Repository\NotificationRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        new:
+            type: boolean
+        createdAt:
+            type: datetime
+            column: created_at
+        noteType:
+            type: smallint  
+    manyToOne:
+        user:
+            targetEntity: Bundles\UserBundle\Entity\User
+            joinColumn:
+                onDelete: CASCADE
+                name: user_id
+                referencedColumnName: id
+        aboutUser:
+            targetEntity: Bundles\UserBundle\Entity\User
+            joinColumn:
+                onDelete: CASCADE
+                name: about_user_id
+                referencedColumnName: id
+        community:
+            targetEntity: Bundles\StoreBundle\Entity\Community
+            joinColumn:
+                onDelete: CASCADE
+                name: community_id
+                referencedColumnName: id
+        post:
+            targetEntity: Bundles\StoreBundle\Entity\Post
+        #    cascade: ["persist"]
+            joinColumn:
+                onDelete: CASCADE
+                name: post_id
+                referencedColumnName: id
+    lifecycleCallbacks: {  }

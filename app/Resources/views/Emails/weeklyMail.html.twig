@@ -1,0 +1,300 @@
+<html lang="en"><head>
+<meta charset="UTF-8">
+<title>Document</title>
+<style type="text/css"></style></head>
+<body style="text-align: center; background-color: #ededed; font-family:'Fira Sans', sans-serif; width: 100%">
+<table cellspacing="0px" bgcolor="#fff" width="730px" border="0px" style="margin:0 auto;text-align: left;color: #333;">
+	<tbody><tr>
+		<td colspan="8" bgcolor="#ededed" style="text-align: left;">
+			<a href="" alt="Manavao"><img style="padding: 21px 0px;" src="{{absolute_url('assets/img/logo_mail_bc.png')}}"></a>
+		</td>
+	</tr>
+	<tr style="height: 230px">
+		<td colspan="8" 
+                    {% if comm.image %}
+                        background="{{absolute_url(comm.image.src)}}"
+                    {% else %}
+                        background="{{absolute_url('assets/img/mail-bc-bg.jpg')}}"
+                    {% endif %}>
+                    
+			<table style="color:#fff; " cellspacing="20"  width="100%">
+				<tbody><tr>
+					<td width="50%" bgcolor="#1e335e" style="padding: 30px 20px 20px 30px">
+						<h1 style="font-size: 35px; line-height: 10px">{{comm.area.name}}</h1>
+						<h2 style="font-size: 18px">business community</h2>
+						<hr style="color:#fff; background-color: #fff">
+						<span style="font-size: 16px">{{comm.area.country.name}}</span><img src="">
+					</td>
+					<td width="10%"></td>
+					<td>
+						{#<h2 style="font-size:28px; line-height: 5px">Newsletter 1</h2>
+						<p style="font-size: 14px; line-height: 5px">december 16</p>#}
+					</td>
+				</tr>
+			</tbody></table>
+		</td>
+	</tr>
+	<tr>
+		<td width="105px"></td>
+		<td style="height: 90px"  colspan="6">
+			<p style="font-weight: bold; font-size: 24px; color: #515f70">Hi, {{user.firstName}} <span style="font-size: 14px;color: #e95403;font-weight: normal; padding-left: 10px">+ </span><a href="{{url('some-user-page', {'someUser' : user.id})}}" style="font-size: 14px; color: #4a78b0; text-decoration: underline; font-weight: normal; ">edit profile</a></p>
+		</td>
+		<td width="105px"></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td valign="top" style="height: 60px; padding-top: 10px;" colspan="7">
+			<img src="{{absolute_url('assets/img/members-mail.png')}}" alt="" style="float: left;"> 
+			<div style="color: #408384;float: left;padding-top: 5px; font-weight: bold; padding-left: 10px;">Last members</div>
+		</td>
+	</tr>
+	<tr style="font-size: 14px;" valign="top">
+		<td></td>
+                {% for item in lastUsers %}
+		<td width="12.5%" style="text-align: center;">
+			<a href="javascript:;" style="color:#4a78b0; text-decoration: none; text-align: center;">
+			<img style="border:2px solid #c4c4c4; border-radius: 50px;margin-bottom: 15px; width: 70px; height: 70px " src="{{absolute_url(item.image.src)}}" alt=""><br>
+			{{item.firstName}} {{item.lastName}}</a>
+		</td>		
+                {% endfor %}
+
+		<td></td>
+	</tr>
+	<tr>
+		<td style="padding-top: 25px;" colspan="7">
+			<div style="float: right; color:#e95403; font-size: 20px "><a style="color: #333;font-size: 14px; text-decoration: none;" href="{{url('profile')}}">see all</a> ... </div>
+			</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td colspan="8">
+			<hr style="color: #bebebe; background-color: #bebebe; height: 2px; border:0px;">
+		</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td style="padding-top: 30px;" colspan="6">
+			<div style="text-align: right; float: right; color:#e95403; font-size: 20px; ">
+				<a style="color: #333;font-size: 14px; text-decoration: none;" href="{{url('profile')}}">see all</a> ... </div>
+			<img style="float: left;padding-right: 10px;" src="{{absolute_url('assets/img/update.png')}}" alt=""> 
+			<div style="float: left; color: #4a78b0; padding-top: 3px; font-weight: bold;">Updates</div>
+		</td>
+		<td>
+			
+		</td>
+	</tr>
+        {% for item in updatePosts %}
+	<tr>
+                
+		<td></td>
+		<td colspan="6">
+			<hr style="background-color: #bbb; color: #bbb; border:0px;height: 1px">
+		</td>
+		<td>
+			
+		</td>
+	</tr>
+	<tr>
+	<td></td>
+            <td style="padding: 10px 0px;" colspan="7">
+                <a href="{{url('some-user-page', {'someUser': item.author.id})}}" style="text-decoration: none;"><p style="color: #e95403; font-size: 12px; line-height: 1px;">{{item.author.firstName}} {{item.author.lastName}}</p></a>
+                <p style="font-size: 11px">{{item.author.city}}</p>
+            </td>
+	</tr>
+	<tr>
+            <td></td>
+            <td valign="top">
+                <a href="{{url('some-user-page', {'someUser': item.author.id})}}" style="color:#4a78b0; text-decoration: none; text-align: center;">
+                    <img style="border:2px solid #c4c4c4; width: 70px; height: 70px " src="{% if item.authot.image %}{{absolute_url(item.author.image.src)}} {% else %}{{absolute_url('img/noname.png')}}{% endif %}" alt="">
+                </a>
+            </td>
+            <td colspan="5">
+                {#<h2 style="font-size: 18px">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h2>#}
+                <p  style="font-size: 14px">{{item.content}}</p>
+                <span style="float: right;padding-top: 15px; font-size: 12px;">{{item.createdAt | date('d/m/Y h:i' ) }}</span> <a style="float: left;padding-top: 15px; color: #4a78b0; font-size: 12px; text-decoration: none" href="{{url('community', {'comm': comm.id})}}">{{comm.name}} - {{comm.area.country.name}}</a>
+            </td>
+            <td></td>
+	</tr>
+	<tr>
+            <td colspan="2"></td>
+            <td colspan="5" style="font-size: 12px; color: #4a78b0">
+                <hr style="background-color: #bbb;    margin-bottom: 15px; color: #bbb; border:0px;height: 1px">
+                <a href="javascript:;" style="color:#333; text-decoration: none"><img style="padding-right: 5px" src="{{absolute_url('assets/img/save.png')}}" alt=""> <span style="padding-right: 5px;">Save</span></a>
+                <a href="javascript:;" style="color:#333; text-decoration: none"><img style="padding-right: 5px"  src="{{absolute_url('assets/img/like.png')}}" alt=""> <span style="padding-right: 5px;">Going</span></a>
+                <a href="javascript:;" style="color:#333; text-decoration: none"><img style="padding-right: 5px"  src="{{absolute_url('assets/img/comment.png')}}" alt=""> <span style="padding-right: 5px;">Interested in</span></a>
+                <a href="javascript:;" style="color:#333; text-decoration: none"><img style="padding-right: 5px"  src="{{absolute_url('assets/img/share.png')}}" alt=""> <span style="padding-right: 5px;">Share</span></a>
+            </td>
+
+            <td></td>
+	</tr>
+        {% endfor %}
+	<tr>
+	<td></td>
+		<td  
+		style="border-bottom: 1px solid #333; padding-top: 10px;" colspan="6">
+			
+		</td>
+		<td></td>
+	</tr>
+
+
+
+	<tr>
+		<td></td>
+		<td style="padding-top: 30px;" colspan="6">
+			<div style="text-align: right; float: right; color:#e95403; font-size: 20px; ">
+				<a style="color: #333;font-size: 14px; text-decoration: none;" href="{{url('profile')}}">see all</a> ... </div>
+			<img style="float: left;padding-right: 10px;" src="{{absolute_url('assets/img/opportunites.png')}}" alt=""> 
+			<div style="float: left; color: #4a78b0; padding-top: 3px; font-weight: bold;">Opportunites</div>
+		</td>
+		<td>
+			
+		</td>
+	</tr>
+        {% for item in oppPosts %}
+	<tr>
+		<td></td>
+		<td colspan="6">
+			<hr style="background-color: #bbb; color: #bbb; border:0px;height: 1px">
+		</td>
+		<td>
+			
+		</td>
+	</tr>
+	<tr>
+	<td></td>
+            <td style="padding: 10px 0px;" colspan="7">
+                <a href="{{url('some-user-page', {'someUser': item.author.id})}}" style="text-decoration: none;"><p style="color: #e95403; font-size: 12px; line-height: 1px;">{{item.author.firstName}} {{item.author.lastName}}</p></a>
+                <p style="font-size: 11px">{{item.author.city}}</p>
+            </td>
+	</tr>
+	<tr>
+		<td></td>
+		<td valign="top">
+                    <a href="{{url('some-user-page', {'someUser': item.author.id})}}" style="color:#4a78b0; text-decoration: none; text-align: center;">
+                        <img style="border:2px solid #c4c4c4; width: 70px; height: 70px " src="{%if item.authot.image %}{{absolute_url(item.author.image.src)}}{% else %}{{absolute_url('img/noname.png')}}{% endif %}" alt="">
+                    </a>
+                </td>
+		<td colspan="5">
+			<h2 style="font-size: 18px">{{item.opportunityPost.fewWords}}</h2>
+			<p  style="font-size: 14px">{{item.content}}</p>
+                        <span style="float: right;padding-top: 15px; font-size: 12px;">{{item.createdAt | date('d/m/Y h:i' ) }}</span> <a style="float: left;padding-top: 15px; color: #4a78b0; font-size: 12px; text-decoration: none" href="{{url('community', {'comm': comm.id})}}">{{comm.name}} - {{comm.area.country.name}}</a>
+		</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td colspan="2"></td>
+		<td colspan="5" style="font-size: 12px; color: #4a78b0">
+			<hr style="background-color: #bbb;    margin-bottom: 15px; color: #bbb; border:0px;height: 1px">
+			<a href="javascript:;" style="color:#333; text-decoration: none"><img style="padding-right: 5px" src="{{absolute_url('assets/img/save.png')}}" alt=""> <span style="padding-right: 5px;">Save</span></a>
+			<a href="javascript:;" style="color:#333; text-decoration: none"><span style="color:#eb6117">+ </span><span style="padding-right: 5px;">Send a message</span></a>
+			<a href="javascript:;" style="color:#333; text-decoration: none"><img style="padding-right: 5px"  src="{{absolute_url('assets/img/comment.png')}}" alt=""> <span style="padding-right: 5px;">Interested in</span></a>
+			<a href="javascript:;" style="color:#333; text-decoration: none"><img style="padding-right: 5px"  src="{{absolute_url('assets/img/share.png')}}" alt=""> <span style="padding-right: 5px;">Share</span></a>
+		</td>
+
+		<td></td>
+	</tr>
+        {% endfor %}
+	<tr>
+	<td></td>
+		<td  
+		style="border-bottom: 1px solid #333; padding-top: 10px;" colspan="6">
+			
+		</td>
+		<td></td>
+	</tr>
+
+
+
+	<tr>
+		<td></td>
+		<td style="padding-top: 30px;" colspan="6">
+			<div style="text-align: right; float: right; color:#e95403; font-size: 20px; ">
+				<a style="color: #333;font-size: 14px; text-decoration: none;" href="{{url('profile')}}">see all</a> ... </div>
+			<img style="float: left;padding-right: 10px;" src="{{absolute_url('assets/img/event.png')}}" alt=""> 
+			<div style="float: left; color: #4a78b0; padding-top: 3px; font-weight: bold;">Events</div>
+		</td>
+		<td>
+			
+		</td>
+	</tr>
+        {% for item in eventPosts %}
+	<tr>
+		<td></td>
+		<td colspan="6">
+			<hr style="background-color: #bbb; color: #bbb; border:0px;height: 1px">
+		</td>
+		<td>
+			
+		</td>
+	</tr>
+	<tr>
+	<td></td>
+		<td style="padding: 10px 0px;" colspan="7">
+                    <a href="{{url('some-user-page', {'someUser': item.author.id})}}" style="text-decoration: none;"><p style="color: #e95403; font-size: 12px; line-height: 1px;">{{item.author.firstName}} {{item.author.lastName}}</p></a>
+                    <p style="font-size: 11px">{{item.author.city}}</p>
+                </td>
+	</tr>
+	<tr>
+		<td></td>
+		<td valign="top">
+                    <a href="{{url('some-user-page', {'someUser': item.author.id})}}" style="color:#4a78b0; text-decoration: none; text-align: center;">
+                        <img style="border:2px solid #c4c4c4; width: 70px; height: 70px " src="{% if item.authot.image %}{{absolute_url(item.author.image.src)}} {% else %}{{absolute_url('img/noname.png')}}{% endif %}" alt="">
+                    </a>
+                </td>
+		<td colspan="5">
+			<h2 style="font-size: 18px">{{item.eventPost.name}}</h2>
+			<p  style="font-size: 14px">{{item.content}}</p>
+                        <span style="float: right;padding-top: 15px; font-size: 12px;">{{item.createdAt | date('d/m/Y h:i' ) }}</span> <a style="float: left;padding-top: 15px; color: #4a78b0; font-size: 12px; text-decoration: none" href="{{url('community', {'comm': comm.id})}}">{{comm.name}} - {{comm.area.country.name}}</a>
+		</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td colspan="2"></td>
+		<td colspan="5" style="font-size: 12px; color: #4a78b0">
+			<hr style="background-color: #bbb;    margin-bottom: 15px; color: #bbb; border:0px;height: 1px">
+			<a href="javascript:;" style="color:#333; text-decoration: none"><img style="padding-right: 5px" src="{{absolute_url('assets/img/save.png')}}" alt=""> <span style="padding-right: 5px;">Save</span></a>
+			<a href="javascript:;" style="color:#333; text-decoration: none"><span style="color:#eb6117">+ </span><span style="padding-right: 5px;">Send a message</span></a>
+			<a href="javascript:;" style="color:#333; text-decoration: none"><img style="padding-right: 5px"  src="{{absolute_url('assets/img/comment.png')}}" alt=""> <span style="padding-right: 5px;">Interested in</span></a>
+			<a href="javascript:;" style="color:#333; text-decoration: none"><img style="padding-right: 5px"  src="{{absolute_url('assets/img/share.png')}}" alt=""> <span style="padding-right: 5px;">Share</span></a>
+		</td>
+
+		<td></td>
+	</tr>
+        {% endfor %}
+	<tr>
+	<td></td>
+		<td  
+		style="border-bottom: 1px solid #333; padding-top: 10px;" colspan="6">
+			
+		</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td style=" font-size: 18px; text-align: center; padding-top: 30px; padding-bottom: 30px;" colspan="8">
+			<span style="color: #eb6117;">+ </span><a href="{{url('profile')}}"  style="color:#4a78b0;">you want to add contacts</a>
+		</td>
+	</tr>
+
+
+<tr>
+	<td colspan="8" style="text-align: center; background-color: #ededed; padding: 30px 0px;">
+		
+
+	<p style="font-size: 14px; font-weight: bold;">Thanks fot joining us! <br>
+	<span style="font-size: 12px;">Manavao Team</span></p>
+		<a href="javascript:;" style="text-decoration: none;"><img style="width: 23px; height: 23px;padding-top: 10px;" src="{{absolute_url('assets/img/in.png')}}" alt=""></a><a href="javascript:;"><img style="width: 23px; height: 23px;padding-top: 10px;" src="{{absolute_url('assets/img/ed.png')}}" alt=""></a><a href="javascript:;"><img style="width: 23px; height: 23px;" src="{{absolute_url('assets/img/tw.png')}}" alt=""></a>
+		
+		<p style="font-size: 11px">
+		<a href="javascript:;" style="color:#333; text-decoration: none;"> Unsubscribe </a> | 
+		<a href="javascript:;" style="color:#333; text-decoration: none;"> Privacy </a> | 
+		<a href="javascript:;" style="color:#333; text-decoration: none;"> Help </a> | 
+		<a href="javascript:;" style="color:#333; text-decoration: none;"> Contact </a>
+		</p>
+		<p  style="font-size: 11px">Toulouse, France @ 2016 Manavao</p>
+
+	</td>
+</tr>
+</tbody>
+</table>
+</body></html>

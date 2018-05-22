@@ -1,0 +1,407 @@
+{% set useStyle2 = true %}
+{% include 'AppBundle:Main:_header.html.twig' %}
+
+<body class="{{'header.lang'|trans}}">
+  {% include 'AppBundle:Main:analytics.html.twig' %}
+{% block header %}
+<header id="header">
+    {% block header_top %}
+    <div class="container">
+        <div class="row">
+            <div class="{% if app.user %}col-md-3{% else %}col-md-9 col-md-offset-1{% endif %} logo">
+              {% if app.user %}
+                <a href="{{path('profile')}}">
+              {% else %}
+                <a href="{{path('homepage')}}">
+              {% endif %}
+                <span class="mnv-logo-small">{% include 'AppBundle:Main:logo.html.twig'%}</span>
+              </a>
+            </div>
+
+            {% if app.user %}
+            <div class="col-md-5 search">
+                <input placeholder="{{'header.search'|trans}}" type="text">
+                <button  class="search-btn mnv-disabled" name="search">
+                <span class="icon-search "></span>
+                </button>
+            </div>
+            <div class="col-md-2 ">
+                <div class="row">
+                    <div class="alert-icons">
+                        <div><button  class="mnv-disabled" name="watch">
+                            <span class="icon-eye_icon header-icon"></span>
+                        </button>
+
+                        </div>
+                        <div>
+                        <button  class="mnv-disabled" name="add">
+                            <span class="icon-add header-icon"></span>
+                        </button>
+
+                        </div>
+                        <div class="messenger-holder">
+                            <a href="{{path('profile_message')}}">
+                                <span class="icon-envelope header-icon"></span>
+                                {% set newMess = messageManager.unreadCount(app.user)%}
+                                <span id="mail-alert" class="alert-icon{% if newMess %} active{% endif %}">{{newMess}}</span>
+                            </a>
+                        </div>
+
+                        {% include 'AppBundle:Account:parts/notifications.html.twig'%}
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 user-avatar">
+                 <div class="lang">
+                    <button class="dropdown-toggle" type="button" data-toggle="dropdown" name="lang" >{{ app.request.locale }} <span class="caret"></span></button>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'fr'})) }}">{{ 'fr'|trans }}</a></li>
+                        <li><a href="{{  path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'}))}}">{{ 'en'|trans }}</a></li>
+                        <li><a href="{{  path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'es'}))}}">{{ 'es'|trans }}</a></li>
+                        <li><a href="{{  path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'ca'}))}}">{{ 'ca'|trans }}</a></li>
+                    </ul>
+                </div>
+
+                    {#<a href="{{path('profile')}}">#}
+                    <a id="user-link" class="mnv-avatar-header" data-user-email="{{ app.user.email }}" data-tutorial-popup="#details-popup-3" href="{{path('some-user-page', {'someUser' : app.user.id })}}">
+                        <div class="img-holder">
+                            <img class="user-avatar" v-bind:src="avatar" alt="">
+                        </div>
+                    </a>
+
+                <div id="user-dropdown">
+                     <h2 class="user-city">{{app.user.firstName}} {{app.user.lastName}}</h2>
+                     <a class="logout" href="{{path('fos_user_security_logout')}}">{{'user_dropdown.log_out'|trans}}</a>
+                     <p class="user-location">{{app.user.city}}</p>
+                     <hr>
+                    <div class="user-dropdown-left">
+                        <a href="javascript:;" class="heading-dropdown">{{'user_dropdown.my_experience'|trans}}</a>
+                        <a id="toggleFeedbackPopups2" href="javascript:;">{{'user_dropdown.impressions'|trans}}</a>
+                        <a id="toggleFeedbackPopups1" href="javascript:;">{{'user_dropdown.priorities'|trans}}</a>
+                        <a href="javascript:;" class="become-partner heading-dropdown">{{'business_community.Become_partner'|trans}}</a>
+                    </div>
+                    <div class="user-dropdown-right">
+                        <a href="{% if user is defined %}{{path('some-user-page', {'someUser' : user.id })}}{% endif %}" class="heading-dropdown">{{'user_dropdown.my_profile'|trans}}</a>
+                        <a href="{{path('profile_organisation')}}"><span class="icon icon-add"></span>{{'user_wall.create_my_organisation'|trans}}</a>
+                        <a href="javascript:;"><span class="icon icon-add"></span>{{'user_wall.create_group'|trans}}</a>
+                        <a href="javascript:;"><span class="icon icon-settings"></span>{{'user_dropdown.settings'|trans}}</a>
+                        <a href="javascript:;"><span class="icon icon-membership"></span>{{'user_dropdown.membership'|trans}}</a>
+                        <a href="javascript:;"><span class="icon icon-invite"></span>{{'user_wall.Invite'|trans}}</a>
+                        <!-- <a href="javascript:;"><span class="icon icon-help"></span>{{'footer-third.help'|trans}}</a> -->
+                    </div>
+
+                </div>
+            {% endif %}
+
+
+            </div>
+        </div>
+    </div>
+    {% endblock header_top %}
+    {% block header_comm %}
+    {% endblock header_comm %}
+</header>
+{% endblock header %}
+
+{% block content %}
+{% endblock content %}
+
+{% include 'AppBundle:Main:footer.html.twig'%}
+{#
+{% block welcome %}
+<div class="modal fade" id="new-user-modal" role="dialog">
+    <div class="modal-dialog">
+
+
+      <!-- Modal content-->
+      <div class="modal-content">
+          <div class="container-fluid progress-registration-warp">
+                <div class="registration-box">
+                    <ul id="registration-tabs" class="nav nav-tabs">
+                        <li class="active"><!-- <a data-toggle="tab" href="#step1"> -->
+                        <div class="step"></div>
+                        <p>My <br> network</p>
+                        </li>
+                        <li class="active">
+                        <div class="step"></div>
+                              <p>My <br>profile</p>
+                        </li>
+                        <li class="active">
+                        <div class="step last-step"></div>
+                              <p>Let's <br> start!</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="registration-box">
+                <h3 class="reg-title">Hello  <?php echo $_POST['first-name'] ?></h3>
+
+                <p class="welcome-text">Welcome in the first <br>GLOCAL professional network.</p>
+
+                <p class="modal-text">Thank you so much for joining us. As we are on a <br> pilot stage, we will be very pleased to learn <br> about your experience and don't hesitate to <br> bounce ideas off.</p>
+
+                <div id="confirmation-modal">
+                        <p class="get-confirm">To get full access to manovao.com, just confirm <br> your address by clicking on the link enclosed inbr  <br> the email sent.</p>
+                        <p class="q-get-email">Didn't receive the email?</p>
+                        <a href="javascript:;" id="send-confirm-email">Send again</a>
+                </div>
+                <button class="get-started" data-dismiss="modal"><span class="glyphicon glyphicon-ok"></span>Get started</button>
+                <button class="get-started" data-dismiss="modal"><span class="icon-edit"></span>Edit Profile</button>
+
+            </div>
+        <div class="modal-body">
+        </div>
+      </div>
+
+    </div>
+</div>
+{% endblock welcome %}#}
+
+
+<div id="cropp-img-popup" class="white-popup img-cropp-popup mfp-hide">
+    <div id="image-cropp"></div>
+    <button id="get-cropp-result">{{'post.save'|trans}}</button>
+</div>
+
+<div class="details-popup-feedback feedback-marketing-team white-popup mfp-with-anim mfp-hide" id="feedback-marketing-team">
+    <div class="heading">
+        <div class="wrapp">
+            <h3>We need your feed back to improve manavao.com</h3>
+            <p>Please take few minutes to answer our questions. It's very important for us.</p>
+        </div>
+    </div>
+    <form id="feedback-priorities-form" method="post" action="{{path('send_feedback_priorities')}}">
+        <div class="items-block">
+            <div class="item develop">
+                <h4>Develop your business network</h4>
+                <div class="progress-holder">
+                    <div class="progres-bar">
+                        <div class="progres"></div>
+                    </div>
+                    <ul class="list-number">
+                        <li>1</li>
+                        <li>2</li>
+                        <li>3</li>
+                        <li>4</li>
+                        <li>5</li>
+                        <li>6</li>
+                        <li>7</li>
+                        <li>8</li>
+                        <li>9</li>
+                        <li>10</li>
+                    </ul>
+                    <input type="hidden" name="priorities[develop]" value="10">
+                </div>
+            </div>
+            <div class="item clients-partners">
+                <h4>Find clients or providers or partners</h4>
+                <div class="progress-holder">
+                    <div class="progres-bar">
+                        <div class="progres"></div>
+                    </div>
+                    <ul class="list-number">
+                        <li>1</li>
+                        <li>2</li>
+                        <li>3</li>
+                        <li>4</li>
+                        <li>5</li>
+                        <li>6</li>
+                        <li>7</li>
+                        <li>8</li>
+                        <li>9</li>
+                        <li>10</li>
+                    </ul>
+                    <input type="hidden" name="priorities[partners]" value="10">
+                </div>
+            </div>
+        </div>
+        <div class="items-block">
+            <div class="item promote">
+                <h4>Promote your organisation</h4>
+                <div class="progress-holder">
+                    <div class="progres-bar">
+                        <div class="progres"></div>
+                    </div>
+                    <ul class="list-number">
+                        <li>1</li>
+                        <li>2</li>
+                        <li>3</li>
+                        <li>4</li>
+                        <li>5</li>
+                        <li>6</li>
+                        <li>7</li>
+                        <li>8</li>
+                        <li>9</li>
+                        <li>10</li>
+                    </ul>
+                    <input type="hidden" name="priorities[promote]" value="10">
+                </div>
+            </div>
+            <div class="item business-neighbourhood">
+                <h4>Ensure a business intelligence over your business neighbourhood</h4>
+                <div class="progress-holder">
+                    <div class="progres-bar">
+                        <div class="progres"></div>
+                    </div>
+                    <ul class="list-number">
+                        <li>1</li>
+                        <li>2</li>
+                        <li>3</li>
+                        <li>4</li>
+                        <li>5</li>
+                        <li>6</li>
+                        <li>7</li>
+                        <li>8</li>
+                        <li>9</li>
+                        <li>10</li>
+                    </ul>
+                    <input type="hidden" name="priorities[neighbourhood]" value="10">
+                </div>
+            </div>
+        </div>
+        <textarea rows="4" name="priorities[comment]" placeholder="In few words, what would you consider to be Manavao’s priorities in terms of services ?"></textarea>
+        <div class="holder-custom-checkbox">
+            <input type="checkbox" name="confirm-send" id="confirm-send">
+            <label for="confirm-send">By ticking this little box, I agree to be contacted by Manavao’s marketing team.</label>
+        </div>
+        <div class="wrapp-button">
+            <button id="feedback-priorities-send" class="submit submit-send" type="submit"><span>Send feedback</span></button>
+        </div>
+    </form>
+</div>
+
+<div class="details-popup-feedback feedback-functions white-popup mfp-with-anim mfp-hide" id="feedback-functions">
+    <div class="heading">
+        <div class="wrapp">
+            <h3>We need your feed back to improve manavao.com</h3>
+            <p>Please take few minutes to answer our questions. It's very important for us.</p>
+        </div>
+    </div>
+    <form id="feedback-impressions-form" method="post" action="{{path('send_feedback_impressions')}}">
+        <div class="items-block">
+            <div class="item concept">
+                <h4>Concept</h4>
+                <div class="progress-holder">
+                    <div class="progres-bar">
+                        <div class="progres"></div>
+                    </div>
+                    <ul class="list-number">
+                        <li>1</li>
+                        <li>2</li>
+                        <li>3</li>
+                        <li>4</li>
+                        <li>5</li>
+                        <li>6</li>
+                        <li>7</li>
+                        <li>8</li>
+                        <li>9</li>
+                        <li>10</li>
+                    </ul>
+                    <input type="hidden" name="impressions[concept]" value="10">
+                </div>
+            </div>
+            <div class="item design">
+                <h4>Design</h4>
+                <div class="progress-holder">
+                    <div class="progres-bar">
+                        <div class="progres"></div>
+                    </div>
+                    <ul class="list-number">
+                        <li>1</li>
+                        <li>2</li>
+                        <li>3</li>
+                        <li>4</li>
+                        <li>5</li>
+                        <li>6</li>
+                        <li>7</li>
+                        <li>8</li>
+                        <li>9</li>
+                        <li>10</li>
+                    </ul>
+                    <input type="hidden" name="impressions[design]" value="10">
+                </div>
+            </div>
+        </div>
+        <div class="items-block">
+            <div class="item ergonomics">
+                <h4>Ergonomics</h4>
+                <div class="progress-holder">
+                    <div class="progres-bar">
+                        <div class="progres"></div>
+                    </div>
+                    <ul class="list-number">
+                        <li>1</li>
+                        <li>2</li>
+                        <li>3</li>
+                        <li>4</li>
+                        <li>5</li>
+                        <li>6</li>
+                        <li>7</li>
+                        <li>8</li>
+                        <li>9</li>
+                        <li>10</li>
+                    </ul>
+                    <input type="hidden" name="impressions[ergonomics]" value="10">
+                </div>
+            </div>
+            <div class="item functionalities">
+                <h4>Functionalities</h4>
+                <div class="progress-holder">
+                    <div class="progres-bar">
+                        <div class="progres"></div>
+                    </div>
+                    <ul class="list-number">
+                        <li>1</li>
+                        <li>2</li>
+                        <li>3</li>
+                        <li>4</li>
+                        <li>5</li>
+                        <li>6</li>
+                        <li>7</li>
+                        <li>8</li>
+                        <li>9</li>
+                        <li>10</li>
+                    </ul>
+                    <input type="hidden" name="impressions[functionalities]" value="10">
+                </div>
+            </div>
+        </div>
+        <textarea name="impressions[comment]" rows="4" placeholder="In few words, what would you say about your experience ?"></textarea>
+        <div class="holder-custom-checkbox">
+            <input type="checkbox" name="confirm-send" id="confirm-send">
+            <label for="confirm-send">By ticking this little box, I agree that my testimonial might be used in Manavao’s communication.</label>
+        </div>
+        <div class="wrapp-button">
+            <button id="feedback-impressions-send" class="submit submit-send" type="submit"><span>Send feedback</span></button>
+        </div>
+    </form>
+</div>
+
+<div class="details-popup-city white-popup mfp-with-anim mfp-hide" id="details-popup-city">
+    <p>{{'registration.you_do_not_find_your'|trans}} <a href="javascript:;">{{'registration.please_contact'|trans}}</a></p>
+</div>
+
+
+{% block javascript %}
+<script src="/js/jquery-3.1.1.min.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/jquery-ui/jquery-ui.min.js"></script>
+{% if 'header.lang'|trans != 'en' %}
+<script src="/js/jquery-ui/ui/i18n/datepicker-{{'header.lang'|trans}}.js"></script>
+{% endif %}
+<script src="/js/croppie.min.js"></script>
+<script src="/js/jquery.matchHeight.js"></script>
+<script src="/js/magnific.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+
+<script src="/js/custom.js"></script>
+<script src="/js/api.js"></script>
+
+{% endblock javascript %}
+
+{% block js %}
+{% endblock js %}
+
+    </body>
+</html>

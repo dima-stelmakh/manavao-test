@@ -1,0 +1,28 @@
+{% extends "AppBundle::layout.html.twig"%}
+
+{% block content %}
+
+<div class="container">
+        {#{% trans_default_domain 'FOSUserBundle' %}
+        #}
+        {% if error %}
+            <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+
+    <div class="login-form-holder">
+        <h3 class="reg-title">{{'registration.welcome_to_manavao'|trans}}</h3>
+        <form action="{{ path("fos_user_security_check") }}" method="post">
+            {% if csrf_token %}
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+            {% endif %}
+            <input class="sing-in-pop-up" type="email" name="_username" placeholder="E-mail">
+            <input class="sing-in-pop-up" type="password" name="_password" placeholder="Password">
+			<br>
+			<a href="{{path('fos_user_resetting_request')}}" class="forgot-password">{{'registration.forgot_your_password'|trans}}</a>
+			<br>
+            <button class="orange-btn" type="submit" value="{% trans from 'FOSUserBundle' %}security.login.submit{% endtrans %}" name="singIn">{{'header.sign_in'|trans}}</button>
+            {#<input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />#}
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,60 @@
+        {% include 'AppBundle:Main:header.html.twig'%}
+        <div class="bottom-header-content-page">
+            <h2 class="main-heading">{{'about_us.about_us'|trans}}</h2>
+        </div>
+    </header>
+    <div class="main">
+        <div class="container narrow-container">
+            <div class="row">
+                 <div class="about-us-block">
+                    <p>La société MANAVAO a été créée en 2016 pour réaliser des missions de conseil et des prestations de formation dans les domaines suivants :</p>
+                    <ul class="list-style-disc list-style-disc-small">
+                        <li>innovation et politiques publiques,</li>
+                        <li>territoires numériques et villes intelligentes,</li>
+                        <li>programmes européens,</li>
+                        <li>économie et ingénierie de la commande publique,</li>
+                        <li>programmes européens,</li>
+                    </ul>
+                    <strong>Manavao signifie en langue malgache “Innover”, “quelque chose de nouveau”. </strong>
+                    <p>Notre vision </p>
+                    <p>La technologie offre des solutions nouvelles pour recréer un équilibre entre le local et le global dans un contexte de montée du protectionnisme et de rejet de la mondialisation.</p>
+                    <p>manavao.com est le résultat de cette réflexion.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% include 'AppBundle:Main:footer.html.twig'%}
+
+<!-- <div id="cropp-img-popup" class="white-popup img-cropp-popup mfp-hide">
+    <div id="image-cropp"></div>
+    <button id="get-cropp-result">{{'post.save'|trans}}</button>
+</div> -->
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script>
+        jQuery(document).ready(function($) {
+            $(function() {
+                  $('a[href*="#"]:not([href="javascript:;"])').click(function() {
+                    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+                      var target = $(this.hash);
+                      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+                      if (target.length) {
+                        $('html, body').animate({
+                          scrollTop: target.offset().top
+                        }, 1000);
+                        return false;
+      }
+    }
+  });
+});
+            
+        });
+    </script>
+    <script src="/js/croppie.min.js"></script>
+    <script src="/js/magnific.js"></script>
+    <script src="/assets/js/custom.js"></script>
+    
+</body>
+</html>

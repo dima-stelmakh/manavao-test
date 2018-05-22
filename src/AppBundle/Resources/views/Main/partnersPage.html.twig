@@ -1,0 +1,72 @@
+        {% include 'AppBundle:Main:header.html.twig'%}
+        <div class="bottom-header-content-page">
+            <h2 class="main-heading">{{'footer-first.partners'|trans}}</h2>
+        </div>
+    </header>
+    <div class="main">
+        <div class="container narrow-container">
+            <div class="row">
+                 <div class="about-us-block">
+                    <div>
+                        <h2 class="orange">Partenaires</h2>
+                        <p><a href="javascript:;">manavao.com</a> est une aventure collective qui a mobilisé :</p>
+                        <ul class="list-style">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                        <p>manavao.com a l’ambition de créer un écosystème qui permettra à nos membres de pouvoir accéder, en un clic, à une offre intégrée de services et de contenus. Si vous partagez notre vision et voulez participer à notre aventure, n’hésitez pas à nous contacter :</p>
+
+                        - Logo ATNOS (Link website) - Dirigée par Bruno Perles, Atnos est une société de services informatiques basée dans la région Toulousaine. Elle nous a assistée dans la coordination et le suivi des développements techniques. Photo Bruno
+
+                        - Logo Funkyline (Link website)- FunkyLine est une jeune société Ukrainienne spécialisée dans les développements web. Coordonnée par Pavel Reznikov, l’équipe a assurée le webdesigning et le développement de manavao.com. Photos Pavel et Karina.
+
+                        - Photo Yael Fazy - Diplômé d’un master 2 en ingénierie informatique et management, Yaël accompagne de nombreux entrepreneurs dans leur projet de startups. Il a réalisé tous les mockups préalables à la réalisation de manavao.com.
+
+                        - Photo Philippe VIDAL (Link LinkedIn)- Enseignant chercheur à l’Université du Havre, Philippe travaille sur l’influence des Technologies de l’Information et de la Communication (TIC) dans les dynamiques territoriales. Il nous a apporté son expertise et ses conseils.
+
+                        Formulaire partenaires (see Karina's designed page)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% include 'AppBundle:Main:footer.html.twig'%}
+
+<!-- <div id="cropp-img-popup" class="white-popup img-cropp-popup mfp-hide">
+    <div id="image-cropp"></div>
+    <button id="get-cropp-result">{{'post.save'|trans}}</button>
+</div> -->
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script>
+        jQuery(document).ready(function($) {
+            $(function() {
+                  $('a[href*="#"]:not([href="javascript:;"])').click(function() {
+                    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+                      var target = $(this.hash);
+                      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+                      if (target.length) {
+                        $('html, body').animate({
+                          scrollTop: target.offset().top
+                        }, 1000);
+                        return false;
+      }
+    }
+  });
+});
+            
+        });
+    </script>
+    <script src="/js/croppie.min.js"></script>
+    <script src="/js/magnific.js"></script>
+    <script src="/assets/js/custom.js">
+                          
+                      </script>
+    
+
+</body>
+</html>

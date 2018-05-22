@@ -1,0 +1,20 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block content %}
+  <div id="content" class="wall-page">
+    <div class="container">
+      {% include 'AppBundle:Account:parts/profileLeftAside.html.twig' with {'user': app.user } %}
+      <div class="col-md-7">
+        <div class="row">
+          <h1>Évènement</h1>
+          <p>
+            Bientôt disponible
+          </p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        {% include 'AppBundle:Account:parts/profileRightAside.html.twig' with {'showMembers' : true } %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

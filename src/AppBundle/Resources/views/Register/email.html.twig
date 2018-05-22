@@ -1,0 +1,111 @@
+<html lang="en"><head>
+<meta charset="UTF-8">
+<title>Manavao - Inscription</title>
+<style type="text/css"></style></head>
+<body style="text-align: center; background-color: #ededed; font-family:'Fira Sans', sans-serif;padding-top: 30px; width: 100%" >
+<table  cellspacing="0px" bgcolor="#fff" width="520px" style="margin:0 auto;text-align: left;color: #333; border: 0px; ">
+    <tbody>
+    <tr>
+        <td valign="top" colspan="4" style="background-image: url({{ absolute_url('/assets/img/mail-w-bg.jpg')}}); height: 265px; text-align:center;">
+            <img style="padding-top: 45px;" src="{{ absolute_url('/assets/img/logo-manavao-fr-small.png')}}" alt="">
+            <p style="font-size: 18px; font-weight: bold; padding-top: 10px;">{{user.firstName}},</p>
+            <p style="font-size: 14px;padding-bottom: 25px;">Bienvenue dans Manavao</p>
+            <a href="{{url('registration_2', {'token': user.confirmationToken })}}"  style=" border-radius: 2px;text-decoration: none;background-color: #515f70;padding: 10px 15px;color: #fff; border: 1px solid #fff; font-size: 14px; "><img src="{{ absolute_url('/assets/img/check.png')}}" alt="">Confirmer mon adresse email</a>
+        </td>
+
+    </tr>
+    <tr>
+        <td style="border-left: 1px solid #bbb" width="105px"></td>
+        <td valign="top" width="35px" style="padding-bottom: 20px">
+            <img style="padding-top: 30px;" src="{{ absolute_url('/assets/img/build.png')}}" alt="">
+        </td>
+        <td width="295px" valign="top">
+            <h2 style="color: #408384; font-size: 18px;    padding-top: 30px;">Voisinages d'affaires sélectionnés</h2>
+            {% for item in user.communities %}
+            <a href="manavao.com" style="text-decoration: none;line-height: 25px; color: #515f70">{{item.name}}</a><br>
+            {% endfor %}
+        </td>
+        <td width="100px" style="border-right: 1px solid #bbb"></td>
+    </tr>
+    <tr>
+        <td  style="border-left: 1px solid #bbb; border-right: 1px solid #bbb" colspan="4">
+                <hr style="color:#bbb; background-color: #bbb; height: 2px; border: 0px">
+        </td>
+    </tr>
+    <tr valign="top">
+        <td style="border-left: 1px solid #bbb"></td>
+        <td>
+                <img style="padding-top: 30px;" src="{{ absolute_url('/assets/img/update.png')}}" alt="">
+        </td>
+        <td  style="padding-top: 30px;">
+                <a href="manavao.com" style="font-weight: bold; font-size: 18px; text-decoration: none; color: #515f70">Partager une info</a><br>
+                <p style="font-size: 14px">Informations sur l'entreprise, rendez-vous, nouveau produit, récompenses, ...</p>
+        </td>
+        <td style="border-right: 1px solid #bbb">
+
+        </td>
+    </tr>
+    <tr>
+        <td style="padding: 0px 75px;border-left: 1px solid #bbb;border-right: 1px solid #bbb" colspan="4">
+            <hr style="background-color: #bbb; color:#bbb; height: 1px; border: 0px">
+        </td>
+    </tr>
+
+
+    <tr valign="top">
+        <td style="border-left: 1px solid #bbb"></td>
+        <td>
+                <img style="padding-top: 30px;" src="{{ absolute_url('/assets/img/opportunites.png')}}" alt="">
+        </td>
+        <td  style="padding-top: 30px;">
+                <a href="manavao.com" style="font-weight: bold; font-size: 18px; text-decoration: none; color: #d05d1f">Publier une opportunité</a><br>
+                <p style="font-size: 14px">Informations sur l'entreprise, rendez-vous, nouveau produit, récompenses, ...</p>
+        </td>
+        <td style="border-right: 1px solid #bbb">
+
+        </td>
+    </tr>
+    <tr>
+        <td style="padding: 0px 75px;border-left: 1px solid #bbb;border-right: 1px solid #bbb" colspan="4">
+        <hr style="background-color: #bbb; color:#bbb; height: 1px; border: 0px">
+        </td>
+
+
+    </tr>
+
+
+    <tr valign="top">
+        <td style="border-left: 1px solid #bbb;border-bottom: 1px solid #bbb"></td>
+        <td style="border-bottom: 1px solid #bbb">
+                <img style="padding-top: 30px; padding-bottom: 30px;" src="{{ absolute_url('/assets/img/event.png')}}" alt="">
+        </td>
+        <td  style="padding-top: 30px; padding-bottom: 30px;border-bottom: 1px solid #bbb">
+                <a href="manavao.com" style="font-weight: bold; font-size: 18px; text-decoration: none; color: #517059">Publier un évènement</a><br>
+                <p style="font-size: 14px">Informations sur l'entreprise, rendez-vous, nouveau produit, récompenses, ...</p>
+        </td>
+        <td style="border-right: 1px solid #bbb;border-bottom: 1px solid #bbb">
+
+        </td>
+    </tr>
+
+    <tr>
+    <td colspan="8" style="text-align: center; background-color: #ededed; padding: 30px 0px;">
+    <p style="font-size: 14px; font-weight: bold;">Merci de vous joindre a nous !<br>
+    <span style="font-size: 12px;">L'équipe Manavao</span></p>
+            <a href="https://www.linkedin.com/company/10976984/" style="text-decoration: none;">
+                <img style="width: 23px; height: 23px;padding-top: 10px;" src="{{ absolute_url('/assets/img/in.png')}}" alt="">
+            </a>
+
+            <p style="font-size: 11px">
+            <a href="manavao.com" style="color:#333; text-decoration: none;" data-toggle="dropdown" class="dropdown-toggle">Se désinscrire</a> |
+            <a href="{{url('static_page',{'slug': 'privacy'})}}" style="color:#333; text-decoration: none;"> {{'footer-third.privacy'|trans}} </a> |
+            <a href="javascript:;" style="color:#333; text-decoration: none;" data-toggle="dropdown" class="dropdown-toggle"> {{'footer-third.help'|trans}} </a> |
+            <a href="javascript:;" style="color:#333; text-decoration: none;" data-toggle="dropdown" class="dropdown-toggle"> {{'footer-third.contact'|trans}} </a>
+            </p>
+            <p  style="font-size: 11px">Toulouse, France @ 2018 Manavao</p>
+
+    </td>
+</tr>
+</tbody>
+</table>
+</body></html>

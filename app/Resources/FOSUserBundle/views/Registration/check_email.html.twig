@@ -1,0 +1,39 @@
+{% extends "AppBundle::layout.html.twig"%}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block content %}
+    <div class="container progress-registration-warp">
+        <div class="registration-box">
+            <a href="javascript:;">
+                <div class="support">live support</div>
+            </a>
+
+            <ul id="registration-tabs" class="nav nav-tabs">
+                <li><!-- <a data-toggle="tab" href="#step1"> -->
+                    <div class="step"></div>
+                    <p>My <br> network</p>
+                </li>
+                <li>
+                    <div class="step"></div>
+                    <p>My <br>profile</p>
+                </li>
+                <li>
+                    <div class="step last-step"></div>
+                    <p>Let's <br> start!</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container-fluid content-registration-wrap">
+        <div class="registration-box">
+            <p>{{ 'registration.check_email'|trans({'%email%': user.email}) }}</p>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

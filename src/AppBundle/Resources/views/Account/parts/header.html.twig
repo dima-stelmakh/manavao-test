@@ -1,0 +1,60 @@
+<div class="public-profile-header">
+    <div class="container">
+        <div class="banner-content">
+            <div class="avatar-info-box">
+                <div class="info">
+                    <div class="avatar-holder">
+                        <div class="img-holder">
+                            <span class="mnv-avatar-sidebar" data-user-email="{{ user.email }}">
+                              <img class="user-avatar" v-bind:src="avatar" alt="">
+                            </span>
+                            {% if user == app.user %}
+                            <div class="info-pop-block">
+                                <label>
+                                    <input type="file" accept="image/*">
+                                    <input id="cropp-img-res" name="canvasImg" type="hidden">
+                                    <span>{{'header.edit_photo'|trans}}</span>
+                                </label>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="user-header{% if user != app.user %} members{% endif %}">
+                        <p class="user-name">{{user.firstName}} {{user.lastName}}  -  {{user.job}}</p>
+                        <p class="user-country">{{user.city}}</p>
+                        <div class="holder-icon-flag">
+                            <span class="flag-icon flag-icon-eu"></span>
+                        </div>
+                        {% if user != app.user %}
+                          {% if friends.isFriend(app.user, user) %}
+                            <a href="{{path('remove-friend', {'someUser': user.id})}}" class="remove">{{'public_profile_header.remove'|trans}}</a>
+                          {% else %}
+                            <a href="javascript:;{# {{path('add-friend', {'someUser': user.id})}} #}" class="connect mnv-disabled mnv-disabled-top">+ {{'public_profile_header.connect'|trans}}</a>
+                          {% endif %}
+                          <div class="btn-group">
+                            <button type="button" class="btn btn-primary send-msg">+ {{'user_wall.Send_a_message'|trans}}</button>
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                              <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                              <li>
+                                <a href="javascript:;" class="mnv-disabled">{{'header.request_a_quotation'|trans}}</a>
+                              </li>
+                              <li>
+                                <a href="javascript:;" class="mnv-disabled">{{'header.ask_for_a_meeting'|trans}}</a>
+                              </li>
+                              <li>
+                                <a href="javascript:;" class="mnv-disabled">{{'header.receive_a_documentation'|trans}}</a>
+                              </li>
+                            </ul>
+                          </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="member-since-wrap">
+                <p>{{'public_profile_header.member_since'|trans}} <span id="member-since">{{user.createdAt | date ('d/m/Y')}}</span></p>
+            </div>
+        </div>
+    </div>
+</div>

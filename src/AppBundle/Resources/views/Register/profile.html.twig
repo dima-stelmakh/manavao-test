@@ -1,0 +1,163 @@
+{% extends "AppBundle::layout.html.twig"%}
+
+{% block content %}
+<div class="container progress-registration-warp">
+    <div class="registration-box">
+		<ul id="registration-tabs" class="nav nav-tabs">
+			<li class="active"><!-- <a data-toggle="tab" href="#step1"> -->
+				<div class="step"></div>
+				<p>{{'registration.network'|trans}}</p>
+			</li>
+			<li class="active">
+				<div class="step"></div>
+				<p>{{'registration.profile'|trans}}</p>
+			</li>
+			<li>
+				<div class="step last-step"></div>
+				<p>{{'registration.Lets'|trans}}<br> {{'registration.Start'|trans}}</p>
+			</li>
+		</ul>
+    </div>
+  </div>
+  <div class="container content-registration-wrap">
+    <div class="registration-box">
+		<div id="step2">
+		  <div class="box-content">
+        {#
+        <div class="foto-wrap">
+          <div class="img-holder">
+            {% if app.user.image %}
+            <img src="{{app.user.image.src}}" id="avatar-image" alt=""> <br>
+            {% else %}
+            <img src="/assets/img/noname.png" id="avatar-image" alt=""> <br>
+            {% endif %}
+          </div>
+          <div class="info-pop-block">
+            <label>
+            <input type="file" accept="image/*">
+            <input id="cropp-img-res" name="canvasImg" type="hidden">
+            <span class="icon icon-add"></span>
+            <span>{{'registration_pr.Add_profile_picture'|trans}}</span>
+            </label>
+          </div>
+          <p>{{'registration_pr.files'|trans}}: png, jpeg</p>
+        </div>
+        #}
+			  <div class="wrap-form">
+			  <form method="post" id="step1-form">
+				<div class="general-info">
+				  <input required="required" name="first-name" type="text"{% if app.request.get('firstName') %} value="{{app.request.get('firstName')}}"{% endif %} required placeholder="{{'registration_pr.First_name'|trans}}*"><br>
+				  <input required="required" name="last-name" type="text"{% if app.request.get('lastName') %} value="{{app.request.get('lastName')}}"{% endif %} required placeholder="{{'registration_pr.Last_name'|trans}}*"><br>
+				  <input name="password" type="password" required placeholder="{{'registration_pr.Password'|trans}}*" pattern="^(?=.*[a-zàâäèéêëîïôœùûüÿç])(?=.*[A-ZÀÂÄÈÉÊËÎÏÔŒÙÛÜŸÇ])(?=.*\d)(?=.*?).{8,}$"><br>
+				  <p class="pass">{{'registration_pr.password_minimum'|trans}}</p>
+				  <input name="password2" type="password" required placeholder="{{'registration_pr.Confirm_your_password'|trans}}*" pattern="^(?=.*[a-zàâäèéêëîïôœùûüÿç])(?=.*[A-ZÀÂÄÈÉÊËÎÏÔŒÙÛÜŸÇ])(?=.*\d)(?=.*?).{8,}$">
+				</div>
+{#                </form>#}
+				{% for flashMessage in app.session.flashbag.get('registration_profile_error') %}
+				  <div class="alert alert-danger" role="alert">
+				  <strong>Error!</strong> {{ flashMessage }}
+				  </div>
+				  {% endfor %}
+			</div>
+		  </div>
+
+		  <div class="wrap-activity">
+				{% if false %}
+					<div class="auth-linked-wrap">
+
+						<a href="https://www.linkedin.com/oauth/v2/authorization?response_type=code&scope=r_basicprofile&client_id=77kbf67mm814tp&redirect_uri={{url('register_linkedin')}}" class="mnv-disabled">
+							{{'registration_pr.complete'|trans}}<img src="/assets/img/inkedin.png">
+						</a>
+						<p>{{'registration_pr.By_joining_via'|trans}}</p>
+					</div>
+					<div class="or-separator">
+						<div class="content">{{'registration_pr.Or'|trans}}</div>
+					</div>
+				{% endif %}
+{#                                            <form method="post" id="step2-form">#}
+
+
+			<div id="step2-more-content">
+				<p class="activity-title">{{'registration_pr.Specify_Your_activity'|trans}}</p>
+				<input type="text" name="job" required placeholder="{{'registration_pr.Current_position'|trans}}*"><br>
+				<select name="interested-in[]" class="interestedin-with-search" multiple="multiple" placeholder="Current position*" required>
+				  <option disabled>{{'registration_pr.Interested_in'|trans}}*</option>
+				  {% for item in interests %}
+				  <option value="{{item.id}}">{{item.translate(app.request.locale).name}}</option>
+				  {% endfor %}
+				</select><br>
+				<select name="industry" class="select-with-search" id="select-current-sector" required>
+					<option selected disabled value="">{{'registration_pr.industry'|trans}}*</option>
+				  {% for item in industries %}
+				  <option value="{{item.id}}">{{item.translate(app.request.locale).name}}</option>
+				  {% endfor %}
+				</select><br>
+				<select name="category" class="select-with-search" id="select-category" required>
+					<option selected disabled value="">{{'registration_pr.category'|trans}}*</option>
+				  {% for item in categories %}
+				  <option value="{{item.id}}">{{item.translate(app.request.locale).name}}</option>
+				  {% endfor %}
+				</select><br>
+				<select name="zone" class="select-with-search" id="community-area" required>
+					<option selected disabled value="">{{'registration_pr.zone'|trans}}*</option>
+				  {% for item in zones %}
+				  <option value="{{item.id}}">{{item.translate(app.request.locale).name}}</option>
+				  {% endfor %}
+				</select><br>
+			</div>
+			<div class="wrap-buttom"><button id="to-step3" type="submit" class="continue continue-step3"><span class="icon-continue_icon"></span> {{'registration_bc.Continue'|trans}}</button></div>
+			</form>
+		  </div>
+
+		</div>
+
+	</div>
+  </div>
+{% endblock %}
+
+{% block modal %}
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+
+{% block header %}
+<header id="header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 col-md-offset-1 logo">
+            <a href="{{path('homepage')}}">
+                <span class="mnv-logo-small">{% include 'AppBundle:Main:logo.html.twig'%}</span>
+            </a>
+            </div>
+
+            <div class="col-md-2 user-avatar">
+                 <div class="lang">
+                    <button class="dropdown-toggle" type="button" data-toggle="dropdown" name="lang" >{{ app.request.locale }} <span class="caret"></span></button>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li><a href="{{  path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'fr'}))}}">{{ 'fr'|trans }}</a></li>
+                        <li><a href="{{  path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'}))}}">{{ 'en'|trans }}</a></li>
+                        <li><a href="{{  path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'es'}))}}">{{ 'es'|trans }}</a></li>
+                        <li><a href="{{  path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'ca'}))}}">{{ 'ca'|trans }}</a></li>
+                    </ul>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock header %}
+
+{% block javascript %}
+    {{parent()}}
+<script>
+jQuery(document).ready(function($) {
+
+    $('.interestedin-with-search').select2({
+        multiple:true,
+        placeholder: "{{'registration_pr.Interested_in'|trans}}*",
+    });
+
+});
+</script>
+{% endblock %}

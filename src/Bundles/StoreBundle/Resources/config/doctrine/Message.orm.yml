@@ -1,0 +1,32 @@
+Bundles\StoreBundle\Entity\Message:
+    type: entity
+    table: null
+    repositoryClass: Bundles\StoreBundle\Repository\MessageRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        text:
+            type: text
+        createdAt:
+            type: datetime
+            column: created_at
+        viewed:
+            type: boolean
+    manyToOne:
+        sender:
+            targetEntity: Bundles\UserBundle\Entity\User
+            joinColumn:
+                onDelete: CASCADE
+                name: sender_id
+                referencedColumnName: id
+        user:
+            targetEntity: Bundles\UserBundle\Entity\User
+            joinColumn:
+                onDelete: CASCADE
+                name: user_id
+                referencedColumnName: id
+    lifecycleCallbacks: {  }

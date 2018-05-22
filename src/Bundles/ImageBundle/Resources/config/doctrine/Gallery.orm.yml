@@ -1,0 +1,15 @@
+Bundles\ImageBundle\Entity\Gallery:
+    type: entity
+    table: null
+    repositoryClass: Bundles\ImageBundle\Repository\GalleryRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    oneToMany:
+        images:
+            targetEntity: GalleryImage
+            mappedBy: gallery
+    lifecycleCallbacks: {  }

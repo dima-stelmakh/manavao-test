@@ -1,0 +1,115 @@
+.mnv-homeBlock-imageCircle {
+  position: relative;
+}
+
+.mnv-homeBlock-imageCircle label p {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 24px;
+  color: #2c2e2c;
+  text-transform: capitalize;
+  font-weight: normal;
+}
+
+.mnv-homeBlock-imageCircle label {
+  background-color: white;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  border: 8px solid #d6ddd6;
+  border-radius: 80px;
+  width: 140px;
+  height: 140px;
+  z-index: 9999;
+  position: relative;
+}
+
+#mnv-directory form input {
+  width: 100%;
+}
+
+.mnv-directory-title {
+  font-size: larger;
+  font-weight: bold;
+  margin: 12px 0;
+}
+
+#mnv-directory-results p {
+  margin: 5px 0;
+  background: #fff;
+  border: 1px solid #aaa;
+  padding: 5px;
+}
+
+.mnv-disabled {
+  color: #cfcfcf !important;
+  text-decoration: none;
+}
+
+.mnv-disabled:focus,
+.mnv-disabled:hover,
+.mnv-disabled:active {
+  text-decoration: none;
+  cursor: default;
+}
+
+.mnv-disabled:focus:after,
+.mnv-disabled:hover:after,
+.mnv-disabled:active:after {
+  content: 'Available soon';
+  position: absolute;
+  z-index: 9999999;
+  background-color: #fff;
+  color: black;
+  border-radius: 5px;
+  padding: 1rem;
+  width: 140px;
+  margin-left: 10px;
+  font-size: 1.4rem;
+  text-align: center;
+}
+.mnv-disabled-top:focus:after,
+.mnv-disabled-top:hover:after,
+.mnv-disabled-top:active:after {
+  margin: -50px 0 0 0;
+}
+
+.mnv-footer-socials .fab {
+  font-size: 4rem;
+}
+
+.mnv-logo-manavao {
+  position: relative;
+  padding-top: 10px;
+  display: inline-block;
+  padding-right: 70px;
+}
+.mnv-logo-manavao > img {
+  height: 80px;
+}
+.mnv-logo-manavao > span {
+  text-decoration: none;
+  color: #625C59;
+  position: absolute;
+  left: 77px;
+  top: 46px;
+}
+
+.mnv-logo-small .mnv-logo-manavao {
+  padding-top: 0;
+}
+.mnv-logo-small .mnv-logo-manavao > img {
+  height: 54px;
+}
+.mnv-logo-small .mnv-logo-manavao > span {
+  left: 53px;
+  top: 27px;
+  font-size: 11px;
+}
+
+#mnv-map {
+  padding: 14px 10px;
+}

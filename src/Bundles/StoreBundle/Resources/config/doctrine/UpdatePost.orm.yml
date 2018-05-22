@@ -1,0 +1,26 @@
+Bundles\StoreBundle\Entity\UpdatePost:
+    type: entity
+    table: null
+    repositoryClass: Bundles\StoreBundle\Repository\UpdatePostRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    oneToOne:
+        post:
+            targetEntity: Post
+            mappedBy: updatePost
+    manyToOne:
+        postCategory:
+            targetEntity: Bundles\OptionBundle\Entity\PostCategory
+            joinColumn:
+                name: post_category_id
+                referencedColumnName: id
+        industry:
+            targetEntity: Bundles\OptionBundle\Entity\Industry
+            joinColumn:
+                name: industry_id
+                referencedColumnName: id
+    lifecycleCallbacks: {  }

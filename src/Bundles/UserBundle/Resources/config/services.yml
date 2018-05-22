@@ -1,0 +1,10 @@
+parameters:
+    location_finder.ip_service:  'http://freegeoip.net/json/{IP}'
+
+services:
+    bundles_user.mailer:
+        class: Bundles\UserBundle\Mailer\Mailer
+        arguments: ["@mailer", "@router", "@templating", "@service_container"]
+    bundles_user.location_finder:
+        class: Bundles\UserBundle\Services\LocationFinder
+        arguments: ['@request_stack', '%location_finder.ip_service%']

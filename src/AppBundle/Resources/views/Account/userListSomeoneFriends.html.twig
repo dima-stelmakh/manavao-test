@@ -1,0 +1,18 @@
+{% extends "AppBundle:Account:templates/userList.html.twig" %}
+
+{% block leftAside %}
+    {% include 'AppBundle:Account:parts/profileLeftAside.html.twig' with {'user': user } %}
+{% endblock %}
+
+
+{% block userList %}
+<div class="user-list-wrap">
+    {% include 'AppBundle:Account:parts/userListHead.html.twig' with {'user': user, 'currentTab': currentTab } %}
+    
+    {% for item in pagination %}
+        {% include 'AppBundle:Account:parts/userListItem.html.twig' with {'user': item }%}
+    {% endfor %}
+    
+    {{ knp_pagination_render(pagination) }}
+</div>
+{% endblock userList %}

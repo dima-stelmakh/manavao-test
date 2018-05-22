@@ -1,0 +1,179 @@
+services:
+
+# Options
+
+    option.admin.author_type:
+        class: Bundles\OptionBundle\Admin\OptionAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Options", label: "Author Type" }
+        arguments:
+            - ~
+            - Bundles\OptionBundle\Entity\AuthorType
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle]]
+
+    option.admin.business_area:
+        class: Bundles\OptionBundle\Admin\OptionAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Options", label: "Business Area" }
+        arguments:
+            - ~
+            - Bundles\OptionBundle\Entity\BusinessArea
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle]]
+
+    option.admin.category:
+        class: Bundles\OptionBundle\Admin\OptionAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Options", label: "Category" }
+        arguments:
+            - ~
+            - Bundles\OptionBundle\Entity\Category
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle]]
+
+    option.admin.clients:
+        class: Bundles\OptionBundle\Admin\OptionAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Options", label: "Clients" }
+        arguments:
+            - ~
+            - Bundles\OptionBundle\Entity\Clients
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle]]
+
+    option.admin.department:
+        class: Bundles\OptionBundle\Admin\OptionAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Options", label: "Department" }
+        arguments:
+            - ~
+            - Bundles\OptionBundle\Entity\Department
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle]]
+
+    option.admin.event_type:
+        class: Bundles\OptionBundle\Admin\OptionAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Options", label: "Event Type" }
+        arguments:
+            - ~
+            - Bundles\OptionBundle\Entity\EventType
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle]]
+
+    option.admin.industry:
+        class: Bundles\OptionBundle\Admin\OptionAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Options", label: "Industry" }
+        arguments:
+            - ~
+            - Bundles\OptionBundle\Entity\Industry
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle]]
+
+    option.admin.interested_in:
+        class: Bundles\OptionBundle\Admin\OptionAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Options", label: "InterestedIn" }
+        arguments:
+            - ~
+            - Bundles\OptionBundle\Entity\InterestedIn
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle]]
+
+    option.admin.language:
+        class: Bundles\OptionBundle\Admin\OptionAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Options", label: "Language" }
+        arguments:
+            - ~
+            - Bundles\OptionBundle\Entity\Language
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle]]
+
+    option.admin.author_type:
+        class: Bundles\OptionBundle\Admin\OptionAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Options", label: "Author Types" }
+        arguments:
+            - ~
+            - Bundles\OptionBundle\Entity\AuthorType
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle]]
+
+    option.admin.organisation_size:
+        class: Bundles\OptionBundle\Admin\OptionAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Options", label: "Organisation Size" }
+        arguments:
+            - ~
+            - Bundles\OptionBundle\Entity\OrganisationSize
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle]]
+
+    option.admin.post_category:
+        class: Bundles\OptionBundle\Admin\OptionAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Options", label: "PostCategory" }
+        arguments:
+            - ~
+            - Bundles\OptionBundle\Entity\PostCategory
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle]]
+
+    option.admin.project_type:
+        class: Bundles\OptionBundle\Admin\OptionAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Options", label: "Project Type" }
+        arguments:
+            - ~
+            - Bundles\OptionBundle\Entity\ProjectType
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle]]
+
+    option.admin.author_type:
+        class: Bundles\OptionBundle\Admin\OptionAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Options", label: "Author Types" }
+        arguments:
+            - ~
+            - Bundles\OptionBundle\Entity\AuthorType
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle]]
+
+    option.admin.skill:
+        class: Bundles\OptionBundle\Admin\OptionAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Options", label: "Skill" }
+        arguments:
+            - ~
+            - Bundles\OptionBundle\Entity\Skill
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle]]
+
+    option.admin.zone:
+        class: Bundles\OptionBundle\Admin\OptionAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Options", label: "Zone" }
+        arguments:
+            - ~
+            - Bundles\OptionBundle\Entity\Zone
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle]]

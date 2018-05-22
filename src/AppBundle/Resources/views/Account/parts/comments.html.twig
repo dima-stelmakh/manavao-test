@@ -1,0 +1,33 @@
+{% for elem in item.comment%}
+<div class="info-block info-block-message">
+        <a href="javascript:;">
+            <div class="wrap-holder">
+                <div class="img-holder">
+                    <img src="{{elem.user.image.src}}" alt="">
+                </div>
+            </div>
+        </a>
+        <div class="messenger-box">
+            <div class="comment-content">{{elem.content}}</div>{#<span class="post-btn">{{elem.createdAt | date('d/m/Y H:i:s' )}}</span>#}
+        </div>
+        <div class="span-holder">
+            <span class="date">{{elem.createdAt|date('H:i')}}</span>
+            <span class="date">{{elem.createdAt|date('d.m.Y')}}</span>
+        </div>
+</div>
+{% endfor %}
+{% if app.user %}
+<div class="info-block info-block-message create-message">
+        <a href="javascript:;">
+            <div class="wrap-holder">
+                <div class="img-holder">
+                    <img src="{{app.user.image.src}}" alt="">
+                </div>
+            </div>
+        </a>
+        <div class="messenger-box">
+            <textarea id="comment-{{item.id}}" placeholder="{{'post.add_a_comment'|trans}}" onkeyup="auto_grow(this)"></textarea>
+        </div>
+        <button onclick="comment({{item.id}});" class="post-btn">{{'user_wall.Post'|trans}}</button>    
+</div>
+{% endif %}

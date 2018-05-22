@@ -1,0 +1,244 @@
+{% include 'AppBundle:Main:_header.html.twig'%}
+
+<body  class="{{'header.lang'|trans}} {% if community %}mnv-homeBlock-community{% else %}mnv-homeBlock{% endif %}"{% if community %} data-community-id="{{community.id}}"{% endif %}>
+  {% include 'AppBundle:Main:analytics.html.twig' %}
+<div id="map"></div>
+    <header id="header"{% if community %} class="mnv-community-image"{% endif %}>
+
+        {% include 'AppBundle:Main:topHeader.html.twig'%}
+        <div class="container">
+                <div class="row">
+                        <div class="col-sm-7 call-text">
+                                <h2 class="call-text-title"{% if c %} style="margin-top:140px;"{% endif %}>
+                                    {{'homepage.Connect_to_your'|trans}}
+                                    <br>
+                                    <span>{{'homepage.business_neighbourhood'|trans}}</span>
+                                    <br>
+                                    <span style="font-size:34px;">{{ c }}</span>
+                                </h2>
+                                {% if community %}
+                                    <div style="margin-left:46px;text-align:center;margin-top:44px;font-size:25px;font-family:cursive;" class="mnv-community-iconBlock">
+                                        {{'homepage.supported_by'|trans}}
+                                        <span style="background-color:white;display:inline-block;border-radius:4px;margin-left:13px;"><img src="" class="mnv-community-icon" alt="" style="max-width:80px;"></span>
+                                    </div>
+                                {% endif %}
+                        </div>
+                        <div class="call col-sm-5">
+        <div class="call-wrap">
+                        <div class="call-form">
+                            <form method="post" action="{{path('register')}}">
+                                <input type="text" name="user-city" required placeholder="{{'homepage.Your_city'|trans}}">
+                                <br>
+                                <input type="email" name="user-email" required placeholder="{{'homepage.eMail'|trans}}">
+                                <br>
+                                <input type="submit" value="{{'homepage.Join_us'|trans}}">
+                                <div class="mnv-signin-or">OU</div>
+                                <div>
+                                    <a href="javascript:;" title="Sign in with Linkedin">
+                                        <img src="/assets/img/Sign-in-Large---Default.png" srcset="/assets/img/Sign-in-Large---Default@x2.png 2x" alt="Sign In with Linkedin">
+                                    </a>
+                                </div>
+                                <p class="call-policy">{{'homepage.By_clicking'|trans}}</p>
+                            </form>
+                        </div>
+        </div>
+                </div>
+        </div>
+    </header>
+    <!--about block-->
+        <div class="container">
+            <div class="row">
+                <div id="about" class="col-md-6">
+                <div class="about-text">
+                    <p>{{'homepage.Each_morning'|trans}}</p></div>
+                    <a class="btn-about" href="{{path('register')}}">{{'homepage.Get_started_free'|trans}}</span>
+                    <i class="icon-get_started general-icon-gray"></i>
+
+                    </a>
+                </div>
+                <div class="col-md-5">
+                <div class="about-right">
+                    <img class="about-img" src="/assets/img/about.png" alt="About"><br>
+
+                    </div>
+                </div>
+        </div>
+    </div>
+    <!--infographics block-->
+    <div class="infographics">
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-6">
+                        <div class="infographics-item infographics-bottom-border infographics-right-border">
+                        <i class="icon-agile info-icon"></i>
+                            <div class="title-wrap"><h3>{{'homepage.Agile'|trans}}</h3></div>
+
+                            <p>{{'homepage.We_connect'|trans}}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="infographics-item infographics-bottom-border"><i class="icon-easy_to_use info-icon"></i>
+                        <div class="title-wrap"><h3>{{'homepage.Easy_to_use'|trans}}</h3></div>
+
+                        <p>{{'homepage.You_organise'|trans}}</p>
+                    </div>
+                    </div>
+        </div>
+        <div class="row">
+                    <div class="col-md-6">
+                        <div class="infographics-item infographics-right-border"><i class="icon-collaborative info-icon"></i>
+                        <div class="title-wrap"><h3>{{'homepage.Collaborative'|trans}}</h3></div>
+
+                        <p>{{'homepage.News,'|trans}}</p>
+                    </div>
+                    </div>
+                    <div class="col-md-6 ">
+                        <div class="infographics-item infographics-dot"><i class="icon-responsible info-icon"></i>
+                        <div class="title-wrap"><h3>{{'homepage.Responsible'|trans}}</h3></div>
+
+                        <p>{{'homepage.You_actively'|trans}}</p>
+                    </div>
+                    </div>
+        </div>
+
+        </div>
+    </div>
+    <!--comments block-->
+    <div id="c1">
+             <div id="c14" style="background-color:white;">
+                 <div></div>
+             </div>
+              <div id="c11" style="background-color:white;">
+                  <div></div>
+              </div>
+                     <div id="c111">
+                          <div id="c112" style="background-color:white;"></div>
+                          <div id="c113" style="background-color:white;">
+                              <div></div>
+                          </div>
+                          <a href="{{path('register')}}"><div class="info-btn"><p>{{'homepage.Join_us_free'|trans}}</span>
+                                </p></div></a>
+                      </div>
+
+              </div>
+    {% if false %}
+    <div class="testimonials-box-wrap">
+        <div class="container">
+           <div class="testimonials-wrap clerfix">
+           <h2> {{'homepage.Ever_been'|trans}}</h2>
+                    <div id="testimonials-slideshow">
+
+                    <a href="javascript:;" id="left-ctrl"></a>
+                    <a href="javascript:;" id="right-ctrl"></a>
+
+                      <div id="slidesContainer">
+                        <div class="slide">
+                          <div class="image-wrap">
+                              <img src="/assets/img/testemonials-1.jpg" alt="">
+                          </div>
+                          <div  class="testimonial-wrap">
+                              <p>{{'homepage.My_company'|trans}}</p>
+                          </div>
+                        </div>
+                        <div class="slide">
+                          <div class="image-wrap">
+                              <img src="/assets/img/testemonials-2.jpg" alt="">
+                          </div>
+                          <div  class="testimonial-wrap">
+                              <p>Integer a tristique arcu. Vestibulum luctus tincidunt quam, in lobortis erat maximus et. Nulla a pulvinar diam, ac varius tellus. Morbi rhoncus justo id lectus vulputate auctor. Nunc quis tincidunt massa. Sed sollicitudin mauris nec mauris scelerisque, non efficitur orci molestie. </p>
+                          </div>
+                        </div>
+                        <div class="slide">
+                          <div class="image-wrap">
+                              <img src="/assets/img/testemonials-3.jpg" alt="">
+                          </div>
+                          <div class="testimonial-wrap">
+                              <p>Quisque placerat massa non tincidunt feugiat. Donec sit amet mauris tristique felis bibendum pretium. Nulla a lectus eget nunc mollis posuere. Morbi faucibus fermentum malesuada.</p>
+                          </div>
+                        </div>
+                      </div>
+
+
+           </div>
+        </div>
+    </div>
+    {% endif %}
+  </div>
+
+<div class="city">
+<div class="container">
+    {% if false %}<h2> {{'homepage.city_header'|trans}}</h2>{% endif %}
+    <form method="get" action="{{path('register')}}">
+    <div class="row">
+        {% if c %}
+            <div id="mnv-citiesBlock" data-community-id="{{community.id}}">
+                <city-item
+                    v-for="city in cities"
+                    :key="city.id"
+                    v-bind:city="city">
+                </city-item>
+            </div>
+        {% else %}
+            <div id="mnv-communitiesBlock">
+                <community-item
+                    v-for="community in communities"
+                    :key="community.id"
+                    v-bind:community="community">
+                </community-item>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="row">
+       <div class="city-botton">
+           <button class="btn-city">
+                <i class="general-icon-gray icon-search"></i>
+                {% if c %}
+                    <span style="margin-top:11px;float:left;font-size:26px;">{{'homepage.join_us'|trans}}</span>
+                {% else %}
+                    {{'homepage.Find_your_business_community'|trans}}
+                {% endif %}
+            </button>
+        </div>
+    </div>
+    </form>
+</div>
+</div>
+{% include 'AppBundle:Main:footer.html.twig'%}
+
+<div id="cropp-img-popup" class="white-popup img-cropp-popup mfp-hide">
+    <div id="image-cropp"></div>
+    <button id="get-cropp-result">{{'post.save'|trans}}</button>
+</div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $(function() {
+              $('a[href*="#"]:not([href="javascript:;"])').click(function() {
+                if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+                  var target = $(this.hash);
+                  target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+                  if (target.length) {
+                    $('html, body').animate({
+                      scrollTop: target.offset().top
+                    }, 1000);
+                    return false;
+                  }
+                }
+              });
+            });
+        });
+        var getipajax = '{{ url('get-ip-ajax')|replace({'http://': 'https://'}) }}';
+    </script>
+    <script src="/js/croppie.min.js"></script>
+    <script src="/js/jquery.matchHeight.js"></script>
+    <script src="/js/magnific.js"></script>
+    <script src="/assets/js/custom.js"></script>
+    <script src="/js/api.js"></script>
+    <script src="/assets/js/geolocation.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ google_api }}&libraries=places&callback=init"></script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<div class="info-block">
+        <div class="wrap-holder">
+                <div class="img-holder">
+                    <a href="{{path('some-user-page', {'someUser': user.id })}}">
+                        <img src="{{user.image.src}}" alt="">
+                    </a>
+                </div>
+        </div>
+        <div class="user-info-box">
+                <h3><a href="{{path('some-user-page', {'someUser': user.id })}}">{{user.firstName}} {{user.lastName}}</a></h3>
+                <h4>Paris Area, France</h4>
+                <dl>
+                    <dt>Organisation:</dt>
+                    <dd></dd>
+                    <dt>Current position:</dt>
+                    <dd>{{user.job}}</dd>
+                    <dt>Business communities:</dt>
+                    <dd>
+                        {% for item in user.communities %}
+                        <a href="{{path('community', {'comm' : item.id})}}">{{item.area.name}}{% if not loop.last %},{% endif %}</a>
+                        {% endfor %}
+                    </dd>
+                    <dt>Interested in:</dt>
+                    <dd></dd>
+                </dl>
+                <ul class="list-links">
+                        <li>
+                            <a href="javascript:;" class="dropdown-message-window">{{'user_wall.Send_a_message'|trans}}</a>
+                            <ul class="link-menu">
+                                <li>
+                                    <a href="javascript:;" class="trigger-message-window">{{'user_wall.Send_a_message'|trans}}</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">{{'header.request_a_quotation'|trans}}</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">{{'header.ask_for_a_meeting'|trans}}</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">{{'header.receive_a_documentation'|trans}}</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a href="{{path('some-user-page', {'someUser': user.id })}}">{{'header.сontact_info'|trans}}</a></li>
+                        
+                        {% if friends.isFriend(app.user, user) %}
+                        <li><a href="{{path('remove-friend', {'someUser': user.id})}}">{{'public_profile_header.remove'|trans}}</a></li>
+                        {% else %}
+                        <li><a href="{{path('add-friend', {'someUser': user.id})}}">{{'public_profile_header.connect'|trans}}</a></li>
+                        {% endif %}
+                </ul>
+        </div>
+</div>

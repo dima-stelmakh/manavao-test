@@ -1,0 +1,85 @@
+<footer id="footer">
+    {% block footer %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-xs-6">
+                <h2 class="title">{{'about_us.company'|trans}}</h2>
+                <ul>
+                    <li>
+                        <a href="{{path('static_page',{'slug': 'about-us'})}}">{{'footer-first.about'|trans}}</a>
+                    </li>
+                    <!-- <li>
+                        <a  href="{{path('static_page',{'slug': 'press'})}}">{{'footer-first.press'|trans}}</a>
+                    </li> -->
+                    <li>
+                        <a href="{{path('static_page',{'slug': 'jobs'})}}">{{'footer-first.jobs'|trans}}</a>
+                    </li>
+                    <li>
+                        <a href="https://blog.manavao.com" target="_blank">{{'footer-first.blog'|trans}}</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-3 col-xs-6">
+                <h2 class="title">{{'footer.manavao_com'|trans}}</h2>
+                <ul>
+                    <li>
+                        <a href="{{path('static_page',{'slug': 'business-communities'})}}">{{'footer-second.business-communities'|trans}}</a>
+                    </li>
+                    <li>
+                        <a href="{{path('static_page',{'slug': 'ambassadors'})}}">{{'footer-second.for-organisations'|trans}}</a>
+                    </li>
+                    <li>
+                        <a href="{{path('static_page',{'slug': 'economic'})}}">{{'footer-second.for-companies'|trans}}</a>
+                    </li>
+                    <li>
+                        <a href="{{path('static_page',{'slug': 'networks'})}}">{{'footer-second.for-medias'|trans}}</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-3 col-xs-6">
+                <h2 class="title">{{'footer.third_footer_colom'|trans}}</h2>
+                <ul>
+                    <li>
+                        <a href="{{path('static_page',{'slug': 'usage'})}}">{{'footer-third.usage'|trans}}</a>
+                    </li>
+                    <li>
+                        <a href="{{path('static_page',{'slug': 'terms'})}}">{{'footer-third.guidelines'|trans}}</a>
+                    </li>
+                    <li>
+                        <a href="{{path('static_page',{'slug': 'privacy'})}}">{{'footer-third.privacy'|trans}}</a>
+                    </li>
+                    <li>
+                        <a href="{{path('static_page',{'slug': 'help'})}}">{{'footer-third.help'|trans}}</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-3 col-xs-6 mnv-footer-socials">
+                <h2 class="title">{{'footer.fourth_footer_colom'|trans}}</h2>
+                <ul>
+                    <li>
+                        <a href="https://www.linkedin.com/company/manavao/" target="_blank">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/Manavao_com" target="_blank">
+                            <i class="fab fa-twitter-square"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="" target="_blank" class="mnv-disabled">
+                            <i class="fab fa-google-plus-square"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    {% endblock footer %}
+    <div class="container">
+        <div class="row footer-battom">
+            <p class="copyright">{{'footer_bottom.made_in_Toulouse'|trans}} &#169; 2018</p>
+            <a href="{{path('static_page',{'slug': 'legal-reference'})}}">{{'footer_bottom.legal_reference'|trans}}</a>
+        </div>
+    </div>
+</footer>

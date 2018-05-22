@@ -1,0 +1,43 @@
+{% extends "AppBundle::layout.html.twig"%}
+
+{% block content %}
+<div class="container progress-registration-warp">
+		<div class="registration-box">
+			
+
+	        <ul id="registration-tabs" class="nav nav-tabs">
+			  
+			  <li class="active"><!-- <a data-toggle="tab" href="#step1"> -->
+			  <div class="step"></div>
+			   <p>{{'registration.network'|trans}}</p>
+			  </li>
+			  <li class="active">
+			  <div class="step"></div>
+			  	<p>{{'registration.profile'|trans}}</p>
+			  </li>
+			  <li class="active">
+                            <div class="step last-step"></div>
+                            <p>{{'registration.Lets'|trans}}<br> {{'registration.Start'|trans}}</p>
+			  </li>
+			</ul>
+		</div>
+	</div>
+	<div class="container content-registration-wrap">
+            <div class="registration-box">
+                <div id="step2">
+                    <div class="clearfix">
+                        Welcome
+                     </div>
+
+                </div>
+
+            </div>
+	</div>
+
+{% endblock %}
+
+{% block modal %}
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

@@ -1,0 +1,51 @@
+Bundles\StoreBundle\Entity\OpportunityPost:
+    type: entity
+    table: null
+    repositoryClass: Bundles\StoreBundle\Repository\OpportunityPostRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        fewWords:
+            type: string
+            lenght: 255
+        deadline:
+            type: datetime
+        isMyNameConfidential:
+            type: boolean
+        showToEveryone:
+            type: boolean
+        readyToContact:
+            type: boolean
+        skill:
+            type: text
+            nullable: true
+    oneToOne:
+        post:
+            targetEntity: Post
+            mappedBy: opportunityPost
+    manyToOne:
+        authorType:
+            targetEntity: Bundles\OptionBundle\Entity\AuthorType
+            joinColumn:
+                name: author_type_id
+                referencedColumnName: id
+        projectType:
+            targetEntity: Bundles\OptionBundle\Entity\ProjectType
+            joinColumn:
+                name: project_type_id
+                referencedColumnName: id
+        industry:
+            targetEntity: Bundles\OptionBundle\Entity\Industry
+            joinColumn:
+                name: industry_id
+                referencedColumnName: id
+#        skill:
+#            targetEntity: Bundles\OptionBundle\Entity\Skill
+#            joinColumn:
+#                name: skill_id
+#                referencedColumnName: id
+    lifecycleCallbacks: {  }

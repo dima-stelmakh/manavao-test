@@ -1,0 +1,135 @@
+<div class="details-popup-share details-popup-share-event white-popup mfp-with-anim" id="details-popup-share-event">
+	<div class="heading-share">
+		<h2>{{'post.share'|trans}} {{'business_community.withing_my_network'|trans}}</h2>
+		<span class="icon icon-close custom-close-btn" onclick="closePopup();"></span>
+	</div>
+	<ul class="nav nav-tabs nav-tabs-share">
+        {% if app.user != post.author %}
+       	<li class="active"><a href="#tab-1" data-toggle="tab">{{'business_community.Members'|trans}}</a></li>
+        {% endif %}
+        {#
+         <li {% if app.user == post.author %} class="active" {% endif %}><a href="#tab-2" data-toggle="tab">{{'user_wall.message'|trans}}</a></li>
+         #}
+    </ul>
+
+    <div class="tab-content">
+        {% if app.user != post.author %}
+        <div class="tab-pane fade in active" id="tab-1">
+        	<div class="info-block">
+                            <a href="javascript:;">
+                                    <div class="wrap-holder">
+                                            <div class="img-holder">
+                                                    <img src="{{user.image.src}}" alt="">
+                                            </div>
+                                    </div>
+                            </a>
+                            <div class="user-info-box">
+                                    <a href="{{path('profile')}}" class="heading-link"><h3>{{user.firstName}} {{user.lastName}}</h3></a>
+                                    <span>{{user.job}}</span>
+                            </div>
+			</div>
+{#			<textarea class="sharing" placeholder="{{'business_community.tell_your_minds'|trans}}"></textarea>#}
+			<div class="content-block">
+				<div class="info-block">
+					<a href="javascript:;">
+						<div class="wrap-holder">
+							<div class="img-holder">
+								<img src="{{post.author.image.src}}" alt="">
+							</div>
+						</div>
+					</a>
+					<div class="user-info-box">
+						<div class="wrapper-user-info">
+							<a href="{{path('some-user-page', {'someUser': post.author.id})}}" class="heading-link"><h3>{{post.author.firstName}} {{post.author.lastName}}</h3></a>
+							<span>{{post.author.job}}</span>
+						</div>
+						<div class="post-type-wrap">
+							<p class="type-of-event">{{post.eventPost.eventType.translate(app.request.locale).name}}
+								<span class="icon icon-publish_icon"></span>
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="wrapp-post-content">
+                                    <div class="heading-information">
+                                        <h4>{{post.eventPost.name}}</h4>
+                                        <p class="event-date">{{post.eventPost.startDate | date('d/m/Y')}} - {{post.eventPost.endDate | date('d/m/Y')}}</p>
+                                    </div>
+                                    <p>{{post.content}}</p>
+                                    <div class="item-wrap">
+                                        <p class="post-indastry">{{post.eventPost.industry.translate(app.request.locale).name}}</p>
+                                        {% if post.communities.first %}
+                                        <a href="{{path('community', {'comm': post.communities.first.id})}}" class="post-community">{{post.communities.first}}</a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+			</div>
+			<div class="button-box">
+                            <div class="select-holder">
+			      	<select id="community-{{post.id}}">
+                                    <option selected disabled>Business community</option>
+                                    {% for item in comm %}
+			      		<option value="{{item.id}}">{{item.name}}</option>
+                                    {% endfor %}
+			      	</select>
+			    </div>
+			    <button onclick="repost({{post.id}}, {{app.user.id}});" class="post">{{'user_wall.Post'|trans}}</button>
+			</div>
+        </div>
+        {% endif %}
+        <div class="tab-pane fade {% if app.user == post.author %} in active {% endif %}"  id="tab-2">
+        	<div class="teaxtarea-holder">
+                    <textarea class="sharing sharing-list-names" placeholder="{{'post.type_a_name'|trans}}"></textarea>
+                </div>
+			<textarea class="sharing sharing-comment" placeholder="{{'post.write_a_comment'|trans}}"></textarea>
+			<div class="content-block">
+				<div class="info-block">
+					<a href="javascript:;">
+						<div class="wrap-holder">
+							<div class="img-holder">
+								<img src="/assets/img/noname.png" alt="">
+							</div>
+						</div>
+					</a>
+					<div class="user-info-box">
+						<div class="wrapper-user-info">
+							<a href="javascript:;" class="heading-link"><h3>Li U</h3></a>
+							<span>journalist</span>
+						</div>
+						<div class="post-type-wrap">
+							<p class="type-of-event">Symposium
+								<span class="icon icon-publish_icon"></span>
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="wrapp-post-content">
+					<div class="heading-information">
+						<h4>New event</h4>
+						<p class="event-date">03/04/2017 - 16/04/2017</p>
+					</div>
+					<p>Pellentesque orci mi, lobortis at volutpat quis, varius id turpis. Ut vitae viverra risus. Nunc cursus ut ipsum a maximus.Pellentesque orci mi, lobortis at volutpat quis, varius id turpis. Ut vitae viverra risus.</p>
+					<div class="item-wrap">
+						<p class="post-indastry">Chemicals</p>
+                        <a href="javascript:;" class="post-community">Bergen Business Community</a>
+					</div>
+				</div>
+			</div>
+                        <div class="button-box">
+                            {% if app.user == post.author %}
+                            <div class="select-holder">
+                                <select id="community-my-{{post.id}}">
+                                    <option selected disabled>Business community</option>
+                                    {% for item in comm %}
+                                        <option value="{{item.id}}">{{item.name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <button onclick="repostToCommunity({{post.id}});" class="post">{{'user_wall.Post'|trans}}</button>
+                            {% else %}
+                            <button class="post">{{'user_wall.Post'|trans}}</button>
+                            {% endif %}
+                        </div>
+        </div>
+    </div>
+</div>

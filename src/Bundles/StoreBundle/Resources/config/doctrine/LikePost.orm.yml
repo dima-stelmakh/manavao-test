@@ -1,0 +1,24 @@
+Bundles\StoreBundle\Entity\LikePost:
+    type: entity
+    table: null
+    repositoryClass: Bundles\StoreBundle\Repository\LikePostRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    manyToOne:
+        user:
+            targetEntity: Bundles\UserBundle\Entity\User
+            inversedBy: likePosts
+            joinColumn:
+                name: user_id
+                referencedColumnName: id
+        post:
+            targetEntity: Post
+            inversedBy: likedUsers
+            joinColumn:
+                name: post_id
+                referencedColumnName: id
+    lifecycleCallbacks: {  }

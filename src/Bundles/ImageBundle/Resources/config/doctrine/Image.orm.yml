@@ -1,0 +1,18 @@
+Bundles\ImageBundle\Entity\Image:
+    type: entity
+    table: null
+    repositoryClass: Bundles\ImageBundle\Repository\ImageRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        path:
+            type: string
+            length: 255
+    lifecycleCallbacks:
+        prePersist:   [ lifecycleFileUpload ]
+        preUpdate:    [ lifecycleFileUpload ]
+        postRemove:   [ lifecycleFileRemove ]

@@ -1,0 +1,55 @@
+Bundles\StoreBundle\Entity\Community:
+    type: entity
+    table: null
+    repositoryClass: Bundles\StoreBundle\Repository\CommunityRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: '512'
+        overview:
+            type: text
+            nullable: true
+        lat:
+            type: decimal
+            precision: 20
+            scale: 14
+        lng:
+            type: decimal
+            precision: 20
+            scale: 14
+        enable:
+            type: boolean
+            nullable: false
+    manyToMany:
+        users:
+            targetEntity: Bundles\UserBundle\Entity\User
+            mappedBy: communities
+        post:
+            targetEntity: Post
+            mappedBy: communities
+    oneToOne:
+        area:
+            targetEntity: UrbanArea
+            inversedBy: community
+            joinColumn:
+                name: area_id
+                referencedColumnName: id
+        image:
+            targetEntity: Bundles\ImageBundle\Entity\Image
+            cascade: ["remove", "persist"]
+            joinColumn:
+                name: image_id
+                referencedColumnName: id
+        icon:
+            targetEntity: Bundles\ImageBundle\Entity\Image
+            cascade: ["remove", "persist"]
+            joinColumn:
+                name: icon_id
+                referencedColumnName: id
+    lifecycleCallbacks: {  }

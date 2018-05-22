@@ -1,0 +1,26 @@
+Bundles\StoreBundle\Entity\SharePost:
+    type: entity
+    table: null
+    repositoryClass: Bundles\StoreBundle\Repository\SharePostRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    manyToOne:
+        user:
+            targetEntity: Bundles\UserBundle\Entity\User
+            inversedBy: sharedPosts
+            joinColumn:
+                name: user_id
+                referencedColumnName: id
+                onDelete: CASCADE
+        post:
+            targetEntity: Post
+            inversedBy: sharedUsers
+            joinColumn:
+                name: post_id
+                referencedColumnName: id
+                onDelete: CASCADE
+    lifecycleCallbacks: {  }

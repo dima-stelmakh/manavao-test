@@ -1,0 +1,26 @@
+Bundles\StoreBundle\Entity\City:
+    type: entity
+    table: null
+    repositoryClass: Bundles\StoreBundle\Repository\CityRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+        code:
+            type: string
+            length: 255
+            unique: true
+    manyToOne:
+        urbanArea:
+            targetEntity: UrbanArea
+            inversedBy: cities
+            joinColumn:
+                name: area_id
+                referencedColumnName: id
+    lifecycleCallbacks: {  }

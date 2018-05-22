@@ -1,0 +1,29 @@
+Bundles\StoreBundle\Entity\Friend:
+    type: entity
+    table: null
+    repositoryClass: Bundles\StoreBundle\Repository\FriendRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        status:
+            type: smallint
+    manyToOne:
+        user:
+            targetEntity: Bundles\UserBundle\Entity\User
+            inversedBy: friendUsers
+            joinColumn:
+                onDelete: CASCADE
+                name: user_id
+                referencedColumnName: id
+        friend:
+            targetEntity: Bundles\UserBundle\Entity\User
+            inversedBy: friends
+            joinColumn:
+                onDelete: CASCADE
+                name: friend_id
+                referencedColumnName: id
+    lifecycleCallbacks: {  }

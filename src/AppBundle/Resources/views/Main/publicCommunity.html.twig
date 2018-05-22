@@ -1,0 +1,186 @@
+{% extends "AppBundle::layout.html.twig"%}
+
+{% block header %}
+
+    <div class="top-header">
+        <div class="container">
+            <div class="left-top-header logo">
+                <a href="/profile">
+                  <span class="mnv-logo-small">{% include 'AppBundle:Main:logo.html.twig'%}</span>
+                </a>
+            </div>
+            <div class="right-top-header">
+                <nav class="navbar">
+                    <ul class="nav navbar-nav">
+                        <li><a href="{{path('static_page',{'slug': 'about-us'})}}">{{'header.about'|trans}}</a></li>
+                        <li><button class="mnv-disabled" type="button">{{'header.sign_in'|trans}}</button>
+
+                          <ul class="dropdown-menu dropdown-menu-right">
+                                <form action="{{ path("fos_user_security_check") }}" method="post">
+                                {% if csrfToken %}
+                                    <input type="hidden" name="_csrf_token" value="{{ csrfToken }}" />
+                                {% endif %}
+                                <li><input class="sing-in-pop-up" type="email" name="_username" placeholder="E-mail"></li>
+                                <li><input class="sing-in-pop-up" type="password" name="_password" placeholder="Password"></li>
+                                <li><button class="sing-in-pop-up" type="submit" value="{% trans from 'FOSUserBundle' %}security.login.submit{% endtrans %}" name="singIn">{{'header.sign_in'|trans}}</button></li>
+                                <li class="holder-forgot-password"><a href="{{path('fos_user_resetting_request')}}"  class="forgot-password">{{'registration.forgot_your_password'|trans}}</a></li>
+                                {#<input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />#}
+                                </form>
+                            </ul>
+
+                        </li>
+                        <li>
+                            <button class="mnv-disabled" type="button">{{ app.request.locale }} <span class="icon-arrow icon"></span></button>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'fr'})) }}">{{ 'fr'|trans }}</a></li>
+                                <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'})) }}">{{ 'en'|trans }}</a></li>
+                                <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'es'})) }}">{{ 'es'|trans }}</a></li>
+                                <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'ca'})) }}">{{ 'ca'|trans }}</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <div class="community-header{% if comm %} mnv-community-image mnv-homeBlock-community{% endif %}" {% if comm %} data-community-id="{{comm.id}}"{% else %} style="background-image: url('/img/manavao_main_image.png')"{% endif %}></div>
+        <div class="container">
+            <div class="col-md-6">
+                <div class="info">
+                    <h1>{{comm.name}}</h1>
+                    <h2>Voisinage d'affaires</h2>
+
+                    <div class="community-location">
+                            <img src="/assets/img/flag.png" alt="" class="flag">
+                            <span>{{comm.area.region}} - {{comm.area.country.name}}</span>
+
+                    </div>
+                </div>
+            </div>
+            <div class="community-buttons col-md-4 col-md-offset-1">
+                <!-- <a class="mnv-disabled" href="">{{'business_community.Join_us'|trans}}</a>
+                <ul class="dropdown-menu def ">
+                      <li> Available soon. We do our best to provide you the best experience.</li>
+                    </ul> -->
+                <a class="mnv-disabled" javascript:;>{{'business_community.invite_contacts'|trans}}</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+<div id="content" class="community-content">
+  <div class="row">
+    <div class="container">
+
+        <aside class="col-md-2 left-side">
+          <div class="community-info">
+                                            {% set arr = comm.name | split(' ')%}
+                                            {% if arr[0] == 'Barcelona' %}
+            <h2 class="title">{{'business_community.At_a_glance'|trans}}</h2>
+
+            <p>{{'business_community.Total_population'|trans}} <br> <span id="total-com">3,846,697</span></p>
+            <p>{{'business_community.As_percent'|trans}} <br> <span id="percent-total-com">8.27</span></p>
+            <p>{{'business_community.GDP_estlmated'|trans}}<br> <span id="estimated-com">135,803 </span></p>
+            <p>as % of national value<br> <span id="percent-estimated-com">9,26</span></p>
+                                            {% else %}
+                                            {% endif %}
+
+
+            <div id="map-mini" class="user-location-map" style="height: 160px; width: 160px;"></div>
+                                                <input id="address" type="hidden" value="{{comm.area.name}}, {{comm.area.country.name}}">
+          </div>
+          <div class="left-item-wrap">
+            <h3 class="title">{{'business_community.Home'|trans}}</h3>
+                <div class="active left-list-item">{{'aside.overview'|trans}}</div>
+                <div class="left-list-item"><a class="mnv-disabled" javascript:;>{{'business_community.News_feed'|trans}}</a></div>
+                <div class="left-list-item"><a class="mnv-disabled" javascript:;>{{'user_wall.Opportunities'|trans}}</a></div>
+                <div class="left-list-item"><a class="mnv-disabled" javascript:;>{{'user_wall.Events'|trans}}</a></div>
+
+          </div>
+          <div class="left-item-wrap">
+            <h3 class="title">{{'business_community.Members'|trans}}</h3>
+                <div class="left-list-item"><a class="mnv-disabled" javascript:;>{{'business_community.Individuals'|trans}}</a></div>
+                <div class="left-list-item"><a class="mnv-disabled" javascript:;>{{'business_community.Companies'|trans}}</a></div>
+                <div class="left-list-item"><a class="mnv-disabled" javascript:;>{{'business_community.Public_organisations'|trans}}</a></div>
+                <div class="left-list-item"><a class="mnv-disabled" javascript:;>{{'business_community.Others'|trans}}</a></div>
+
+          </div>
+        </aside>
+
+      <div class="col-md-7">
+        <div class="row">
+
+          <div class="overview-wrap">
+            <h2 class="title">Overview</h2>
+            <div class="overview">
+                {{comm.overview}}
+            </div>
+          </div>
+          <div class="wall-wrap">
+
+          {% include 'AppBundle:Account:post.html.twig' with {'from' : 'comm', 'user': 'x'} %}
+        </div>
+        </div>
+      </div>
+      <aside class="col-md-3 right-side">
+        <div class="partners-wrap mnv-community-iconBlock">
+          <h3>{{'business_community.Supported_by'|trans}}</h3>
+          <div class="partner">
+            <img src="" class="mnv-community-icon" alt="" style="max-width:80px;">
+            <a class="become-partner" javascript:;>{{'business_community.Become_partner'|trans}}</a>
+          </div>
+        </div>
+
+        <div class="last-members">
+          <h2 class="aside-title">{{'business_community.Last_members'|trans}}</h2>
+          {% for item in lastUsers %}
+          <div class="aside-item">
+            <img src="{{item.image.src}}" alt="">
+            <a href="{{path('some-user-page', {'someUser': item.id})}}">
+            {{item.firstName}} <br> {{item.lastName}}</a>
+                                        </div>
+                                        {% endfor %}
+          <div class="link-all-wrap clearfix">
+                                            <a href="{{path('profile_last_members')}}" class="link-all">{{'user_wall.See_all'|trans}} <span>...</span></a>
+                                        </div>
+        </div>
+
+        <div class="calendar-wrap">
+          <div class="datepicker-holder" data-lang="{{'header.lang'|trans}}">
+            <div class="datepicker-inline cusmom-datepicker-inline"></div>
+          </div>
+          <div class="link-all-wrap clearfix">
+              <a javascript:; class="link-all">see all <span>...</span></a>
+            </div>
+        </div>
+
+                            <div class="near-community-wrap">
+                                <h2 class="aside-title">{{'user_wall.Nearby_business_communities'|trans}}</h2>
+                                {% for item in nearly %}
+                                <div class="aside-item">
+                                    <a href="{{path('public-community', {'area' : item.area.id})}}" class="mnv-photo-community community-round-image" data-community-id="{{item.area.id}}">
+                                    <span>{{item.name}}</span>{#<br>
+                                            {{'user_wall.Add'|trans}}#}
+                                    </a>
+                                </div>
+                                {% endfor %}
+                                <div class="link-all-wrap clearfix">
+                                    <a javascript:; class="link-all mnv-disabled">{{'user_wall.See_all'|trans}}<span>...</span></a>
+                                </div>
+                            </div>
+      </aside>
+
+    </div>
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block javascript %}
+<script src="https://maps.googleapis.com/maps/api/js?key={{googleApiKey}}"
+    async defer></script>
+    {{parent()}}
+<script src="/js/map.js"></script>
+{% endblock %}

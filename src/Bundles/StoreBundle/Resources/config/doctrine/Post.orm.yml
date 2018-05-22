@@ -1,0 +1,76 @@
+Bundles\StoreBundle\Entity\Post:
+    type: entity
+    table: null
+    repositoryClass: Bundles\StoreBundle\Repository\PostRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        content:
+            type: text
+        type:
+            type: smallint
+    oneToMany:
+        sharedUsers:
+            targetEntity: SharePost
+            mappedBy: post
+            cascade: ["remove"]
+        likedUsers:
+            targetEntity: LikePost
+            mappedBy: post
+            cascade: ["remove"]
+        comment:
+            targetEntity: Comment
+            mappedBy: post
+            orderBy: { 'createdAt': 'ASC' }
+            cascade: ["remove"]
+    oneToOne:
+        updatePost:
+            targetEntity: UpdatePost
+            inversedBy: post
+            cascade: ["remove"]
+            joinColumn:
+                onDelete: CASCADE
+                name: update_post_id
+                referencedColumnName: id
+        opportunityPost:
+            targetEntity: OpportunityPost
+            inversedBy: post
+            cascade: ["remove"]
+            joinColumn:
+                onDelete: CASCADE
+                name: opportunity_post_id
+                referencedColumnName: id
+        eventPost:
+            targetEntity: EventPost
+            inversedBy: post
+            cascade: ["remove"]
+            joinColumn:
+                onDelete: CASCADE
+                name: event_post_id
+                referencedColumnName: id
+    manyToOne:
+        author:
+            targetEntity: Bundles\UserBundle\Entity\User
+            inversedBy: posts
+            joinColumn:
+                onDelete: CASCADE
+                name: user_id
+                referencedColumnName: id
+    manyToMany:
+        communities:
+            targetEntity: Community
+            inversedBy: post
+            joinTable:
+                onDelete: CASCADE
+                name: post_community
+                joinColumns:
+                    post_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    community_id:
+                        referencedColumnName: id
+    lifecycleCallbacks: {  }

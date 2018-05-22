@@ -1,0 +1,90 @@
+{% set noteCount = notificationManager.newCount() %}
+
+<div class="notifications-holder">
+    <button name="show-alerts" type="button" data-toggle-notifications>
+        <span class="icon-bell header-icon"></span>
+        <span id="bell-alert" class="alert-icon{% if noteCount %} active{% endif %}">{{noteCount}}</span>
+    </button>
+    <div class="notifications-popup">
+        <div class="content-holder">
+            <div class="heading">
+                <div class="row">
+                    <h3 class="col-md-7">Notifications</h3>
+                    <div class="col-md-5">
+                      <div is="notification-controls"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="list-holder">
+                <ul class="list">
+                  {% for item in notificationManager.getList() %}
+                    <li class="list-item {{ item.new ? 'active' : ''}}">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="avatar"><a href="{{path('some-user-page', {'someUser' : item.aboutUser.id })}}"><img src="{{item.aboutUser.image.src}}" alt=""></a></div>
+                            </div>
+                            <div class="col-md-8">
+
+                                {% if item.noteType == 1 %}
+                                <a href="{{path('some-user-page', {'someUser' : item.aboutUser.id })}}" class="name">
+                                    {{item.aboutUser.firstName}} {{item.aboutUser.lastName}}
+                                </a> joined
+                                <a href="{{path('community', {'comm' : item.community.id})}}">
+                                    {{item.community.name}}
+                                </a>
+                                {% elseif item.noteType == 2 %}
+
+                                    {% if item.post.type == 1 %}
+                                    <i class="icon icon-share_icon"></i>
+                                    {% elseif item.post.type == 2 %}
+                                    <i class="icon-post_icon icon"></i>
+                                    {% elseif item.post.type == 3 %}
+                                    <i class="icon icon-publish_icon"></i>
+                                    {% endif %}
+
+                                <a href="{{path('some-user-page', {'someUser' : item.aboutUser.id })}}" class="name">
+                                    {{item.aboutUser.firstName}} {{item.aboutUser.lastName}}
+                                </a> just posted
+                                    {% if item.post.opportunityPost %}
+                                    an opportunity - "{{item.post.opportunityPost.fewWords}}" -
+                                    {% elseif item.post.eventPost %}
+                                    an event - "{{item.post.eventPost.name}}" -
+                                    {% else %}
+                                    an update -
+                                    {% endif %}
+                                <a href="{{path('community', {'comm' : item.community.id})}}">{{item.community.name}}</a>
+                                {% elseif item.noteType == 3 %}
+                                <i class="icon icon-share_little"></i>
+                                <a href="{{path('some-user-page', {'someUser' : item.aboutUser.id })}}" class="name">
+                                    {{item.aboutUser.firstName}} {{item.aboutUser.lastName}}
+                                </a> just posted
+                                    {% if item.post.opportunityPost %}
+                                    an opportunity - "{{item.post.opportunityPost.fewWords}}" -
+                                    {% elseif item.post.eventPost %}
+                                    an event - "{{item.post.eventPost.name}}" -
+                                    {% else %}
+                                    an update -
+                                    {% endif %}
+                                <a href="{{path('community', {'comm' : item.community.id})}}">{{item.community.name}}</a>
+                                {% elseif item.noteType == 4 %}
+                                <a href="{{path('some-user-page', {'someUser' : item.aboutUser.id })}}" class="name">
+                                    {{item.aboutUser.firstName}} {{item.aboutUser.lastName}}
+                                </a> just liked your post.
+
+                                {% endif %}
+
+                                <div class="date">{{item.createdAt |date('Y-m-d H:i:s')}}</div>
+                            </div>
+
+
+                            <div class="col-md-2 actions">
+                                <div is="notification-line-controls" item-id="{{item.id}}"></div>
+                            </div>
+                        </div>
+                    </li>
+                  {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

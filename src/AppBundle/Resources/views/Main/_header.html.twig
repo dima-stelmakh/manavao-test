@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Manavao</title>
+    <!-- Latest compiled and minified CSS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/css/normalize.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans:300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/2.3.1/css/flag-icon.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/croppie.css">
+    <link href="/assets/css/icon-font.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css" integrity="sha384-5SOiIsAziJl6AWe0HWRKTXlfcSHKmYV4RBF18PPJ173Kzn7jzMyFuTtk8JA7QQG1" crossorigin="anonymous">
+    <link rel="stylesheet" href="/js/jquery-ui/jquery-ui.min.css">
+    {% if useStyle2 is defined %}
+    <link rel="stylesheet" href="/assets/css/style2.css">
+    {% else %}
+      <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+    {% endif %}
+    <link rel="stylesheet" type="text/css" href="/assets/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/custom_datepicker.css">
+    <link href="/assets/css/select2.css" rel="stylesheet">
+    <script src="/assets/js/vue.min.js"></script>
+    <script src="/linkifyjs/linkify.min.js"></script>
+    <script src="/linkifyjs/linkify-element.min.js"></script>
+    <script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="19f2da82-9302-4c02-9b95-bbfc8640794c";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.im/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#e84e0f">
+    <meta name="msapplication-TileColor" content="#e84e0f">
+    <meta name="theme-color" content="#ffffff">
+    {% include 'AppBundle:Main:tagManager.html.twig' %}
+  </head>

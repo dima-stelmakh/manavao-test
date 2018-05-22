@@ -1,0 +1,28 @@
+Bundles\StoreBundle\Entity\Guest:
+    type: entity
+    table: null
+    repositoryClass: Bundles\StoreBundle\Repository\GuestRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        createdAt:
+            type: datetime
+            column: created_at
+    manyToOne:
+        user:
+            targetEntity: Bundles\UserBundle\Entity\User
+            joinColumn:
+                onDelete: CASCADE
+                name: user_id
+                referencedColumnName: id
+        guest:
+            targetEntity: Bundles\UserBundle\Entity\User
+            joinColumn:
+                onDelete: CASCADE
+                name: guest_id
+                referencedColumnName: id
+    lifecycleCallbacks: {  }

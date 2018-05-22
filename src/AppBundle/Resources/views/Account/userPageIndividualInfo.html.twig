@@ -1,0 +1,208 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block header_comm %}
+    {% include "AppBundle:Account:parts/header.html.twig" %}
+{% endblock %}
+
+
+{% block content %}
+<div id="content" class="public-profile-content">
+	<div class="row">
+		<div class="container">
+
+				<aside class="col-md-2">
+					<div id="map-mini" class="user-location-map" style="height: 160px; width: 160px;"></div>
+                                        <input id="address" type="hidden" value="{{user.city}}">
+					<div class="left-item-wrap">
+						<h3 class="title">{{'registration.profile'|trans}}</h3>
+								<div class="active left-list-item">{{'aside.overview'|trans}}</div>
+								<div class="left-list-item"><a href="javascript:;" class="mnv-disabled">{{'aside.my_bussiness_communities'|trans}}</a> </div>
+
+								<div class="left-list-item"><a href="javascript:;" class="mnv-disabled">{{'aside.my_individual_informations'|trans}}</a> </div>
+
+								<div class="left-list-item"><a href="javascript:;" class="mnv-disabled">{{'aside.my_bussiness_informations'|trans}}</a> </div>
+
+
+					</div>
+					<div class="left-item-wrap">
+						<h3 class="title">{{'user_wall.Recent_activity'|trans}}</h3>
+								<div class="left-list-item"><a href="javascript:;" class="mnv-disabled">{{'user_wall.Connections'|trans}}</a> </div>
+
+								<div class="left-list-item"><a href="javascript:;" class="mnv-disabled">{{'user_wall.Following'|trans}}</a> </div>
+
+								<div class="left-list-item"><a href="javascript:;" class="mnv-disabled">{{'user_wall.Updates_feed'|trans}}</a> </div>
+
+								<div class="left-list-item"><a href="javascript:;" class="mnv-disabled">{{'user_wall.Opportunities'|trans}}</a> </div>
+
+                        <div class="left-list-item"><a href="javascript:;" class="mnv-disabled">{{'user_wall.Events'|trans}}</a> </div>
+
+					</div>
+					<div class="invite-wrap">
+						<a class="mnv-disabled invite-btn" href="javascript:;">
+							<span class="icon icon-invite"></span>
+
+							{{'user_wall.Invite'|trans}}
+						</a>
+
+					</div>
+				</aside>
+
+			<div class="col-md-7 edit-page">
+				<div class="row">
+					<div class="edit-header">
+						<a class="complete-profile" href="javascript:;">Complete your profile</a>
+						<div class="progres-wrap">
+						<p>Completion</p>
+							<div class="progres-bar">
+								<div class="progres" style="width: 30%"></div>
+							</div>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+					<form class="edit-content" metod="post" action="edit-individual">
+						<h2 class="title">My individual informations</h2>
+						<span class="icon icon-edit"></span>
+						<div class="clearfix"></div>
+
+						<div class="edit-wrap clearfix">
+							<div class="edit-profiling-wrap">
+								<p></p>
+								<div class="table-cell">
+									<p class="title-edit">General informations</p>
+								</div>
+							</div>
+
+							<div class="edit-profiling-wrap">
+								<p>email</p>
+								<div class="input-holder">
+									<input name="email"  type="email" value="{{user.inform.email}}">
+									<span class="icon icon-edit hide-icon-edit"></span>
+								</div>
+							</div>
+							<div class="edit-profiling-wrap">
+								<p>IM</p>
+								<div class="input-holder">
+									<input name="im"  type="text" value="{{user.im}}">
+									<span class="icon icon-edit hide-icon-edit"></span>
+								</div>
+							</div>
+							<div class="edit-profiling-wrap">
+								<p>Phone</p>
+								<div class="input-holder">
+									<input name="phone"  type="text" value="{{user.phone}}">
+									<span class="icon icon-edit hide-icon-edit"></span>
+								</div>
+							</div>
+							<div class="edit-profiling-wrap">
+								<p>Address</p>
+								<div class="input-holder">
+									<input name="address"  type="text" value="{{user.address}}">
+									<span class="icon icon-edit hide-icon-edit"></span>
+								</div>
+							</div>
+							<div class="edit-profiling-wrap">
+								<p>LinkedIn</p>
+								<div class="input-holder">
+									<input name="linkedIn"  type="text" value="{{user.linkedIn}}">
+									<span class="icon icon-edit hide-icon-edit"></span>
+								</div>
+							</div>
+
+						</div>
+						<div class="edit-wrap clearfix">
+							<div class="edit-profiling-wrap">
+								<p></p>
+								<div class="table-cell">
+									<p class="title-edit">Current activity</p>
+								</div>
+							</div>
+							<div class="edit-profiling-wrap">
+								<p>Summary</p>
+								<div class="textarea-holder">
+									<textarea name="currentSummary" id="summary"  rows="4">{{user.inform.currentSummary}}</textarea>
+									<span class="icon icon-edit hide-icon-edit"></span>
+								</div>
+							</div>
+							<div class="edit-profiling-wrap">
+								<p>{{'registration_pr.Current_position'|trans}}</p>
+								<div class="textarea-holder">
+									<textarea name="currentPosition" class="set-content-height current-stretch-textarea" onkeyup="auto_grow(this)">{{someUser.job}}</textarea>
+									<span class="icon icon-edit hide-icon-edit"></span>
+								</div>
+							</div>
+							<div class="edit-profiling-wrap">
+								<p>Department</p>
+								<div class="select-holder">
+									<select name="department" id="department">
+	                                                                    <option value="dep1">Department</option>
+	                                                                    <option value="dep2">Department2</option>
+									</select>
+									<span class="icon icon-edit hide-icon-edit"></span>
+								</div>
+							</div>
+							<div class="edit-profiling-wrap">
+								<p>Skills</p>
+								<div class="input-holder">
+									<input name="skills"  type="text" value="{{user.inform.skills}}">
+									<span class="icon icon-edit hide-icon-edit"></span>
+								</div>
+							</div>
+							<div class="edit-profiling-wrap">
+								<p>Education</p>
+								<div class="input-holder">
+									<input name="education"  type="text" value="{{user.inform.education}}">
+									<span class="icon icon-edit hide-icon-edit"></span>
+								</div>
+							</div>
+						</div>
+						<div class="edit-wrap clearfix">
+							<div class="edit-profiling-wrap">
+								<p></p>
+								<div class="table-cell">
+									<p class="title-edit">Additional informations</p>
+								</div>
+							</div>
+							<div class="edit-profiling-wrap">
+								<p>Language</p>
+								<div class="select-holder">
+									<select name="language" id="language">
+	                                                                        <option value="lang1">Language</option>
+	                                                                        <option value="lang2">Language2</option>
+									</select>
+									<span class="icon icon-edit hide-icon-edit"></span>
+								</div>
+							</div>
+							<div class="edit-profiling-wrap">
+								<p>Interests</p>
+								<div class="input-holder">
+									<input name="interests"  type="text" value="{{user.inform.interests}}">
+									<span class="icon icon-edit hide-icon-edit"></span>
+								</div>
+							</div>
+							<div class="edit-profiling-wrap">
+								<p>Local responsabilities</p>
+								<div class="input-holder">
+									<input name="localResp"  type="text" value="{{user.inform.localResp}}">
+									<span class="icon icon-edit hide-icon-edit"></span>
+								</div>
+							</div>
+						</div>
+                                                        <div class="wrap-button"><button class="submit submit-save" type="submit">Save</button></div>
+					</form>
+				</div>
+			</div>
+
+			{% include 'AppBundle:Account:parts/aside.html.twig' %}
+
+		</div>
+            </div>
+	</div>
+
+{% endblock %}
+
+{% block javascript %}
+<script src="https://maps.googleapis.com/maps/api/js?key={{googleApiKey}}"
+    async defer></script>
+    {{parent()}}
+<script src="/js/map.js"></script>
+{% endblock %}

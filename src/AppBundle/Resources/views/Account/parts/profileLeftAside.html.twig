@@ -1,0 +1,59 @@
+<aside class="col-md-2">
+        <div class="user-info">
+            <div data-tutorial-secondary="#details-popup-3" class="wrap-info-location">
+                <h2 class="user-city">{{user.firstName}} {{user.lastName}}</h2>
+                <div class="user-job"> {{user.job}} </div>
+                <p class="user-location">{{user.city}}</p>
+                <a class="edit-profile" href="{{path('some-user-page', {'someUser' : user.id })}}"><span class="icon-edit"></span>{{'user_wall.edit_profile'|trans}}</a>
+            </div>
+            <br>
+            <div id="map-mini" class="user-location-map" style="height: 160px; width: 160px;"></div>
+            <input id="address" type="hidden" value="{{user.city}}">
+        </div>
+        <div class="left-item-wrap details-left-item-wrap details-left-item-wrap-1" data-tutorial-popup="#details-popup-1">
+          <h3 class="title">{{'user_wall.In_my_network'|trans}}</h3>
+          {% for item in user.communities %}
+            {% if loop.index <= 5 %}
+              <div class="left-list-item"><a href="{{path('community', {'comm' : item.id})}}">{{item.name}}</a></div>
+            {% endif %}
+          {% endfor %}
+          <div class="link-all-wrap clearfix">
+            <a href="{{path('some-user-page', {'someUser' : user.id })}}#tab-2" class="link-all">{{'user_wall.See_all'|trans}} <span>...</span></a>
+          </div>
+        </div>
+        <div class="left-item-wrap details-left-item-wrap" data-tutorial-popup="#details-popup-6">
+            <h3 class="title">{{'user_wall.Recent_activity'|trans}}</h3>
+            {#
+            <div class="left-list-item">
+                <a{% if type is defined and type == 4 %} class="active"{% endif %} href="{{path('profile-members')}}">{{'business_community.Members'|trans}}</a>
+            </div>
+            <div class="left-list-item">
+              <a  class="mnv-disabled" href="javascript:;"> {{'business_community.organisations'|trans}}</a>
+            </div>
+            #}
+            <div class="left-list-item">
+                <a{% if type is defined and type == 1 %} class="active"{% endif %} href="{{path('profile-update')}}">{{'user_wall.Updates_feed'|trans}}</a>
+            </div>
+            <div class="left-list-item">
+                <a{% if type is defined and type == 2 %} class="active"{% endif %} href="{{path('profile-opportunity')}}">{{'user_wall.Opportunities'|trans}}</a>
+            </div>
+            <div class="left-list-item">
+                <a{% if type is defined and type == 3 %} class="active"{% endif %} href="{{path('profile-event')}}">{{'user_wall.Events'|trans}}</a>
+            </div>
+            {% if false %}
+            <div class="invite-wrap">
+                <a class="invite-btn" href="{{path('profile_organisation')}}">
+                    + {{'registration.My_organisation'|trans}}
+                </a>
+            </div>
+            {% endif %}
+        </div>
+        <div class="left-item-wrap details-left-item-wrap">
+            <h3 class="title">Groupes</h3>
+            <div class="left-list-item left-list-item-fas">
+                <a href="javascript:;" class="mnv-disabled"><i class="fas fa-lock"></i>Coventis</a>
+                <a href="javascript:;" class="mnv-disabled"><i class="fas fa-lock"></i>Interfaces</a>
+                <a href="javascript:;" class="mnv-disabled"><i class="fas fa-lock"></i>Achat public innovant</a>
+            </div>
+        </div>
+    </aside>

@@ -1,0 +1,25 @@
+Bundles\ImageBundle\Entity\GalleryImage:
+    type: entity
+    table: null
+    repositoryClass: Bundles\ImageBundle\Repository\GalleryImageRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        path:
+            type: string
+            length: 255
+    manyToOne:
+        gallery:
+            targetEntity: Gallery
+            inversedBy: images
+            joinColumn:
+                name: gallery_id
+                referencedColumnName: id
+    lifecycleCallbacks:
+        prePersist:   [ lifecycleFileUpload ]
+        preUpdate:    [ lifecycleFileUpload ]
+        postRemove:   [ lifecycleFileRemove ]

@@ -1,0 +1,53 @@
+{% extends "AppBundle::layout.html.twig"%}
+
+{% block content %}
+    <div class="container progress-registration-warp">
+        <div class="registration-box">
+            
+               
+            
+
+            <ul id="registration-tabs" class="nav nav-tabs">
+                <li><!-- <a data-toggle="tab" href="#step1"> -->
+                    <div class="step"></div>
+                    <p>{{'registration.network'|trans}}</p>
+                </li>
+                <li>
+                    <div class="step"></div>
+                    <p>{{'registration.profile'|trans}}</p>
+                </li>
+                <li>
+                    <div class="step last-step"></div>
+                    <p>{{'registration.Lets'|trans}}<br> {{'registration.Start'|trans}}</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="container-fluid content-registration-wrap">
+        <div class="registration-box">
+            <div id="step0">
+                <h3 class="reg-title">{{'registration.Create_your_profile_in_3_steps'|trans}}</h3>
+                <p>{{'registration.It_will_take'|trans}}</p>
+                
+                {% for flashMessage in app.session.flashbag.get('registratior_error') %}
+                <div class="alert alert-danger" role="alert">
+                  <strong>Error!</strong> {{ flashMessage }}
+                </div>
+                {% endfor %}
+
+                
+                <form method="post">
+                    <input type="text" name="user-city"{% if city %} value="{{city}}"{% endif %} required placeholder="{{'registration.Enter_your_city'|trans}}"><br>
+                    <input type="email" name="user-email"{% if email %} value="{{email}}"{% endif %} required  placeholder="{{'registration.eMail'|trans}}"><br>
+                    <button type="submit" class="join-us" value="">{{'homepage.Join_us'|trans}}</button>
+                </form>
+                <div class="policy"><p>{{'registration.By_clicking'|trans}}</p></div>
+
+            </div>
+            <!-- <button class="city-popup">Testing button</button> -->
+        </div>
+    </div>
+{% endblock %}
+
+{% block modal %}
+{% endblock %}

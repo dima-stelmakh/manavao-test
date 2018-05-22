@@ -1,0 +1,46 @@
+{% include 'AppBundle:Main:_header.html.twig'%}
+
+<body  class="{{'header.lang'|trans}}">
+    {% include 'AppBundle:Main:analytics.html.twig' %}
+    <div id="map"></div>
+    <header id="header" class="header-header-content-page">
+        <div class="top-header top-header-content-page">
+            <div class="container">
+                <div class="left-top-header">
+                  <a href="/">
+                    {% include 'AppBundle:Main:logo.html.twig'%}
+                  </a>
+                </div>
+                <div class="right-top-header">
+                    <nav class="navbar">
+                        <ul class="nav navbar-nav">
+                            <li><a href="{{path('static_page', {'slug': 'about-us'})}}">{{'header.about'|trans}}</a></li>
+                            <li><button class="dropdown-toggle" type="button" data-toggle="dropdown">{{'header.sign_in'|trans}}</button>
+                              <ul class="dropdown-menu dropdown-menu-right">
+                                    <form action="{{ path("fos_user_security_check") }}" method="post">
+                                    {% if csrfToken is defined %}
+                                        <input type="hidden" name="_csrf_token" value="{{ csrfToken }}" />
+                                    {% endif %}
+                                    <li><input class="sing-in-pop-up" type="email" name="_username" placeholder="E-mail"></li>
+                                    <li><input class="sing-in-pop-up" type="password" name="_password" placeholder="Password"></li>
+                                    <li><button class="sing-in-pop-up" type="submit" value="{% trans from 'FOSUserBundle' %}security.login.submit{% endtrans %}" name="singIn">{{'header.sign_in'|trans}}</button></li>
+                                    <li class="holder-forgot-password"><a href="{{path('fos_user_resetting_request')}}" class="forgot-password">{{'registration.forgot_your_password'|trans}}</a></li>
+                                    {#<input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />#}
+                                    </form>
+                                </ul>
+                            </li>
+                            <li>
+                                <button class="dropdown-toggle" type="button" data-toggle="dropdown">{{ app.request.locale }} <span class="icon-arrow icon"></span></button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'fr'})) }}">{{ 'fr'|trans }}</a></li>
+                                    <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'})) }}">{{ 'en'|trans }}</a></li>
+                                    <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'es'})) }}">{{ 'es'|trans }}</a></li>
+                                    <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'ca'})) }}">{{ 'ca'|trans }}</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+

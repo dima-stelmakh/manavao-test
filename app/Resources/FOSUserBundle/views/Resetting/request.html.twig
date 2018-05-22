@@ -1,0 +1,20 @@
+{% extends "AppBundle::layout.html.twig"%}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block content %}
+<div class="container">
+    <div class="login-form-holder">
+		<h3 class="reg-title">{{'resetting.email.subject'|trans}}</h3>
+		<form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
+			<div>
+			{#	<label for="username">{{ 'resetting.request.username'|trans }}</label>#}
+				<input type="text" id="username" name="username" placeholder="E-mail" required="required" />
+			</div>
+			<div>
+				<button class="orange-btn" type="submit">{{ 'resetting.request.submit'|trans }}</button>
+			</div>
+		</form>
+    </div>
+</div>
+{% endblock %}

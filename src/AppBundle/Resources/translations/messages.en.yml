@@ -1,0 +1,356 @@
+header:
+    about: about
+    sign_in: sign in
+    search: Search
+    Advanced_search: Advanced search
+    lang: en
+    search: search
+    cities_business_network: Glocal Business Network
+    edit_photo: Edit photo
+    request_a_quotation: Request a quotation
+    ask_for_a_meeting: Ask for a meeting
+    receive_a_documentation: Receive a documentation
+    сontact_info: сontact info
+    manavao_slogan: Proximity matters for prosperity
+
+footer:
+    first_footer_colom: about
+    second_footer_colom: network
+    third_footer_colom: support
+    fourth_footer_colom: follow us on
+    manavao_com: manavao.com
+
+footer-first:
+    about: About
+    partners: Partners
+    press: Press
+    investors: Investors
+    jobs: Jobs
+    blog: Blog
+
+footer-second:
+    business-communities: Business clubs & networks
+    for-organisations: Public organisations
+    for-companies: Companies
+    for-medias: Medias
+
+footer-third:
+    guidelines:  Terms of use
+    help: Help
+    privacy: Privacy
+    contact: Contact
+    usage: Usage
+
+footer_bottom:
+    made_in_Toulouse: Designed in Toulouse
+    legal_reference: Legal reference
+post:
+    save: Save
+    like: Like
+    comment: Comment
+    share: Share
+    share_to_feed: Share to feed
+    repost: Repost
+    text_repost_event: has reposted an event
+    text_repost_update: has reposted an update
+    text_repost_opportunity: has reposted an opportunity
+    public: Public
+    add_a_comment: Comment typing
+    write_a_comment: Write a comment
+    type_a_name: Type a name or a list of names
+
+homepage:
+    Connect_to_your: Connect to your business
+    city_header: Keep your finger on the pulse of...
+    business_neighbourhood: neighbourhood
+    Your_city: Your city
+    eMail: E-Mail
+    Join_us: Join us
+    By_clicking: by clicking Join now, you agree to manavao's User Agreement, Privacy and Cookie Policy
+    manavao.com_is_the: Manavao.com is the first GLOCAL business network
+    Each_morning: Each morning, you want to know forthwith about what's going on in your business environment - news, opportunities, public tenders, products or services, upcoming events, ... You will discover so many ways our business communities can help you at both local and global level.
+    Get_started_free: get started FREE
+    Agile: Agile
+    We_connect: We connect your company with its nearby business environment and meanwhile invite you to find new markets out.
+    Easy_to_use: Easy to use
+    You_organise: You organise your network according to your business area and your needs.
+    Collaborative: Collaborative
+    News,: News, directory, opportunities, tenders, events&#058; you get what you need, you share what you want.
+    Responsible: Responsible
+    You_actively: You actively contribute to the development of your territory while safeguarding the principles of an open economy.
+    Join_us_free: Join us free
+    Ever_been: Ever been at the start of something wich might change your way of doing business?
+    My_company: My company is very small. I was looking for a local specialist in website development and social networks. I sought for a local directory. I didn't find it. I try to use google and finally, I found out manavao.com which simply networked me with local providers.
+    Keep_your_finger: Keep your finger on the pulse of
+    Find_your_business_community: Find another business community
+    join_us: Join us
+    supported_by: With the support of
+
+registration:
+    Live_support: Live support
+    My_: My
+    network: network
+    profile: profile
+    Lets: Let's
+    Start: start
+    My_organisation: My organisation
+    Create_your_profile_in_3_steps: Create your profile in 3 steps
+    It_will_take: It will take few minutes. It's free
+    Enter_your_city: Enter your city
+    eMail: E-Mail
+    By_clicking: by clicking Join us, you agree to manavao's terms, our privacy policy including cookie use
+    hello: Hello
+    welcome: Welcome into the first GLOCAL professional network
+    thank_you: Thank you so much for joining us. As we are on a pilot stage, we will be very pleased to learn about your experience and don't hesitate to bounce ideas off.
+    full_access: To get full access to manovao.com, just confirm your address by clicking on the link enclosed in the email sent.
+    receive_the_email: Didn't receive the email ?
+    send_again: Send again
+    get_started: Get started
+    welcome_to_manavao: Welcome to Manavao
+    you_do_not_find_your: You don't find your city and you do want to create your business neighborhood.
+    please_contact: Please, contact us via live support
+    forgot_your_password: Forgot your password?
+    new_password: New password
+    repeat_new_password: Repeat new password
+
+
+registration_bc:
+    Set_your_network: Set your network
+    No_selected_communities: No selected communities
+    Do_you_want_to_add_another_city: Do you want to add another city?
+    Select_your_country: Select your country
+    Select_an_urban_area: Select an urban area
+    Continue: Continue
+    You_already_selected: You already selected
+
+registration_pr:
+    Join_via: Join via
+    By_joining_via: By joining via LinkedIn you agree to let Manavao store your Linkedin profile
+    Add_profile_picture: Add a profile picture
+    Or: Or
+    Specify_Your_activity: Specify your activity
+    First_name: First name
+    Last_name: Last name
+    Password: Password
+    Confirm_your_password: Confirm your password
+    Current_position: Current position
+    Interested_in: Interested in
+    industry: Select your current industry
+    category: Select a category
+    zone: Select your primary business area
+    complete: Complete
+    files: Files
+    password_minimum: "Your password must be at least 8 characters long and contain at least: one uppercase, one lowercase, one number and one symbol."
+
+user_wall:
+    my: My
+    edit_profile: Edit profile
+    What’s_in_your_mind: What’s in your mind ?
+    Share_an_update: Share an update
+    Post_an_opportunity: Post an opportunity
+    Publish_an_event: Publish an event
+    In_my_network: In my network
+    See_all: see all
+    Recent_activity: Recent activity
+    Connections: Connections
+    my_connections: My connections
+    Following: Following
+    Updates_feed: Updates feed
+    Updates: Updates
+    Opportunities: Opportunities
+    Events: Events
+    Invite: Invite
+    Last_connections: Last connections
+    Suggestions: Suggestions
+    Nearby_business_communities: Nearby business communities
+    Add: + Add
+    Create_an_event: Create an event
+    Like: Like
+    Comment: Comment
+    Share: Share
+    Post: Post
+    Publish: Publish
+    Going: Going
+    Interested_in: Interested in
+    Send_a_message: Send a message
+    Follow: Follow
+    Advanced_filter: Advanced filter
+    Sponsored: Sponsored
+    PT: PT
+    Add_the_file: Add the file
+    date: Due date
+    update_type: Type of update
+    industry: Industry required
+    industry_post: Relevant industry
+    industry_post_event: Involved industry
+    placeholder-event: What’s in your mind
+    location: Location
+    you_are: You are
+    describe: Describe what you need as precisely as possible
+    select_country: Select a country
+    general_informations: General informations
+    current_activity: Current activity
+    additional_informations: Additional informations
+    IM: IM
+    phone: Phone
+    address: Address
+    summary: Summary
+    department: Department
+    skills: Skills
+    education: Education
+    language: Language
+    interests:  Interests
+    local_responsabilities: Local responsabilities
+    organisation_s_name: Organisation's name
+    type: Type
+    size:  Size
+    business_area:  Business area
+    industry_list: Industry
+    clients: Clients
+    business_network_clubs: Business network & clubs
+    internet: Internet
+    youtube_channel: Youtube channel
+    websites: Websites
+    documentation_center: Documentation center
+    tell_about_yourself: Tell about yourself
+    enter_your_message: Enter your message or attache a file
+    message: Message
+    activity: Activity
+    purchase: Purchase
+    followers: Followers
+    subscribe: Subscribe
+    promote_a_product: promote a product (or service)
+    available_soon: Available soon ...
+    create_my_organisation: Add my organisation
+    create_group: Create a group
+    all_my_communities: All my business communities
+business_community:
+    Join_us: Join us
+    invite_contacts: invite contacts
+    At_a_glance: At a glance
+    Total_population: Total population
+    As_percent: As percent …
+    GDP_estlmated: GDP estimated
+    as_percent_of_national_value: as % of national value
+    Home: Home
+    News_feed: News feed
+    Members: Members
+    Individuals: Individuals
+    Companies: Companies
+    Public_organisations: Public organisations
+    Others: Others
+    Supported_by: News feed
+    Become_partner: Become partner
+    Last_members: Last members
+    placeholder-event: What’s in your mind
+    project_type: Project Type
+    in_few_words: In few words
+    date_business_community: Date
+    tell_about_it: Tell about it
+    name: Name
+    end: End
+    event_type: Event Type
+    start_business_community: Start
+    link: Link
+    who_can_see_this: Who can see this ?
+    all_network:  All network
+    just_me: Just me
+    contact_us: Contact us
+    website: Website
+    describe_your_activities: Describe your activities and what you are seeking for
+    phone_number: Phone number
+    by_clicking_send: By clicking Send, I agree to be contacted by Manavao's partnership team
+    send: Send
+    type_of_organisation: Type of organisation
+    tell_your_minds: Tell your minds about it...
+    withing_my_network: withing my network
+    organisations: Organisations
+    explore: Explore
+
+user_dropdown:
+    log_out: Logout
+    my_experience: My experience
+    impressions: Impressions
+    priorities: Priorities
+    my_profile: My profile
+    edit_community: Edit community list
+    settings: Settings
+    membership: Membership
+
+public_profile_header:
+    connect: Connect
+    remove: Remove
+    member_since: Member since
+
+aside:
+    overview: Overview
+    my_bussiness_communities: Business communities
+    my_individual_informations: Individual informations
+    my_bussiness_informations: Business informations
+
+edit_profiling_side:
+    notify_your_network: Notify your network?
+    do_not_publish: No. I don’t publish an update to my network about my profile changes
+    no_answer: "No"
+    yes_answer: "Yes"
+
+about_us:
+    company: Smart Economy Solutions
+    about_us: About us
+    support_about_us: support
+
+messenger_block:
+    messenger: Messenger
+    search_messages: search messages
+
+general_informations_tab:
+    registered_name: Registered name
+    trading_name: Trading name
+    year_established: Year established
+    country: Country
+    registration_ID: Registration ID
+    legal_form: Legal form
+    corporate_capital: Corporate capital
+    executive: Executives
+    registered_address: Registered address
+    tel: Tel
+    fax: Fax
+    employees: Employees
+    organisation_chart: Organisation chart
+    turnover_2016: Turnover 2016
+    access_to_legal: Access to legal inf.
+
+activity_tab:
+    main_activity: Main activity
+    others_activities: Others activities
+    products_services_description: Products & services description
+    european_classification: European classification
+    international_classification: International classification
+    type_of_clients: Type of clients
+    markets: Markets
+    locations: Locations
+    certifications: Certifications
+    business_clubs_networks: Business clubs & networks
+    patronage_Sponsorship: Patronage & Sponsorship
+
+
+privacy_page:
+    personal_data: Personal data
+    manavao_collects: MANAVAO collects certain personal information about you. When you register on MANAVAO and use our services, we asked you to provide certain personal informations.
+    by_simply_subscribing: By simply subscribing to the site, you accept that we proceed with your personal data and that it will be used for the purposes described herein. Your data will never be sold to outside parties but can be used for marketing targeted actions.
+    privacy: Privacy
+    manavao_offers_numerous: MANAVAO offers numerous confidentiality options that you will find in the privacy section of your profile (“settings”).
+    however: However, MANAVAO reserves the right to access your personal data and to disclose this information if necessary to comply with applicable laws and to respond to any requests from a competent authority, in order to properly operate its systems or to protect its users.
+    also_manavao: Also, MANAVAO reserves the right to use your data within mailing partners but agrees not to sell. If you no longer agree with this use, you can, under the Act of 6 January 1978 relating to computers, files and freedoms, the law of "Information Technology and Liberties", oppose as well as access, rectify, or delete your information by accessing your profile on MANAVAO .
+    cookies: Cookies
+    manavao_installs: MANAVAO installs a cookie on your computer. This cookie stores information about your navigation on our site and stores the information that you entered during your visit. So you will not need to reenter this information upon your next visit. We can consult this information during your next visit. The shelf life of this information in your computer is one year.
+    you_can_object: You can object the installation of "cookies" by configuring your browser.
+    when_redirecting: When redirecting to a third party website, MANAVAO can not be held responsible directly or indirectly in the event that such third party sites do not comply with both French and European legal and regulatory provisions, nor can MANAVAO can not be held responsible directly or indirectly for any consequences following this non-compliance.
+
+tuto:
+    tuto_1: They are organised at urban area level. You can add or remove one at any moment. By clicking on the link, you connect directly to the dedicated page.
+    tuto_2: You can join closed business communities.
+    tuto_3: You can add or modify any informations at any moment. Take  few minutes to complete it and contribute to the quality of interactions within the network.
+    tuto_4: You get the events organised in your selected business communities.
+    tuto_5: You can share or receive updates, business opportunities or events. Each content is easy to  identify with the little pictograms.
+    tuto_6: Here, find your connections, the organisations you follow as well as contents published by your selected business communities members.

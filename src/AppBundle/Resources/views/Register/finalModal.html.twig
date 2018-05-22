@@ -1,0 +1,63 @@
+<div class="modal fade" id="new-user-modal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+          <div class="container-fluid progress-registration-warp">
+                <div class="registration-box">
+
+                    <ul id="registration-tabs" class="nav nav-tabs">
+
+                        <li class="active"><!-- <a data-toggle="tab" href="#step1"> -->
+                        <div class="step"></div>
+                        <p>{{'registration.network'|trans}}</p>
+                        </li>
+                        <li class="active">
+                        <div class="step"></div>
+                            <p>{{'registration.profile'|trans}}</p>
+                        </li>
+                        <li class="active">
+                        <div class="step last-step"></div>
+                            <p>{{'registration.Lets'|trans}} <br> {{'registration.Start'|trans}}</p>
+                        </li>
+                    </ul>
+                </div>
+                </div>
+                <div class="registration-box">
+                    <div class="wrap-registration-box">
+                        <h3 class="reg-title">{{'registration.hello'|trans}}, {{app.user.firstName}}</h3>
+                        <p class="welcome-text">
+                            {{'registration.welcome'|trans}}
+                        </p>
+                        <p class="modal-text">{{'registration.thank_you'|trans}}</p>
+
+                        {% if not confirmed %}
+                        <div id="confirmation-modal">
+                            <p class="get-confirm">{{'registration.full_access'|trans}}</p>
+                            <p class="q-get-email">{{'registration.receive_the_email'|trans}}</p>
+                            <button onclick="sendConfirmationEmail('{{app.user.email}}');return false;" id="send-confirm-email"><span class="icon icon-invite"></span>{{'registration.send_again'|trans}}</button>
+                        </div>
+                        {% endif %}
+
+                        {% if confirmed %}
+                        <button class="get-started" data-dismiss="modal">
+                            <span class="icon-check_mark"></span>{{'registration.get_started'|trans}}
+                        </button>
+                        {#
+                        <a href="{{path('profile_info')}}" class="get-started">
+                            <span class="icon-edit"></span>{{'user_wall.edit_profile'|trans}}
+                        </a>
+                        #}
+                        {% endif %}
+                    </div>
+                </div>
+
+
+
+        <div class="modal-body">
+
+
+        </div>
+      </div>
+    </div>
+  </div>

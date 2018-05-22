@@ -1,0 +1,53 @@
+Bundles\StoreBundle\Entity\EventPost:
+    type: entity
+    table: null
+    repositoryClass: Bundles\StoreBundle\Repository\EventPostRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+        endDate:
+            type: datetime
+        startDate:
+            type: datetime
+        link:
+            type: string
+            length: 255
+        lat:
+            type: decimal
+            precision: '20'
+            scale: '14'
+            nullable: true
+        lng:
+            type: decimal
+            precision: '20'
+            scale: '14'
+            nullable: true
+            column: lon
+        onlyToMeShow:
+            type: boolean
+            nullable: true
+        location:
+            type: text
+    manyToOne:
+        industry:
+            targetEntity: Bundles\OptionBundle\Entity\Industry
+            joinColumn:
+                name: industry_id
+                referencedColumnName: id
+        eventType:
+            targetEntity: Bundles\OptionBundle\Entity\EventType
+            joinColumn:
+                name: event_type_id
+                referencedColumnName: id
+    oneToOne:
+        post:
+            targetEntity: Post
+            mappedBy: eventPost
+    lifecycleCallbacks: {  }

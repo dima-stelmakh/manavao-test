@@ -1,0 +1,25 @@
+<ul class="user-list-organization">
+    {% if currentTab == 1 %}
+    <li class="active"><span>{{'user_wall.Last_connections'|trans}}</span><strong class="number">({{ pagination.getTotalItemCount }})</strong></li>
+    {% else %}
+    <li><a href="{{path('profile_last_someuser_friends', {'user': user.id })}}">{{'user_wall.Last_connections'|trans}}<strong class="number">({{friends.getFriendCount(user)|default(0)}})</strong></a></li>
+    {% endif %}
+    
+    {% if currentTab == 2 %}
+    <li class="active"><span>{% if user == app.user %}{{'user_wall.my_connections'|trans}}{% else %}{{'user_wall.Connections'|trans}}{% endif %} </span><strong class="number">({{ pagination.getTotalItemCount }})</strong></li>
+    {% else %}
+    <li>
+        <a href="{{path('profile_someuser_friends', {'user': user.id })}}">
+        {% if user == app.user %}{{'user_wall.my_connections'|trans}}{% else %}{{'user_wall.Connections'|trans}}{% endif %} <strong class="number">({{friends.getFriendCount(user)|default(0)}})</strong>
+        </a>
+    </li>
+    {% endif %}
+        
+    {% if currentTab == 3 %}
+    <li class="active"><span>{{'user_wall.Suggestions'|trans}} </span><strong class="number">({{ pagination.getTotalItemCount }})</strong></li>
+    {% else %}
+    <li><a href="{{path('profile_suggestions')}}" >{{'user_wall.Suggestions'|trans}} <strong class="number">({{lastConnections.getLastConnectionCount(user)}})</strong></a></li>
+    {% endif %}
+        
+    <li><a href=""class="tab-search">Search</a></li>
+</ul>

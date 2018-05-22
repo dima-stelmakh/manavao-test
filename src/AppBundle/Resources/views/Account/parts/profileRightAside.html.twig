@@ -1,0 +1,68 @@
+<aside>
+    <div class="calendar-wrap" data-tutorial-popup="#details-popup-4">
+        <div class="datepicker-holder" data-lang="{{'header.lang'|trans}}">
+            <div class="datepicker-inline cusmom-datepicker-inline"></div>
+        </div>
+        <div id="mnv-eventsBlock" class="events-block">
+            <div class="heading">
+                <h2 class="aside-title">events happening</h2>
+            </div>
+            <event-item v-for="event in events" :key="event.id" v-bind:event="event"></event-item>
+        </div>
+    </div>
+
+    <div class="near-community-wrap" data-tutorial-popup="#details-popup-2">
+        <h2 class="aside-title">{{'user_wall.Nearby_business_communities'|trans}}</h2>
+        {% for item in nearly %}
+        <div class="aside-item">
+            <a href="{{path('community', {'comm' : item.id})}}" style="background-image:url('{% if item.image.src is defined %}{{item.image.src}}{% else %}/assets/img/cities/default.png{% endif %}')"
+                class="community-round-image">
+                <span>{{item.name}}</span>{#
+                <br> {{'user_wall.Add'|trans}}#}
+            </a>
+        </div>
+        {% endfor %}
+        <div class="link-all-wrap clearfix">
+            <a href="javascript:;" class="link-all mnv-disabled">{{'user_wall.See_all'|trans}}
+                <span>...</span>
+            </a>
+        </div>
+    </div>
+
+    {% if showMembers %}
+        <div class="last-connections">
+            <h2 class="aside-title">{{'business_community.Last_members'|trans}}</h2>
+            {% for item in users %}
+            <div class="aside-item">
+
+                <a href="{{path('some-user-page', {'someUser': item.id})}}">
+                    <img src="{{item.image.src}}" alt=""> {{item.firstName}}
+                    <br> {{item.lastName}}</a>
+            </div>
+            {% endfor %}
+            <div class="link-all-wrap clearfix">
+                <a href="{{path('profile_last_members')}}" class="link-all">{{'user_wall.See_all'|trans}}
+                    <span>...</span>
+                </a>
+            </div>
+        </div>
+        {#
+        <div class="suggestions-wrap">
+            <h2 class="aside-title">ICI {{'user_wall.Suggestions'|trans}}</h2>
+            {% for item in lastConnections.getLastConnections(user, 6) %}
+            <div class="aside-item">
+
+                <a href="{{path('some-user-page', {'someUser': item.id})}}">
+                    <img src="{{item.image.src}}" alt=""> {{item.firstName}}
+                    <br> {{item.lastName}}</a>
+            </div>
+            {% endfor %}
+            <div class="link-all-wrap clearfix">
+                <a href="{{path('profile_suggestions')}}" class="link-all">{{'user_wall.See_all'|trans}}
+                    <span>...</span>
+                </a>
+            </div>
+        </div>
+        #}
+    {% endif %}
+</aside>

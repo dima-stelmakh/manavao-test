@@ -1,0 +1,163 @@
+Bundles\UserBundle\Entity\Info:
+    type: entity
+    table: null
+    repositoryClass: Bundles\UserBundle\Repository\InfoRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        overview:
+            type: text
+            nullable: true
+            column: overview
+        currentSummary:
+            type: text
+            nullable: true
+            column: current_summary
+        currentPosition:
+            type: string
+            length: 255
+            nullable: true
+            column: current_position
+#        department:
+#            type: string
+#            length: 255
+#            nullable: true
+#        skills:
+#            type: string
+#            length: 255
+#            nullable: true
+        education:
+            type: string
+            length: 255
+            nullable: true
+#        lang:
+#            type: string
+#            length: 255
+#            nullable: true
+        interests:
+            type: string
+            length: 255
+            nullable: true
+        localResp:
+            type: string
+            length: 255
+            nullable: true
+            column: local_resp
+        organisation:
+            type: string
+            length: 255
+            nullable: true
+#        orgType:
+#            type: string
+#            length: 255
+#            nullable: true
+#        orgSize:
+#            type: string
+#            length: 255
+#            nullable: true
+        summary:
+            type: text
+            nullable: true
+#        businessArea:
+#            type: string
+#            length: 255
+#            nullable: true
+#        clients:
+#            type: string
+#            length: 255
+#            nullable: true
+        purchaseArea:
+            type: string
+            length: 255
+            nullable: true
+        clubs:
+            type: string
+            length: 255
+            nullable: true
+#        interestedIn:
+#            type: string
+#            length: 255
+#            nullable: true
+        twitter:
+            type: string
+            length: 255
+            nullable: true
+        youtube:
+            type: string
+            length: 255
+            nullable: true
+        facebook:
+            type: string
+            length: 255
+            nullable: true
+        website:
+            type: string
+            length: 255
+            nullable: true
+        docs:
+            type: string
+            length: 255
+            nullable: true
+        email:
+            type: string
+            length: 255
+            nullable: true
+    manyToOne:
+        department:
+            targetEntity: Bundles\OptionBundle\Entity\Department
+            joinColumn:
+                name: department_id
+                referencedColumnName: id
+        clients:
+            targetEntity: Bundles\OptionBundle\Entity\Clients
+            joinColumn:
+                name: clients_id
+                referencedColumnName: id
+#        lang:
+#            targetEntity: Bundles\OptionBundle\Entity\Language
+#            joinColumn:
+#                name: language_id
+#                referencedColumnName: id
+#        orgType:
+#            targetEntity: Bundles\OptionBundle\Entity\OrganisationType
+#            joinColumn:
+#                name: org_type_id
+#                referencedColumnName: id
+        orgSize:
+            targetEntity: Bundles\OptionBundle\Entity\OrganisationSize
+            joinColumn:
+                name: org_size_id
+                referencedColumnName: id
+        businessArea:
+            targetEntity: Bundles\OptionBundle\Entity\BusinessArea
+            joinColumn:
+                name: business_area_id
+                referencedColumnName: id
+    manyToMany:
+        skills:
+            targetEntity: Bundles\OptionBundle\Entity\Skill
+            joinTable:
+                onDelete: CASCADE
+                name: user_inform_to_skills
+                joinColumns:
+                    inform_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    skill_id:
+                        referencedColumnName: id  
+        lang:
+            targetEntity: Bundles\OptionBundle\Entity\Language
+            joinTable:
+                onDelete: CASCADE
+                name: user_inform_to_lang
+                joinColumns:
+                    inform_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    lang_id:
+                        referencedColumnName: id  
+    lifecycleCallbacks: {  }

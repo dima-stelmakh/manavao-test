@@ -1,0 +1,13 @@
+{% extends "AppBundle:Account:userList.html.twig" %}
+
+{% block userList %}
+<div class="user-list-wrap">
+    {% include 'AppBundle:Account:parts/userListHead.html.twig' with {'user': app.user, 'currentTab': 1 } %}
+    
+    {% for item in pagination %}
+        {% include 'AppBundle:Account:parts/userListItem.html.twig' with {'user': item }%}
+    {% endfor %}
+    
+    {{ knp_pagination_render(pagination) }}
+</div>
+{% endblock userList %}

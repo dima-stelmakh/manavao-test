@@ -1,0 +1,23 @@
+Bundles\StoreBundle\Entity\Country:
+    type: entity
+    table: null
+    repositoryClass: Bundles\StoreBundle\Repository\CountryRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+        code:
+            type: string
+            length: 255
+            unique: true
+    oneToMany:
+        urbanAreas:
+            targetEntity: UrbanArea
+            mappedBy: country
+    lifecycleCallbacks: {  }

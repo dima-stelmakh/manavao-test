@@ -1,0 +1,16 @@
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
+
+bundles_user:
+    resource: "@BundlesUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+# must to be last
+options_bundle:
+    resource: "@BundlesOptionBundle/Controller/"
+    type:     annotation
