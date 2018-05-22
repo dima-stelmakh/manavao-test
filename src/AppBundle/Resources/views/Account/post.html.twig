@@ -4,17 +4,21 @@
     {% if item.type == 2 %}
         {% if user == item.author or user == 'x' %}
                 <div id="post-{{item.id}}" class="post opportunity">
-                        <div class="post-info">
-                                <a class="post-author-link"
+                    <div class="post-info">
+                        <a class="post-author-link"
                                 {% if app.user == item.author %}
-                                    href="{{path('profile')}}"
-                                {% else %}
-                                    href="{{path('some-user-page', {'someUser': item.author.id})}}"
+                            href="{{ path('profile') }}"
+                        {% else %}
+                            href="{{ path('some-user-page', {'someUser': item.author.id}) }}"
                                 {% endif %}>
-                                <h3 class="post-info-author">{{item.author.firstName}} {{item.author.lastName}}</h3>
-                                </a>
-                                <p class="post-author-location">{{item.author.city}}</p>
-                        </div>
+                            <h3 class="post-info-author">
+                                <span>{{ item.author.firstName }} {{ item.author.lastName }}</span>
+                                -
+                                <span>{{ item.createdAt | date('d/m/Y') }}</span>
+                            </h3>
+                        </a>
+                        <p class="post-author-location">{{ item.author.city }}</p>
+                    </div>
                         <div class="post-content-wrap clearfix">
                                 <div class="post-img">
                                         <img src="{{item.author.image.src}}" alt="">
@@ -40,7 +44,9 @@
                                                  <p>{{item.opportunityPost.skill}}</p>
                                                  {% endif %}#}
 
-                                                <p class="post-date">{{item.createdAt | date('d/m/Y')}}</p>
+                                                <p class="post-text">
+                                                    {{ item.opportunityPost.industry.translate(app.request.locale).name }}
+                                                </p>
                                                 {% if item.communities.first %}
                                                 <a href="{{path('community', {'comm': item.communities.first.id})}}" class="post-community">{{item.communities.first}}</a>
                                                 {% endif %}
@@ -155,18 +161,22 @@
         {% elseif item.type == 1 %}
         {% if user == item.author or user == 'x' %}
             <div id="post-{{item.id}}" class="post update">
-                    <div class="post-info">
-                            <a class="post-author-link"
-                               {% if app.user == item.author %}
-                                   href="{{path('profile')}}"
-                               {% else %}
-                                   href="{{path('some-user-page', {'someUser': item.author.id})}}"
-                               {% endif %}
-                            >
-                                    <h3 class="post-info-author">{{item.author.firstName}} {{item.author.lastName}}
-                                            </h3></a>
-                                    <p class="post-author-location">{{item.author.city}}</p>
-                    </div>
+                <div class="post-info">
+                    <a class="post-author-link"
+                            {% if app.user == item.author %}
+                                href="{{ path('profile') }}"
+                            {% else %}
+                                href="{{ path('some-user-page', {'someUser': item.author.id}) }}"
+                            {% endif %}
+                    >
+                        <h3 class="post-info-author">
+                            <span>{{ item.author.firstName }} {{ item.author.lastName }}</span>
+                            -
+                            <span>{{ item.createdAt | date('d/m/Y' ) }}</span>
+                        </h3>
+                    </a>
+                    <p class="post-author-location">{{ item.author.city }}</p>
+                </div>
                     <div class="post-content-wrap clearfix">
                             <div class="post-img">
                                 <a
@@ -192,9 +202,10 @@
                                     </div>#}
 
                                     {#<h3 class="post-title">Phasellus efficitur, augue non </h3>#}
-
-                                             <p class="post-text">{{item.content|nl2br}} </p>
-                                            <p class="post-date">{{item.createdAt | date('d/m/Y h:i' ) }}</p>
+                                            <p class="post-text">{{item.content|nl2br}} </p>
+                                            <p class="post-text">
+                                                {{ item.updatePost.industry.translate(app.request.locale).name }}
+                                            </p>
                                             {% if item.communities.first %}
                                             <a href="{{path('community', {'comm': item.communities.first.id})}}" class="post-community">{{item.communities.first}}</a>
                                             {% endif %}
@@ -304,16 +315,20 @@
         {% else %}
         {% if user == item.author or user == 'x' %}
             <div id="post-{{item.id}}" class="post event">
-                    <div class="post-info">
-                            <a class="post-author-link" {% if app.user == item.author %}
-                                href="{{path('profile')}}"
-                            {% else %}
-                                href="{{path('some-user-page', {'someUser': item.author.id})}}"
+                <div class="post-info">
+                    <a class="post-author-link" {% if app.user == item.author %}
+                        href="{{ path('profile') }}"
+                    {% else %}
+                        href="{{ path('some-user-page', {'someUser': item.author.id}) }}"
                             {% endif %}>
-                            <h3 class="post-info-author">{{item.author.firstName}} {{item.author.lastName}}</h3>
-                            </a>
-                            <p class="post-author-location">{{item.author.city}}</p>
-                    </div>
+                        <h3 class="post-info-author">
+                            <span>{{ item.author.firstName }} {{ item.author.lastName }}</span>
+                            -
+                            <span>{{ item.createdAt | date('d/m/Y' ) }}</span>
+                        </h3>
+                    </a>
+                    <p class="post-author-location">{{ item.author.city }}</p>
+                </div>
 
                     <div class="post-content-wrap clearfix">
                             <div class="post-img">
