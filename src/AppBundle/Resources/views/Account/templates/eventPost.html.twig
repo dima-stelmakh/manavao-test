@@ -42,7 +42,12 @@
                 <a href="{{ path('community', {'comm': item.communities.first.id}) }}"
                    class="post-community">{{ item.communities.first }}</a>
             {% endif %}
-            <p class="post-indastry">{{ item.eventPost.industry.translate(app.request.locale).name }}</p>
+            <a href="javascript:;"
+               onclick="filterPostByIndustry('event', '{{ item.eventPost.industry.translate(app.request.locale).name }}', '{{ app.request.locale }}'); return false;">
+                <p class="post-indastry">
+                    {{ item.eventPost.industry.translate(app.request.locale).name }}
+                </p>
+            </a>
             <div class="post-action-wrap clearfix">
                 {#{% if app.user != item.author %}#}
                 <div class="post-action">

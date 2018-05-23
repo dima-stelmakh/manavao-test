@@ -134,14 +134,38 @@ function filterPostByPostTypeCategory(postType, postTypeCategory, locale) {
 
     var urlLocale = locale === 'fr' ? '' : '/' + locale;
 
-    var url = urlLocale + '/profile/ajax-filterPosts';
+    var url = urlLocale + '/profile/ajax-filterPostsByCategory';
 
+    var data =  {
+        post_type: postType,
+        post_type_category: postTypeCategory,
+    };
+
+    sendFiltrationRequest(url, data);
+
+    return false;
+}
+
+function filterPostByIndustry(postType, postIndustry, locale) {
+
+    var urlLocale = locale === 'fr' ? '' : '/' + locale;
+
+    var url = urlLocale + '/profile/ajax-filterPostByIndustry';
+
+    var data =  {
+        post_type: postType,
+        post_industry: postIndustry,
+    };
+
+    sendFiltrationRequest(url, data);
+
+    return false;
+}
+
+function sendFiltrationRequest(url, data) {
     $.post({
         url: url,
-        data: {
-            'post_type': postType,
-            'post_type_category': postTypeCategory,
-        },
+        data: data,
         dataType: 'json',
         success: function (response) {
             if (response.success) {
@@ -151,6 +175,4 @@ function filterPostByPostTypeCategory(postType, postTypeCategory, locale) {
             return false;
         }
     });
-
-    return false;
 }

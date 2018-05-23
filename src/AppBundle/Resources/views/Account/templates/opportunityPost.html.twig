@@ -43,9 +43,12 @@
             <p>{{item.opportunityPost.skill}}</p>
             {% endif %}#}
 
-            <p class="post-text">
-                {{ item.opportunityPost.industry.translate(app.request.locale).name }}
-            </p>
+            <a href="javascript:;"
+               onclick="filterPostByIndustry('opportunity', '{{ item.opportunityPost.industry.translate(app.request.locale).name }}', '{{ app.request.locale }}'); return false;">
+                <p class="post-text">
+                    {{ item.opportunityPost.industry.translate(app.request.locale).name }}
+                </p>
+            </a>
             {% if item.communities.first %}
                 <a href="{{ path('community', {'comm': item.communities.first.id}) }}"
                    class="post-community">{{ item.communities.first }}</a>
