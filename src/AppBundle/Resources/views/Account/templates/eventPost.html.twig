@@ -1,0 +1,149 @@
+<div id="post-{{ item.id }}" class="post event">
+    <div class="post-info">
+        <a class="post-author-link" {% if app.user == item.author %}
+            href="{{ path('profile') }}"
+        {% else %}
+            href="{{ path('some-user-page', {'someUser': item.author.id}) }}"
+                {% endif %}>
+            <h3 class="post-info-author">
+                <span>{{ item.author.firstName }} {{ item.author.lastName }}</span>
+                -
+                <span>{{ item.createdAt | date('d/m/Y' ) }}</span>
+            </h3>
+        </a>
+        <p class="post-author-location">{{ item.author.city }}</p>
+    </div>
+
+    <div class="post-content-wrap clearfix">
+        <div class="post-img">
+            <a
+                    {% if app.user == item.author %}
+                        href="{{ path('profile') }}"
+                    {% else %}
+                        href="{{ path('some-user-page', {'someUser': item.author.id}) }}"
+                    {% endif %}
+            >
+                <img src="{{ item.author.image.src }}" alt="">
+            </a>
+        </div>
+        <div class="post-content">
+            <div class="post-type-wrap">
+                <span class="icon icon-publish_icon"></span>
+                <a href="javascript:;"
+                   onclick="filterPostByPostTypeCategory('event', '{{ item.eventPost.eventType.translate(app.request.locale).name }}', '{{ app.request.locale }}'); return false;">
+                    <p class="type-of-event">{{ item.eventPost.eventType.translate(app.request.locale).name }}</p>
+                </a>
+            </div>
+            <h3 class="post-title">{{ item.eventPost.name }}</h3>
+            <p class="event-date">{{ item.eventPost.startDate | date('d/m/Y') }}
+                - {{ item.eventPost.endDate | date('d/m/Y') }}</p>
+            <p class="post-text">{{ item.content|nl2br }} </p>
+            {% if item.communities.first %}
+                <a href="{{ path('community', {'comm': item.communities.first.id}) }}"
+                   class="post-community">{{ item.communities.first }}</a>
+            {% endif %}
+            <p class="post-indastry">{{ item.eventPost.industry.translate(app.request.locale).name }}</p>
+            <div class="post-action-wrap clearfix">
+                {#{% if app.user != item.author %}#}
+                <div class="post-action">
+                    <a href="javascript:;" class="dropdown-toggle"
+                       data-toggle="dropdown" {#onclick="repost({{item.id}}, {{app.user.id}});" #}>
+                        <span class="icon-save icon"></span>
+                        {{ 'post.save'|trans }}</a>
+                </div>
+                {#{% endif %}#}
+                <div class="post-action like-box">
+                    <a href="javascript:;" class="dropdown-toggle" onclick="like({{ item.id }});return false;">
+                        <span id="likes1-{{ item.id }}" class="icon icon-like">{{ item.likedUsers | length }}</span>
+                        {{ 'user_wall.Going'|trans }}</a>
+                    <div class="popup-window">
+                        <a href="{{ path('getLikePopup', {'post' : item.id}) }}" class="heading-info link-popup-likes">
+                            <strong><span
+                                        id="likes2-{{ item.id }}">{{ item.likedUsers | length }}</span> {{ 'post.like'|trans }}
+                            </strong>
+                        </a>
+                        <div class="wrap-holder" id="like-list-{{ item.id }}">
+                            {% for elem in item.likedUsers | slice(0, 4) %}
+                                <a {% if app.user == elem.user %} id="like-{{ item.id }}-{{ elem.user.id }}"
+                                    href="{{ path('profile') }}"
+                                {% else %}
+                                    href="{{ path('some-user-page', {'someUser': elem.user.id}) }}"
+                                        {% endif %}>
+                                    <div class="img-holder">
+                                        <img src="{{ elem.user.image.src }}" alt="">
+                                    </div>
+                                </a>
+                            {% endfor %}
+                            {#<a href="javascript:;"><div class="img-holder">
+                                <img src="/assets/img/noname.png" alt="">
+                            </div></a>#}
+                        </div>
+                    </div>
+                </div>
+                <div class="post-action">
+                    <a class="dropdown-toggle toggle-add-comment" href="javascript:;">
+                        <span class="icon icon-comment">{{ item.comment | length }}</span>
+                        {{ 'user_wall.Interested_in'|trans }}</a>
+                </div>
+                <div class="post-action">
+                    {% if item.type == 2 %}
+                        <a class="dropdown-toggle link-popup-share"
+                           href="{{ path('getOppPopup', {'post' : item.id}) }}">
+                            <span class="icon icon-share_little">{{ item.sharedUsers | length }}</span>
+                            {{ 'post.share'|trans }}
+                        </a>
+                    {% elseif item.type == 1 %}
+                        <a class="dropdown-toggle link-popup-share"
+                           href="{{ path('getUpdatePopup', {'post' : item.id}) }}">
+                            <span class="icon icon-share_little">{{ item.sharedUsers | length }}</span>
+                            {{ 'post.share'|trans }}
+                        </a>
+                    {% else %}
+                        <a class="dropdown-toggle link-popup-share"
+                           href="{{ path('getEventPopup', {'post' : item.id}) }}">
+                            <span class="icon icon-share_little">{{ item.sharedUsers | length }}</span>
+                            {{ 'post.share'|trans }}
+                        </a>
+                    {% endif %}
+                </div>
+
+                <div class="post-action filter">
+                    <button>
+                        {% if from == 'user' and item.author == app.user %}
+                            <a href="javascript:;" onclick="deletePostFromUserWall({{ item.id }}); return false;">
+                                <span class="icon icon-close"></span>
+                            </a>
+                        {% elseif from == 'comm' and item.author == app.user %}
+                            <a href="javascript:;"
+                               onclick="deletePostFromCommWall({{ item.id }}, {{ comm.id }}); return false;">
+                                <span class="icon icon-close"></span>
+                            </a>
+                        {% elseif from == 'someUser' and item.author == app.user %}
+                            <a href="javascript:;" onclick="deletePostFromUserWall({{ item.id }}); return false;">
+                                <span class="icon icon-close"></span>
+                            </a>
+                        {% endif %}
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="post-comment-{{ item.id }}">
+        {% include 'AppBundle:Account:parts/comments.html.twig' %}
+    </div>
+    {#<div class="info-block info-block-message">
+        <a href="javascript:;">
+            <div class="wrap-holder">
+                <div class="img-holder">
+                    <img src="/assets/img/noname.png" alt="">
+                </div>
+            </div>
+        </a>
+        <div class="messenger-box">
+            <textarea placeholder="{{'post.add_a_comment'|trans}}" onkeyup="auto_grow(this)"></textarea>
+        </div>
+        <button class="post-btn">{{'user_wall.Post'|trans}}</button>
+    </div>#}
+
+</div>
