@@ -2,6 +2,8 @@
 
 namespace AppBundle\Controller;
 
+use Bundles\OptionBundle\Entity\EventType;
+use Bundles\StoreBundle\Repository\PostRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -227,7 +229,36 @@ class AjaxController extends Controller
         $em->flush();
         return new JsonResponse();
     }
-    
+
+    /**
+     * @param Request $request
+     * @Route("/profile/ajax-filterPosts", name="filter-posts-by-post-category")
+     * @return JsonResponse
+     */
+    public function filterPostsByPostsTypeAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $postType = (string) $request->get('post_type');
+        $postCategory = (string) $request->get('post_type_category');
+        $locale = (string) $request->get('_locale');
+
+        if (!$this->isPostTypeValid($postType)) {
+            return new JsonResponse(['success' => false, 'message' => 'bad post type']);
+        }
+
+        if (empty($postCategory)) {
+            return new JsonResponse(['success' => false, 'message' => 'empty post type category']);
+        }
+
+        $posts = $em->getRepository('BundlesStoreBundle:Post')
+            ->getNewsPost(null, $postType, null, $postCategory, $locale);
+
+        $view = $this->getProperViewByType($postType);
+
+        return new JsonResponse(['success' => true, 'html' => $this->renderByCategory($posts, $view)]);
+    }
+
     /**
      * @Route("/profile/ajax-deleteSharedPost-{post}", name="delete-shared-post")
      */
@@ -331,6 +362,64 @@ class AjaxController extends Controller
         
         return new JsonResponse([]);
     }
-    
-    
+
+    /**
+     * @param $postType
+     * @return bool
+     */
+    private function isPostTypeValid($postType)
+    {
+        $validPostTypes = [
+            PostRepository::POST_TYPE_UPDATE,
+            PostRepository::POST_TYPE_EVENT,
+            PostRepository::POST_TYPE_OPPORTUNITY
+        ];
+
+        return in_array($postType, $validPostTypes);
+    }
+
+    /**
+     * @param $posts
+     * @param $view
+     * @return string
+     */
+    private function renderByCategory($posts, $view) {
+
+        $htmlString = '';
+
+        foreach ($posts as $post) {
+            $htmlString .= $this->renderView($view, [
+                'item' => $post,
+            ]);
+        }
+
+        return $htmlString;
+    }
+
+    /**
+     * @param $postType
+     * @return string
+     */
+    private function getProperViewByType($postType)
+    {
+        switch ($postType) {
+            case PostRepository::POST_TYPE_UPDATE :
+                $view = '@App/Account/templates/updatePost.html.twig';
+                break;
+
+            case PostRepository::POST_TYPE_EVENT :
+                $view = '@App/Account/templates/eventPost.html.twig';
+                break;
+
+            case PostRepository::POST_TYPE_OPPORTUNITY :
+                $view = '@App/Account/templates/opportunityPost.html.twig';
+                break;
+
+            default:
+                $view = '';
+                break;
+        }
+
+        return $view;
+    }
 }

@@ -1,0 +1,54 @@
+<div id="post-{{ item.id }}" class="post opportunity">
+    <div class="post-info">
+        <a class="post-author-link"
+            {% if app.user == item.author %}
+                href="{{ path('profile') }}"
+            {% else %}
+                href="{{ path('some-user-page', {'someUser': item.author.id}) }}"
+            {% endif %}>
+            <h3 class="post-info-author">
+                <span>{{ item.author.firstName }} {{ item.author.lastName }}</span>
+                -
+                <span>{{ item.createdAt | date('d/m/Y') }}</span>
+            </h3>
+        </a>
+        <p class="post-author-location">{{ item.author.city }}</p>
+    </div>
+    <div class="post-content-wrap clearfix">
+        <div class="post-img">
+            <img src="{{ item.author.image.src }}" alt="">
+        </div>
+        <div class="post-content">
+            <div class="post-type-wrap">
+                <span class="icon icon-post_icon"></span>
+                <a href="javascript:;"
+                   onclick="filterPostByPostTypeCategory('opportunity', '{{ item.opportunityPost.projectType.translate(app.request.locale).name }}', '{{ app.request.locale }}'); return false;">
+                    <p class="post-type">{{ item.opportunityPost.projectType.translate(app.request.locale).name }}</p>
+                </a>
+                <div class="clearfix"></div>
+            </div>
+            <div class="heading-information">
+                <h3 class="post-title">{{ item.opportunityPost.fewWords }}</h3>
+                <p class="post-deadline-wrap">
+                    <span class="deadline-title">Deadline</span>
+                    <span class="deadline">{{ item.opportunityPost.deadline | date('d/m/Y') }}</span>
+                </p>
+                <span class="opportunity-type">{{ item.opportunityPost.industry.translate(app.request.locale).name }}</span>
+            </div>
+            <div class="clearfix"></div>
+
+            <p class="post-text">{{ item.content|nl2br }} </p>
+            <p class="post-text">
+                {{ item.opportunityPost.industry.translate(app.request.locale).name }}
+            </p>
+            {% if item.communities.first %}
+                <a href="{{ path('community', {'comm': item.communities.first.id}) }}"
+                   class="post-community">{{ item.communities.first }}</a>
+            {% endif %}
+            {% include 'AppBundle:Account:parts/postBottom.html.twig' with {'from' : 'user', 'user': 'x'} %}
+        </div>
+    </div>
+    <div id="post-comment-{{ item.id }}">
+        {% include 'AppBundle:Account:parts/comments.html.twig' %}
+    </div>
+</div>

@@ -129,3 +129,29 @@ function closePopup()
 {
     $.magnificPopup.close();
 }
+
+function filterPostByPostTypeCategory(postType, postTypeCategory, locale) {
+
+    var urlLocale = locale === 'fr' ? '' : '/' + locale;
+
+    var url = urlLocale + '/profile/ajax-filterPosts';
+
+    $.post({
+        url: url,
+        data: {
+            'post_type': postType,
+            'post_type_category': postTypeCategory,
+        },
+        dataType: 'json',
+        success: function (response) {
+
+            if (response.success === false) {
+                return false;
+            }
+
+            $('.posts-wrap').html(response.html);
+        }
+    });
+
+    return false;
+}
