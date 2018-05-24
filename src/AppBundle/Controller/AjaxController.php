@@ -415,7 +415,8 @@ class AjaxController extends Controller
         foreach ($posts as $post) {
             $htmlString .= $this->renderView($view, [
                 'item' => $post,
-                'from' => 'x' // need to solve; event view need this stuff!
+                'from' => 'user',
+                'user' => 'x'
             ]);
         }
 
