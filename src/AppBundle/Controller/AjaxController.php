@@ -232,7 +232,7 @@ class AjaxController extends Controller
 
     /**
      * @param Request $request
-     * @Route("/profile/ajax-filterPosts", name="filter-posts-by-post-category")
+     * @Route("/profile/ajax-filterPostsByCategory", name="filter-posts-by-post-category")
      * @return JsonResponse
      */
     public function filterPostsByPostsTypeAction(Request $request)
@@ -253,6 +253,33 @@ class AjaxController extends Controller
 
         $posts = $em->getRepository('BundlesStoreBundle:Post')
             ->getNewsPost(null, $postType, null, $postCategory, $locale);
+
+        $view = $this->getProperViewByType($postType);
+
+        return new JsonResponse(['success' => true, 'html' => $this->renderByCategory($posts, $view)]);
+    }
+
+    /**
+     * @Route("/profile/ajax-filterPostByIndustry", name="filter-posts-by-industry")
+     */
+    public function filterPostsByIndustryAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $postIndustry = (string) $request->get('post_industry');
+        $postType = (string) $request->get('post_type');
+        $locale = (string) $request->get('_locale');
+
+        if (!$this->isPostTypeValid($postType)) {
+            return new JsonResponse(['success' => false, 'message' => 'bad post type']);
+        }
+
+        if (empty($postIndustry)) {
+            return new JsonResponse(['success' => false, 'message' => 'empty industry']);
+        }
+
+        $posts = $em->getRepository('BundlesStoreBundle:Post')
+            ->getNewsPost(null, $postType, null, null, $locale, $postIndustry);
 
         $view = $this->getProperViewByType($postType);
 
@@ -390,6 +417,8 @@ class AjaxController extends Controller
         foreach ($posts as $post) {
             $htmlString .= $this->renderView($view, [
                 'item' => $post,
+                'from' => 'user',
+                'user' => 'x'
             ]);
         }
 

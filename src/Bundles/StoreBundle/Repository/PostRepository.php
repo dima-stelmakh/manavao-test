@@ -56,9 +56,10 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
      * @param null $user
      * @param null string $postCategory
      * @param null string $locale
+     * @param null string $postIndustry
      * @return array
      */
-    public function getNewsPost($comm, $type, $user = null, $postCategory = null, $locale = null)
+    public function getNewsPost($comm, $type, $user = null, $postCategory = null, $locale = null, $postIndustry = null)
     {
         $qb = $this->createQueryBuilder('post')
             ->join('post.communities', 'comm')
@@ -77,6 +78,10 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
 
         if (!empty($postCategory)) {
             $this->applyPostCategoryFiltration($qb, $type, $postCategory, $locale);
+        }
+
+        if (!empty($postIndustry)) {
+            $this->applyPostIndustryFiltration($qb, $type, $postIndustry, $locale);
         }
 
         $posts = $qb->orderBy('post.createdAt', 'DESC')->getQuery()->getResult();
@@ -159,6 +164,37 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
     }
 
     /**
+     * @param $qb
+     * @param $type
+     * @param $industry
+     * @param $locale
+     * @return QueryBuilder|void
+     */
+    private function applyPostIndustryFiltration($qb, $type, $industry, $locale)
+    {
+        $tableName = '';
+        switch ($type) {
+            case static::POST_TYPE_UPDATE :
+                $tableName = 'updatePost';
+                break;
+
+            case static::POST_TYPE_EVENT :
+                $tableName = 'eventPost';
+                break;
+
+            case static::POST_TYPE_OPPORTUNITY :
+                $tableName = 'opportunityPost';
+                break;
+        }
+
+        if (empty($tableName)) {
+            return;
+        }
+
+        return $this->getIndustryPostsByTypeQuery($tableName, $qb, $industry, $locale);
+    }
+
+    /**
      * @param QueryBuilder $qb
      * @param string $postCategory
      * @param string $locale
@@ -191,6 +227,25 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
             ->where('project_type_translation.locale = :locale')
             ->andWhere('project_type_translation.name = :projectType')
             ->setParameters(['locale' => $locale, 'projectType' => $projectType]);
+    }
+
+    /**
+     * @param $tableName
+     * @param QueryBuilder $qb
+     * @param $industry
+     * @param $locale
+     * @return QueryBuilder
+     */
+    private function getIndustryPostsByTypeQuery($tableName, QueryBuilder $qb, $industry, $locale)
+    {
+        return $qb
+            ->join('post.'. $tableName, "$tableName", 'WITH',
+                'post.'. $tableName . '=' . $tableName . '.id')
+            ->join('BundlesOptionBundle:IndustryTranslation', 'industry_translation',
+                'WITH', "$tableName" . '.industry = industry_translation.translatable')
+            ->where('industry_translation.locale = :locale')
+            ->andWhere('industry_translation.name = :industry')
+            ->setParameters(['locale' => $locale, 'industry' => $industry]);
     }
 
     /**
