@@ -1,11 +1,11 @@
 <div id="post-{{ item.id }}" class="post opportunity">
     <div class="post-info">
         <a class="post-author-link"
-                {% if app.user == item.author %}
-            href="{{ path('profile') }}"
-        {% else %}
-            href="{{ path('some-user-page', {'someUser': item.author.id}) }}"
-                {% endif %}>
+            {% if app.user == item.author %}
+                href="{{ path('profile') }}"
+            {% else %}
+                href="{{ path('some-user-page', {'someUser': item.author.id}) }}"
+            {% endif %}>
             <h3 class="post-info-author">
                 <span>{{ item.author.firstName }} {{ item.author.lastName }}</span>
                 -
@@ -38,11 +38,6 @@
             <div class="clearfix"></div>
 
             <p class="post-text">{{ item.content|nl2br }} </p>
-            {#{% if item.opportunityPost.skill%}
-            <h3 class="skills-title">Skills</h3>
-            <p>{{item.opportunityPost.skill}}</p>
-            {% endif %}#}
-
             <a href="javascript:;"
                onclick="filterPostByIndustry('opportunity', '{{ item.opportunityPost.industry.translate(app.request.locale).name }}', '{{ app.request.locale }}'); return false;">
                 <p class="post-text">
@@ -59,17 +54,4 @@
     <div id="post-comment-{{ item.id }}">
         {% include 'AppBundle:Account:parts/comments.html.twig' %}
     </div>
-    {#<div class="info-block info-block-message">
-        <a href="javascript:;">
-            <div class="wrap-holder">
-                <div class="img-holder">
-                    <img src="/assets/img/noname.png" alt="">
-                </div>
-            </div>
-        </a>
-        <div class="messenger-box">
-            <textarea placeholder="{{'post.add_a_comment'|trans}}" onkeyup="auto_grow(this)"></textarea>
-        </div>
-        <button class="post-btn">{{'user_wall.Post'|trans}}</button>
-    </div>#}
 </div>

@@ -17,11 +17,11 @@
     <div class="post-content-wrap clearfix">
         <div class="post-img">
             <a
-                    {% if app.user == item.author %}
-                        href="{{ path('profile') }}"
-                    {% else %}
-                        href="{{ path('some-user-page', {'someUser': item.author.id}) }}"
-                    {% endif %}
+                {% if app.user == item.author %}
+                    href="{{ path('profile') }}"
+                {% else %}
+                    href="{{ path('some-user-page', {'someUser': item.author.id}) }}"
+                {% endif %}
             >
                 <img src="{{ item.author.image.src }}" alt="">
             </a>
@@ -49,14 +49,12 @@
                 </p>
             </a>
             <div class="post-action-wrap clearfix">
-                {#{% if app.user != item.author %}#}
                 <div class="post-action">
                     <a href="javascript:;" class="dropdown-toggle"
-                       data-toggle="dropdown" {#onclick="repost({{item.id}}, {{app.user.id}});" #}>
+                       data-toggle="dropdown">
                         <span class="icon-save icon"></span>
                         {{ 'post.save'|trans }}</a>
                 </div>
-                {#{% endif %}#}
                 <div class="post-action like-box">
                     <a href="javascript:;" class="dropdown-toggle" onclick="like({{ item.id }});return false;">
                         <span id="likes1-{{ item.id }}" class="icon icon-like">{{ item.likedUsers | length }}</span>
@@ -79,9 +77,6 @@
                                     </div>
                                 </a>
                             {% endfor %}
-                            {#<a href="javascript:;"><div class="img-holder">
-                                <img src="/assets/img/noname.png" alt="">
-                            </div></a>#}
                         </div>
                     </div>
                 </div>
@@ -137,18 +132,4 @@
     <div id="post-comment-{{ item.id }}">
         {% include 'AppBundle:Account:parts/comments.html.twig' %}
     </div>
-    {#<div class="info-block info-block-message">
-        <a href="javascript:;">
-            <div class="wrap-holder">
-                <div class="img-holder">
-                    <img src="/assets/img/noname.png" alt="">
-                </div>
-            </div>
-        </a>
-        <div class="messenger-box">
-            <textarea placeholder="{{'post.add_a_comment'|trans}}" onkeyup="auto_grow(this)"></textarea>
-        </div>
-        <button class="post-btn">{{'user_wall.Post'|trans}}</button>
-    </div>#}
-
 </div>

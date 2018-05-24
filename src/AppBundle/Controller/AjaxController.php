@@ -396,11 +396,13 @@ class AjaxController extends Controller
      */
     private function isPostTypeValid($postType)
     {
-        if (!in_array($postType, [PostRepository::POST_TYPE_UPDATE, PostRepository::POST_TYPE_EVENT, PostRepository::POST_TYPE_OPPORTUNITY])) {
-            return false;
-        }
+        $validPostTypes = [
+            PostRepository::POST_TYPE_UPDATE,
+            PostRepository::POST_TYPE_EVENT,
+            PostRepository::POST_TYPE_OPPORTUNITY
+        ];
 
-        return true;
+        return in_array($postType, $validPostTypes);
     }
 
     /**
@@ -429,7 +431,6 @@ class AjaxController extends Controller
      */
     private function getProperViewByType($postType)
     {
-        $view = '';
         switch ($postType) {
             case PostRepository::POST_TYPE_UPDATE :
                 $view = '@App/Account/templates/updatePost.html.twig';
@@ -441,6 +442,10 @@ class AjaxController extends Controller
 
             case PostRepository::POST_TYPE_OPPORTUNITY :
                 $view = '@App/Account/templates/opportunityPost.html.twig';
+                break;
+
+            default:
+                $view = '';
                 break;
         }
 

@@ -19,18 +19,16 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
 
     public function getUserWallPost(User $user, $type)
     {
-//        dump($user); die;
         $qb = $this->createQueryBuilder('post')
-                ->leftJoin('post.sharedUsers', 'shu')
-                ->where('post.author = :user')
-                ->orWhere('shu.user = :user')
-                ->setParameter('user', $user); 
+            ->leftJoin('post.sharedUsers', 'shu')
+            ->where('post.author = :user')
+            ->orWhere('shu.user = :user')
+            ->setParameter('user', $user);
         if ($type) {
             $qb->andWhere('post.type = :type')
                 ->setParameter('type', $type);
         }
         $posts = $qb->getQuery()->getResult();
-//        dump($posts); die;
         foreach ($posts as $post) {
             if ($post->getAuthor() == $user) {
                 $post->showDate = $post->getCreatedAt();
@@ -48,8 +46,8 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
             }          
         }
         $returnPosts = $this->bubbleSort($posts);
+
         return $returnPosts;
-        
     }
 
     /**
@@ -64,17 +62,15 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
     public function getNewsPost($comm, $type, $user = null, $postCategory = null, $locale = null, $postIndustry = null)
     {
         $qb = $this->createQueryBuilder('post')
-                ->join('post.communities', 'comm')
-                ->where('comm.id IN (:comm)')
-                ->setParameter('comm', $comm);
-//                ->leftJoin('post.sharedUsers', 'shu');
-//                ->where('post.author = :user')
-//                ->orWhere('shu.user = :user')
-//                ->setParameter('user', $user); 
+            ->join('post.communities', 'comm')
+            ->where('comm.id IN (:comm)')
+            ->setParameter('comm', $comm);
+
         if ($type) {
             $qb->andWhere('post.type = :type')
                 ->setParameter('type', $type);
         }
+
         if ($user) {
             $qb->andWhere('post.author != :user')
                 ->setParameter('user', $user);
@@ -89,6 +85,7 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
         }
 
         $posts = $qb->orderBy('post.createdAt', 'DESC')->getQuery()->getResult();
+
         foreach ($posts as $post) {
             $post->showDate = $post->getCreatedAt();
         }
@@ -100,12 +97,15 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
     {
         $qb = $this->createQueryBuilder('post')
                 ->where('post.author IN (:friends)')
-                ->setParameter('friends', $friends); 
+                ->setParameter('friends', $friends);
+
         if ($type) {
             $qb->where('post.type = :type')
                 ->setParameter('type', $type);
         }
+
         $posts = $qb->orderBy('post.createdAt', 'DESC')->getQuery()->getResult();
+
         return $posts;
     }
     
@@ -113,29 +113,31 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
     {
         $qb = $this->createQueryBuilder('post')
                 ->where(':comm MEMBER OF post.communities')
+
                 ->setParameter('comm', $comm);
         if ($type) {
             $qb->andWhere('post.type = :type')
                 ->setParameter('type', $type);
         }
+
         return $qb->orderBy('post.createdAt', 'DESC')
-                ->getQuery()
-                ->getResult();
+            ->getQuery()
+            ->getResult();
     }
     
     public function getLasWeekCommunityPost(Community $comm, $from, $to, $type)
     {
         return $this->createQueryBuilder('post')
-                ->where(':comm MEMBER OF post.communities')
-                ->setParameter('comm', $comm)
-                ->andWhere('post.type = :type')
-                ->setParameter('type', $type)
-                ->andWhere('post.createdAt BETWEEN :from AND :to')
-                ->setParameter('from', $from)
-                ->setParameter('to', $to)
-                ->orderBy('post.createdAt', 'DESC')
-                ->getQuery()
-                ->getResult();
+            ->where(':comm MEMBER OF post.communities')
+            ->setParameter('comm', $comm)
+            ->andWhere('post.type = :type')
+            ->setParameter('type', $type)
+            ->andWhere('post.createdAt BETWEEN :from AND :to')
+            ->setParameter('from', $from)
+            ->setParameter('to', $to)
+            ->orderBy('post.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult();
     }
 
     /**
