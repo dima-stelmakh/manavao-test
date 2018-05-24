@@ -1,11 +1,11 @@
 <div id="post-{{ item.id }}" class="post update">
     <div class="post-info">
         <a class="post-author-link"
-                {% if app.user == item.author %}
-                    href="{{ path('profile') }}"
-                {% else %}
-                    href="{{ path('some-user-page', {'someUser': item.author.id}) }}"
-                {% endif %}
+            {% if app.user == item.author %}
+                href="{{ path('profile') }}"
+            {% else %}
+                href="{{ path('some-user-page', {'someUser': item.author.id}) }}"
+            {% endif %}
         >
             <h3 class="post-info-author">
                 <span>{{ item.author.firstName }} {{ item.author.lastName }}</span>
@@ -18,11 +18,11 @@
     <div class="post-content-wrap clearfix">
         <div class="post-img">
             <a
-                    {% if app.user == item.author %}
-                        href="{{ path('profile') }}"
-                    {% else %}
-                        href="{{ path('some-user-page', {'someUser': item.author.id}) }}"
-                    {% endif %}
+                {% if app.user == item.author %}
+                    href="{{ path('profile') }}"
+                {% else %}
+                    href="{{ path('some-user-page', {'someUser': item.author.id}) }}"
+                {% endif %}
             >
                 <img src="{{ item.author.image.src }}" alt="">
             </a>
@@ -39,12 +39,6 @@
                     </a>
                 {% endif %}
             </div>
-            {# <div class="post-type">
-                   <span class="icon icon-share_icon"></span>
-                   <p class="type-of-event">{{item.updatePost.postCategory.translate(app.request.locale).name}}</p>
-               </div>#}
-
-            {#<h3 class="post-title">Phasellus efficitur, augue non </h3>#}
             <p class="post-text">{{ item.content|nl2br }} </p>
             <p class="post-text">
                 {{ item.updatePost.industry.translate(app.request.locale).name }}
@@ -59,18 +53,4 @@
     <div id="post-comment-{{ item.id }}">
         {% include 'AppBundle:Account:parts/comments.html.twig' %}
     </div>
-    {#<div class="info-block info-block-message">
-        <a href="javascript:;">
-            <div class="wrap-holder">
-                <div class="img-holder">
-                    <img src="/assets/img/noname.png" alt="">
-                </div>
-            </div>
-        </a>
-        <div class="messenger-box">
-            <textarea placeholder="{{'post.add_a_comment'|trans}}" onkeyup="auto_grow(this)"></textarea>
-        </div>
-        <button class="post-btn">{{'user_wall.Post'|trans}}</button>
-    </div>#}
-
 </div>

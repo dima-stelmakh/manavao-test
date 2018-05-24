@@ -144,11 +144,12 @@ function filterPostByPostTypeCategory(postType, postTypeCategory, locale) {
         },
         dataType: 'json',
         success: function (response) {
-            if (response.success) {
-                $('.posts-wrap').html(response.html);
+
+            if (response.success === false) {
+                return false;
             }
 
-            return false;
+            $('.posts-wrap').html(response.html);
         }
     });
 
